@@ -14,6 +14,8 @@ def main():
         ev = pygame.event.poll()
         if ev.type == pygame.QUIT:   # Window close button clicked?
             break                    # Leave game loop
+        elif ev.type == pygame.MOUSEBUTTONDOWN:
+            print ("YAY")
         # Other Logic Here
         my_font = pygame.font.SysFont("Courier", 20)
         main_surface.fill((0, 0, 128))  #Background Fill First
