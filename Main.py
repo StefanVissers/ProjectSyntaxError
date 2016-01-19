@@ -15,11 +15,14 @@ def main():
         if ev.type == pygame.QUIT:   # Window close button clicked?
             break                    # Leave game loop
         # Other Logic Here
-
+        my_font = pygame.font.SysFont("Courier", 20)
         main_surface.fill((0, 255, 0))  #Background Fill First
                                         #Draw other Things After
+        main_surface.fill((255,0,0), (300, 100, 150, 90))
 
-
+        the_text = my_font.render("Frequency"
+                  .format(), True, (0,0,0))
+        main_surface.blit(the_text, (10, 10))
 
         pygame.display.flip()           #Display it
     pygame.quit()
