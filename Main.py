@@ -6,7 +6,7 @@ import time
 
 def main():
     pygame.init()
-    main_surface = pygame.display.set_mode((1920, 1080))
+    main_surface = pygame.display.set_mode((800, 600))
     my_font = pygame.font.SysFont("Courier", 20)
 
     while True:
@@ -16,7 +16,7 @@ def main():
             break                    # Leave game loop
         # Other Logic Here
         my_font = pygame.font.SysFont("Courier", 20)
-        main_surface.fill((0, 255, 0))  #Background Fill First
+        main_surface.fill((0, 0, 128))  #Background Fill First
                                         #Draw other Things After
         main_surface.fill((255,0,0), (300, 100, 150, 90))
 
