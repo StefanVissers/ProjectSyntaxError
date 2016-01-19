@@ -21,8 +21,8 @@ def main():
         main_surface.fill((255,0,0), (300, 100, 150, 90))
 
         the_text = my_font.render("Frequency"
-                  .format(), True, (0,0,0))
-        main_surface.blit(the_text, (10, 10))
+                  .format(), True, (255,255,255))
+        main_surface.blit(the_text, (300, 100))
 
         pygame.display.flip()           #Display it
     pygame.quit()
