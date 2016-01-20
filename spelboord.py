@@ -2,7 +2,7 @@ __author__ = 'jacob'
 import pygame
 import Menu
 
-bordload = pygame.image.load('Spelbord_zonderzijkanten.png')
+bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
 
 def draw_board(the_board):
     main_surface = pygame.display.set_mode((1200, 850))
