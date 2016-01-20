@@ -1,7 +1,9 @@
 __author__ = 'jacob'
 import pygame
+
+bordload = pygame.image.load('Spelbord_zonderzijkanten.png')
+
 def draw_board(the_board):
-    """ Draw a chess board with queens, from the_board. """
 
     pygame.init()
     colors = [(255,0,0), (0,0,0)]    # Set up colors [red, black]
@@ -14,6 +16,10 @@ def draw_board(the_board):
 
     # Create the surface of (width, height), and its window.
     surface = pygame.display.set_mode((surface_szX, surface_szY))
+    surface.blit(bordload, (0, 0))
+    anotherSurface = surface.convert_alpha()
+
+
 
     # Draw a fresh background (a blank chess board)
     for row in range(n):           # Draw each row of the board.
@@ -23,6 +29,8 @@ def draw_board(the_board):
             surface.fill(colors[c_indx], the_square)
             # now flip the color index for the next square
             c_indx = (c_indx + 1) % 2
+
+
 
 
 def main():
