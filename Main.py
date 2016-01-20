@@ -16,7 +16,8 @@ def main():
     #import time
     #time.sleep(1) # wait and let the sound play for 1 second
     #soundObj.stop()
-    
+    pygame.mixer.music.load('content\meep_merp.mp3')
+    pygame.mixer.music.play(-5, 0.0)
     while True:
         Menu.menu(main_surface)
         pygame.display.flip()           #Display it
