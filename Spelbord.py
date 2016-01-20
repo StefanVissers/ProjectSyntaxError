@@ -15,7 +15,7 @@ def draw_board(the_board):
     colors = [(BLUE), (BLACK)]    # Set up colors [red, black]
     while True:
         ev = pygame.event.poll()
-        
+
         n = the_board       # This is an NxN chess board.
         surface_szX = 1200  # Proposed physical surface size.
         surface_szY = 900
@@ -42,4 +42,14 @@ def draw_board(the_board):
             quit()
         elif ev.type == pygame.MOUSEBUTTONDOWN:
             Menu.menu(main_surface)
+
+
+
+
+        quit_in_gamebuttonpng = pygame.image.load('Pics/exit_in_game.png').convert_alpha()
+        quitingamebutton = pygame.Rect(0, 0, 300, 125)
+        if ev.type == pygame.MOUSEBUTTONDOWN and quitingamebutton.collidepoint(mouse_pos):
+            Menu.menu()
+
+        main_surface.blit(quit_in_gamebuttonpng, (900, 0))
         pygame.display.flip()
