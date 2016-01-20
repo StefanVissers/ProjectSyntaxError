@@ -6,7 +6,7 @@ import Menu
 
 def main():
     pygame.init()
-    main_surface = pygame.display.set_mode((800, 600))
+    main_surface = pygame.display.set_mode((1200, 850))
     pygame.display.set_caption("SyntaXError")
 
     #pygame.mixer.init()
