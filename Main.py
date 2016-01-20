@@ -9,6 +9,7 @@ def main():
     main_surface = pygame.display.set_mode((800, 600))
     my_font = pygame.font.SysFont("Courier", 20)
     pygame.display.set_caption("SyntaXError")
+   
     while True:
         # Look for an event from keyboard, mouse, joystick, etc.
         ev = pygame.event.poll()
