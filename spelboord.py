@@ -6,7 +6,7 @@ bordload = pygame.image.load('Spelbord_zonderzijkanten.png')
 def draw_board(the_board):
 
     pygame.init()
-    colors = [(255,0,0), (0,0,0)]    # Set up colors [red, black]
+    colors = [(0,0,255), (0,0,0)]    # Set up colors [red, black]
 
     n = the_board       # This is an NxN chess board.
     surface_szX = 1200  # Proposed physical surface size.
