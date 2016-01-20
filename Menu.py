@@ -3,6 +3,7 @@ import pygame
 import time
 import random
 import Spelbord
+import Manual
 def menu(main_surface):
     while True:
         startgamebuttonpng = pygame.image.load('Pics/startgame_button.png').convert_alpha()         #laad de plaatjes voor het menu
@@ -29,7 +30,7 @@ def menu(main_surface):
             print ("OPTIES HIER")
         elif ev.type == pygame.MOUSEBUTTONDOWN and instructionbutton.collidepoint(mouse_pos):   #als je op de instructies knop drukt
             print ("INSTRUCTIES HIER")
-
+            Manual.manual()
         # Other Logic Here
         main_surface.fill((0, 0, 128))  #Background Fill First
                                         #Draw other Things After
