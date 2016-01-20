@@ -5,10 +5,10 @@ import random
 import Spelbord
 def menu(main_surface):
     while True:
-        startgamebuttonpng = pygame.image.load('Pics/startgame_button.png').convert_alpha()         #laad de plaatjes voor het menu
-        quitgamebuttonpng = pygame.image.load('Pics/exitgame_button.png').convert_alpha()
-        optionbuttonpng = pygame.image.load('Pics/options_button.png').convert_alpha()
-        manualgamebuttonpng = pygame.image.load('Pics/manual_button.png').convert_alpha()
+        #startgamebuttonpng = pygame.image.load('Pics/startgame_button.png').convert_alpha()         #laad de plaatjes voor het menu
+        #quitgamebuttonpng = pygame.image.load('Pics/exitgame_button.png').convert_alpha()
+        #optionbuttonpng = pygame.image.load('Pics/options_button.png').convert_alpha()
+        #manualgamebuttonpng = pygame.image.load('Pics/manual_button.png').convert_alpha()
 
 
         startgamebutton = pygame.Rect(150, 100, 300, 75)
@@ -50,10 +50,10 @@ def menu(main_surface):
         # main_surface.blit(optionbuttontext, (300, 400))
         # main_surface.blit(instructionbuttontext, (300, 550))
 
-        main_surface.blit(startgamebuttonpng, (100, 100))                                               #laat de plaatjes zien
-        main_surface.blit(quitgamebuttonpng, (100, 250))
-        main_surface.blit(optionbuttonpng, (100, 400))
-        main_surface.blit(manualgamebuttonpng, (100, 550))
+        #main_surface.blit(startgamebuttonpng, (100, 100))                                               #laat de plaatjes zien
+        #main_surface.blit(quitgamebuttonpng, (100, 250))
+        #main_surface.blit(optionbuttonpng, (100, 400))
+        #main_surface.blit(manualgamebuttonpng, (100, 550))
 
 
 
