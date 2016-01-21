@@ -1,7 +1,7 @@
 import pygame
 import Menu
 import time
-
+import pygame
 
 def manual():
     main_surface = pygame.display.set_mode((1200, 900))
@@ -50,12 +50,16 @@ def manual():
         #nextpage = pygame.rect(x, y, breedte, hoogte)
         #lastpage = pygame.Rect()
 
+        ev = pygame.event.poll()
         main_surface.fill(some_color, nextpage)
         main_surface.fill(some_color, previouspage)
 
         if ev.type == pygame.QUIT:    #als je op de quit game knop drukt
             pygame.quit()
             quit()
+        elif ev.type == pygame.KEYDOWN:
+            if ev.type == pygame.K_ESCAPE:
+                Menu.menu(main_surface)
         elif ev.type == pygame.MOUSEBUTTONDOWN and nextpage.collidepoint(mouse_pos):
            page += 1
         if ev.type == pygame.MOUSEBUTTONDOWN and previouspage.collidepoint(mouse_pos):
@@ -85,4 +89,3 @@ def manual():
 
 
         pygame.display.flip()
-        time.sleep(0.06)
