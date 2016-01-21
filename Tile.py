@@ -21,44 +21,31 @@ class Vector2:
         self.x = X
         self.y = Y
 
-#playernr = randint(0,3)
-
-#WoestijnTile = Tile(0, 16, 50, 0)
-#IJsTile = Tile(17, 0, 50, 1)
-#BosTile = Tile(17, 16, 50, 2)
-#MoerasTile = Tile(0, 0, 50, 3)
-
-
 
 def create_Tilelist():
     list = []
-    x = 0
-    y = 0
-    for a in range(0,17):
-        for b in range(0,17):
-            if a == 6 and b >= 5 and y <= 12:
+    for x in range(0,18):
+        for y in range(0,18):
+            if x == 5 and y >= 6 and y <= 11:
+              list.append(RiverTile(x, y))
+            if x == 6 and y >= 5 and y <= 12:
                 list.append(RiverTile(x, y))
-            if a == 5 and b >= 6 and y <= 11:
+            if x == 11 and y >= 5 and y <= 12:
                 list.append(RiverTile(x, y))
-            if a == 11 and y >= 5 and y <= 12:
+            if x == 12 and y >= 6 and y <= 12:
                 list.append(RiverTile(x, y))
-            if a == 12 and y >= 6 and y <= 12:
+            if x >= 0 and x <= 4 and y >= 7 and y <= 10:
                 list.append(RiverTile(x, y))
-            if a >= 0 and a <= 4 and y >= 7 and y <= 10:
+            if x >= 7 and x <= 10 and y >= 0 and y <= 6:
                 list.append(RiverTile(x, y))
-            if a >= 7 and a <= 10 and b >= 0 and b <= 6:
+            if x >= 7 and x <= 10 and y >= 0 and y <= 6:
                 list.append(RiverTile(x, y))
-            if a >= 7 and a <= 10 and b >= 0 and b <= 6:
+            if x >= 13 and x <= 17 and y >= 7 and y <= 10:
                 list.append(RiverTile(x, y))
-            if a >= 13 and a <= 17 and b >= 7 and b <= 10:
-                list.append(RiverTile(x, y))
-            if a >= 7 and a <= 10 and b >= 11 and b <= 17:
+            if x >= 7 and x <= 10 and y >= 11 and y <= 17:
                 list.append((RiverTile(x, y)))
             else:
                 list.append(Tile(x, y, 50, 0))
-            y += 1
-        y = 0
-        x += 1
     return list
 
 
