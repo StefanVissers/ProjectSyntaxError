@@ -1,12 +1,14 @@
 import pygame
+import Menu
 
 def manual():
     while True:
         ev = pygame.event.poll()                 #krijgt de acties die gebeuren
-        if ev.type == ev.type == pygame.QUIT:    #als je op de quit game knop drukt
+        if ev.type == pygame.QUIT:    #als je op de quit game knop drukt
             pygame.quit()
             quit()
-
+        elif ev.type == pygame.K_BACKSPACE:
+            Menu.menu()
         main_surface = pygame.display.set_mode((1200, 900))
         my_font = pygame.font.SysFont("Courier", 20)
         manualtext = my_font.render("Play Game!".format(), True, (255,255,255))
