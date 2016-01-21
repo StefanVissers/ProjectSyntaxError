@@ -1,9 +1,9 @@
 import pygame
+import Menu
 
 def manual():
     while True:
         ev = pygame.event.poll()                 #krijgt de acties die gebeuren
-
 
         main_surface = pygame.display.set_mode((1200, 900))
         my_font = pygame.font.SysFont("Courier", 20)

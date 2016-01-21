@@ -30,6 +30,7 @@ def draw_board(the_board):
         if ev.type == pygame.QUIT:   # Window close button clicked?
             pygame.quit()
             quit()
-        elif ev.type == pygame.MOUSEBUTTONDOWN:
-            Menu.menu(main_surface)
+        elif ev.type == pygame.KEYDOWN:
+            if ev.key == pygame.K_ESCAPE:
+                Menu.menu(main_surface)
         pygame.display.flip()
