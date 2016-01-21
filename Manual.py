@@ -7,8 +7,9 @@ def manual():
         if ev.type == pygame.QUIT:    #als je op de quit game knop drukt
             pygame.quit()
             quit()
-        elif ev.type == pygame.K_BACKSPACE:
-            Menu.menu()
+        elif ev.type == pygame.KEYDOWN:
+            if ev.type == pygame.K_ESCAPE:
+                Menu.menu()
         main_surface = pygame.display.set_mode((1200, 900))
         my_font = pygame.font.SysFont("Courier", 20)
         manualtext = my_font.render("Play Game!".format(), True, (255,255,255))
