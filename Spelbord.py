@@ -11,8 +11,8 @@ BLUE = ( 0, 0, 255)
 main_surface = pygame.display.set_mode((1200, 900))
 
 def draw_board(the_board):
-    pygame.init()
-    colors = [(BLUE), (BLACK)]    # Set up colors [red, black]
+    main_surface = pygame.display.set_mode((1200, 900))
+    colors = [(BLUE), (BLACK)]
     klik = 0
     while True:
         ev = pygame.event.poll()
@@ -22,12 +22,11 @@ def draw_board(the_board):
         surface_szY = 900
         sq_sz = 900 // n    # sq_sz is length of a square.
         surface_sz = n * sq_sz     # Adjust to exactly fit n squares.
-    
+
         # Create the surface of (width, height), and its window.
         surface = pygame.display.set_mode((surface_szX, surface_szY))
 
-    
-        #Draw a fresh background (a blank chess board)
+        # Draw a fresh background (a blank chess board)
         for row in range(n):           # Draw each row of the board.
             c_indx = row % 2           # Change starting color on each row
             for col in range(n):       # Run through cols drawing squares
@@ -35,16 +34,16 @@ def draw_board(the_board):
                 surface.fill(colors[c_indx], the_square)
                 # now flip the color index for the next square
                 c_indx = (c_indx + 1) % 2
-
-        surface.blit(bordload, (0,0))
-
+        
+        surface.blit(bordload, (0,0))        
+                
         if ev.type == pygame.QUIT:   # Window close button clicked?
             pygame.quit()
             quit()
-        elif ev.type == pygame.K_ESCAPE:
-            Menu.menu(main_surface)
-
-
+        elif ev.type == pygame.KEYDOWN:
+            if ev.key == pygame.K_ESCAPE:
+                Menu.menu(main_surface)
+        
         ev = pygame.event.poll()            #kan alle events zijn zoals mouse_click
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
 
