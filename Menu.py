@@ -11,10 +11,10 @@ def menu(main_surface):
         optionbuttonpng = pygame.image.load('Pics/options_button.png').convert_alpha()
         quitgamebuttonpng = pygame.image.load('Pics/exitgame_button.png').convert_alpha()
 
-        startgamebutton = pygame.Rect(150, 100, 300, 125)
-        instructionbutton = pygame.Rect(150, 250, 300, 125)
-        optionbutton = pygame.Rect(150, 400, 300, 125)
-        quitgamebutton = pygame.Rect(150, 550, 300, 125)
+        startgamebutton = pygame.Rect(150, 100, 265, 125)1
+        instructionbutton = pygame.Rect(150, 250, 265, 125)
+        optionbutton = pygame.Rect(150, 400, 265, 125)
+        quitgamebutton = pygame.Rect(150, 550, 265, 125)
 
         my_font = pygame.font.SysFont("Courier", 20)
 
