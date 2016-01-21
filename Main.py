@@ -1,30 +1,18 @@
 __author__ = 'Stefan'
 import pygame
 import time
-
+import Menu
 #convert_alpha voor png met transparantie! Checkt per pixel.
 
 def main():
     pygame.init()
-    main_surface = pygame.display.set_mode((800, 600))
-    my_font = pygame.font.SysFont("Courier", 20)
+    main_surface = pygame.display.set_mode((1200, 900))
     pygame.display.set_caption("SyntaXError")
+
+    pygame.mixer.music.load('Pics\Battle.mp3')
+    pygame.mixer.music.play(-5, 0.0)
+
     while True:
-        # Look for an event from keyboard, mouse, joystick, etc.
-        ev = pygame.event.poll()
-        if ev.type == pygame.QUIT:   # Window close button clicked?
-            break                    # Leave game loop
-        elif ev.type == pygame.MOUSEBUTTONDOWN:
-            print ("YAY")
-        # Other Logic Here
-        my_font = pygame.font.SysFont("Courier", 20)
-        main_surface.fill((0, 0, 128))  #Background Fill First
-                                        #Draw other Things After
-        main_surface.fill((255,0,0), (300, 100, 150, 90))
-
-        the_text = my_font.render("Frequency".format(), True, (255,255,255))
-        main_surface.blit(the_text, (300, 100))
-
+        Menu.menu(main_surface)
         pygame.display.flip()           #Display it
-    pygame.quit()
 main()
