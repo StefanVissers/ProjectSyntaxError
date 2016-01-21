@@ -10,6 +10,9 @@ GREEN = ( 0, 255, 0)
 BLUE = ( 0, 0, 255)
 main_surface = pygame.display.set_mode((1200, 900))
 
+
+
+
 def draw_board(the_board):
     main_surface = pygame.display.set_mode((1200, 900))
     colors = [(BLUE), (BLACK)]
@@ -35,7 +38,7 @@ def draw_board(the_board):
                 # now flip the color index for the next square
                 c_indx = (c_indx + 1) % 2
         
-        surface.blit(bordload, (0,0))        
+        surface.blit(bordload, (0,0))
                 
         if ev.type == pygame.QUIT:   # Window close button clicked?
             pygame.quit()

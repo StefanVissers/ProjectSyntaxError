@@ -1,6 +1,6 @@
 __author__ = 'Jamal'
 
-Class Color:
+class Color:
 Aqua = (  0, 255, 255)
 Black = (  0,   0,   0)
 Blue = (  0,   0, 255)

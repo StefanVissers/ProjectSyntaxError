@@ -30,7 +30,6 @@ def menu(main_surface):
         elif ev.type == pygame.MOUSEBUTTONDOWN and optionbutton.collidepoint(mouse_pos):    #als je op de opties knop drukt
             print ("OPTIES HIER")
         elif ev.type == pygame.MOUSEBUTTONDOWN and instructionbutton.collidepoint(mouse_pos):   #als je op de instructies knop drukt
-            print ("INSTRUCTIES HIER")
             Manual.manual()
         # Other Logic Here
         #Background Fill First
