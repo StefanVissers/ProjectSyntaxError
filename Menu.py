@@ -10,6 +10,7 @@ def menu(main_surface):
         manualgamebuttonpng = pygame.image.load('Pics/manual_button.png').convert_alpha()
         optionbuttonpng = pygame.image.load('Pics/options_button.png').convert_alpha()
         quitgamebuttonpng = pygame.image.load('Pics/exitgame_button.png').convert_alpha()
+        background = pygame.image.load('Pics/Background.jpg').convert_alpha()
 
         startgamebutton = pygame.Rect(150, 100, 265, 125)
         instructionbutton = pygame.Rect(150, 250, 265, 125)
@@ -32,10 +33,11 @@ def menu(main_surface):
             print ("INSTRUCTIES HIER")
             Manual.manual()
         # Other Logic Here
-        main_surface.fill((0, 0, 128))  #Background Fill First
-                                        #Draw other Things After
+        #Background Fill First
+        main_surface.blit(background, (0, 0))
+        #Draw other Things After
 
-        main_surface.blit(startgamebuttonpng, (100, 100))                                               #laat de plaatjes zien
+        main_surface.blit(startgamebuttonpng, (100, 100))   #laat de plaatjes zien
         main_surface.blit(manualgamebuttonpng, (100, 250))
         main_surface.blit(optionbuttonpng, (100, 400))
         main_surface.blit(quitgamebuttonpng, (100, 550))

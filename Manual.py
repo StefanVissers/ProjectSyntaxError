@@ -3,7 +3,7 @@ import Menu
 
 def manual():
     while True:
-        ev = pygame.event.poll()                 #krijgt de acties die gebeuren
+                         #krijgt de acties die gebeuren
 
         main_surface = pygame.display.set_mode((1200, 900))
         my_font = pygame.font.SysFont("Courier", 20)
@@ -25,10 +25,14 @@ def manual():
         #nextpage = pygame.rect(x, y, breedte, hoogte)
         nextpage = pygame.Rect(1100, 450, 100, 100)
 
+        ev = pygame.event.poll()
         if ev.type == pygame.QUIT:    #als je op de quit game knop drukt
             pygame.quit()
             quit()
         elif ev.type == pygame.MOUSEBUTTONDOWN and nextpage.collidepoint(mouse_pos):
             print ("Werkt")
+        elif ev.type == pygame.KEYDOWN:
+            if ev.type == pygame.K_ESCAPE:
+                Menu.menu(main_surface)
 
         pygame.display.flip()
