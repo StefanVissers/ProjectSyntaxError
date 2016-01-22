@@ -1,6 +1,7 @@
 __author__ = 'jacob'
 import pygame
 import Menu
+from Tile import *
 
 bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
 BLACK = ( 0, 0, 0)
@@ -9,6 +10,8 @@ RED = (255, 0, 0,)
 GREEN = ( 0, 255, 0)
 BLUE = ( 0, 0, 255)
 main_surface = pygame.display.set_mode((1200, 900))
+offset = 50
+
 
 
 
@@ -17,6 +20,7 @@ def draw_board(the_board):
     main_surface = pygame.display.set_mode((1200, 900))
     colors = [(BLUE), (BLACK)]
     klik = 0
+    testlist = []
     while True:
         ev = pygame.event.poll()
 
@@ -39,6 +43,12 @@ def draw_board(the_board):
                 c_indx = (c_indx + 1) % 2
         
         surface.blit(bordload, (0,0))
+
+
+        for T in Map:
+            testrect = pygame.Rect(T.Position.x * offset, T.Position.y * offset, 50, 50)
+            testlist.append(testrect)
+
                 
         if ev.type == pygame.QUIT:   # Window close button clicked?
             pygame.quit()
@@ -70,3 +80,5 @@ def draw_board(the_board):
 
         main_surface.blit(quit_in_gamebuttonpng, (900, 0))
         pygame.display.flip()
+
+draw_board(16)
