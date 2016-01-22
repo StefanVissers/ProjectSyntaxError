@@ -50,6 +50,6 @@ def create_Tilelist():
 
 
 
-create_Tilelist()
+Map = create_Tilelist()
 print(create_Tilelist())
 print("Hello world")
