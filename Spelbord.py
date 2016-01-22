@@ -33,7 +33,7 @@ def draw_board(the_board):
             c_indx = (c_indx + 1) % 2
 
     while True:
-        surface.blit(bordload, (0,0))        
+        surface.blit(bordload, (0,0))
 
         quit_in_gamebuttonpng = pygame.image.load('Pics/exit_in_game.png').convert_alpha()
         quitingamebutton = pygame.Rect(900, 0, 265, 125)
