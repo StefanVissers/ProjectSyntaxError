@@ -39,28 +39,30 @@ def manual():
     lastpage = 6
 
     while True:
-        ev = pygame.event.poll()
-        mouse_pos = pygame.mouse.get_pos()
+
         #manualtext = my_font.render("Play Game!".format(), True, (255,255,255))
         main_surface.fill((0, 0, 128))      #Background fill first!!!!
 
         #nextpage = pygame.rect(x, y, breedte, hoogte)
         #lastpage = pygame.Rect()
+        mouse_pos = pygame.mouse.get_pos()
+        event = pygame.event.get()
 
-        ev = pygame.event.poll()
         main_surface.fill(some_color, nextpage)
         main_surface.fill(some_color, previouspage)
 
-        if ev.type == pygame.QUIT:    #als je op de quit game knop drukt
-            pygame.quit()
-            quit()
-        elif ev.type == pygame.KEYDOWN:
-            if ev.type == pygame.K_ESCAPE:
-                Menu.menu(main_surface)
-        elif ev.type == pygame.MOUSEBUTTONDOWN and nextpage.collidepoint(mouse_pos):
-           page += 1
-        elif ev.type == pygame.MOUSEBUTTONDOWN and previouspage.collidepoint(mouse_pos):
-            page -= 1
+        for ev in event:
+            if ev.type == pygame.QUIT:    #als je op de quit game knop drukt
+                pygame.quit()
+                quit()
+            elif ev.type == pygame.KEYDOWN:
+                if ev.key == pygame.K_ESCAPE:
+                    print ("ESC")
+                    Menu.menu(main_surface)
+            elif ev.type == pygame.MOUSEBUTTONDOWN and nextpage.collidepoint(mouse_pos):
+               page += 1
+            elif ev.type == pygame.MOUSEBUTTONDOWN and previouspage.collidepoint(mouse_pos):
+                page -= 1
 
         if page == 0:
             main_surface.blit(manual_page1, (50, 0))

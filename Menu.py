@@ -19,18 +19,18 @@ def menu(main_surface):
 
         my_font = pygame.font.SysFont("Courier", 20)
 
-        ev = pygame.event.poll()            #kan alle events zijn zoals mouse_click
+        event = pygame.event.get()            #kan alle events zijn zoals mouse_click
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
-
-        if ev.type == pygame.MOUSEBUTTONDOWN and startgamebutton.collidepoint(mouse_pos):   #als je op de start game knop drukt
-            Spelbord.draw_board(16)               #hier mmoet play game komen!
-        elif ev.type == pygame.MOUSEBUTTONDOWN and quitgamebutton.collidepoint(mouse_pos) or ev.type == pygame.QUIT:    #als je op de quit game knop drukt
-            pygame.quit()
-            quit()
-        elif ev.type == pygame.MOUSEBUTTONDOWN and optionbutton.collidepoint(mouse_pos):    #als je op de opties knop drukt
-            print ("OPTIES HIER")
-        elif ev.type == pygame.MOUSEBUTTONDOWN and instructionbutton.collidepoint(mouse_pos):   #als je op de instructies knop drukt
-            Manual.manual()
+        for ev in event:
+            if ev.type == pygame.MOUSEBUTTONDOWN and startgamebutton.collidepoint(mouse_pos):   #als je op de start game knop drukt
+                Spelbord.draw_board(16)               #hier mmoet play game komen!
+            elif ev.type == pygame.MOUSEBUTTONDOWN and quitgamebutton.collidepoint(mouse_pos) or ev.type == pygame.QUIT:    #als je op de quit game knop drukt
+                pygame.quit()
+                quit()
+            elif ev.type == pygame.MOUSEBUTTONDOWN and optionbutton.collidepoint(mouse_pos):    #als je op de opties knop drukt
+                print ("OPTIES HIER") #TODO OPTIE MENU
+            elif ev.type == pygame.MOUSEBUTTONDOWN and instructionbutton.collidepoint(mouse_pos):   #als je op de instructies knop drukt
+                Manual.manual()
         # Other Logic Here
         #Background Fill First
         main_surface.blit(background, (0, 0))
