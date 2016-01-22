@@ -36,7 +36,6 @@ def manual():
     previouspage = pygame.Rect(0, 350, 50, 50)
 
     page = 0
-    lastpage = 6
 
     while True:
 
