@@ -36,10 +36,8 @@ def manual():
     previouspage = pygame.Rect(0, 350, 50, 50)
 
     page = 0
-    lastpage = 6
 
     while True:
-        ev = pygame.event.poll()
         mouse_pos = pygame.mouse.get_pos()
         #manualtext = my_font.render("Play Game!".format(), True, (255,255,255))
         main_surface.fill((0, 0, 128))      #Background fill first!!!!
@@ -57,9 +55,9 @@ def manual():
         elif ev.type == pygame.KEYDOWN:
             if ev.type == pygame.K_ESCAPE:
                 Menu.menu(main_surface)
-        elif ev.type == pygame.MOUSEBUTTONDOWN and nextpage.collidepoint(mouse_pos):
+        elif ev.type == pygame.MOUSEBUTTONDOWN and nextpage.collidepoint(mouse_pos) or ev.type == pygame.K_RIGHT:
            page += 1
-        elif ev.type == pygame.MOUSEBUTTONDOWN and previouspage.collidepoint(mouse_pos):
+        elif ev.type == pygame.MOUSEBUTTONDOWN and previouspage.collidepoint(mouse_pos) or ev.type == pygame.K_LEFT:
             page -= 1
 
         if page == 0:
