@@ -1,6 +1,9 @@
 __author__ = 'Jamal'
+import pygame
+from random import *
+offset = 50
 
-#from random import *
+testlist = []
 
 class Tile:
     def __init__(self, tilex, tiley, income, PlayerNR):
@@ -8,11 +11,13 @@ class Tile:
         self.income = income
         self.Player = PlayerNR
         self.Traversable = True
+        self.Rectangle = pygame.Rect(self.Position.x * offset, self.Position.y  * offset, offset, offset)
 
 class RiverTile:
     def __init__(self, Rtilex, Rtiley):
         self.Position = Vector2(Rtilex, Rtiley)
         self.Traversable = False
+        self.Rectangle = pygame.Rect(self.Position.x * offset, self.Position.y  * offset, offset, offset)
 
 
 
@@ -48,8 +53,16 @@ def create_Tilelist():
                 list.append(Tile(x, y, 50, 0))
     return list
 
-
+def create_Map(l):
+    for T in l:
+        if T == Tile:
+            MapTile = Tile(T.Position.x, T.Position.y, T.income, T.Player)
+            Map.append(MapTile)
+        if T == RiverTile:
+            MapRiverTile = RiverTile(T.Position.x, T.Position.y)
+            Map.append(MapRiverTile)
+    return Map
 
 Map = create_Tilelist()
+create_Map(Map)
 print(create_Tilelist())
-print("Hello world")

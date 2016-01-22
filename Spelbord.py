@@ -10,7 +10,6 @@ RED = (255, 0, 0,)
 GREEN = ( 0, 255, 0)
 BLUE = ( 0, 0, 255)
 main_surface = pygame.display.set_mode((1200, 900))
-offset = 50
 
 
 
@@ -44,12 +43,6 @@ def draw_board(the_board):
         
         surface.blit(bordload, (0,0))
 
-
-        for T in Map:
-            testrect = pygame.Rect(T.Position.x * offset, T.Position.y * offset, 50, 50)
-            testlist.append(testrect)
-
-                
         if ev.type == pygame.QUIT:   # Window close button clicked?
             pygame.quit()
             quit()
