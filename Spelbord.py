@@ -41,6 +41,7 @@ def draw_board(the_board):
     main_surface.blit(quit_in_gamebuttonpng, (900, 0))
 
     klik = 0
+    testlist = []
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         ev = pygame.event.poll()            #kan alle events zijn zoals mouse_click
