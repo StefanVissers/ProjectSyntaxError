@@ -1,6 +1,7 @@
 __author__ = 'jacob'
 import pygame
 import Menu
+from Tile import *
 
 bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
 BLACK = ( 0, 0, 0)
@@ -9,6 +10,7 @@ RED = (255, 0, 0,)
 GREEN = ( 0, 255, 0)
 BLUE = ( 0, 0, 255)
 main_surface = pygame.display.set_mode((1200, 900))
+offset = 50
 
 def draw_board(the_board):
     main_surface = pygame.display.set_mode((1200, 900))
@@ -56,6 +58,10 @@ def draw_board(the_board):
                 Menu.menu(main_surface)
             elif ev.type == pygame.MOUSEBUTTONDOWN and no123.collidepoint(mouse_pos):
                 klik = 0
+        
+        for T in Map:
+            testrect = pygame.Rect(T.Position.x * offset, T.Position.y * offset, 50, 50)
+            testlist.append(testrect)
 
         if ev.type == pygame.QUIT:   # Window close button clicked?
             pygame.quit()
