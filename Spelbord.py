@@ -39,14 +39,12 @@ def draw_board(the_board):
 
     quitingamebutton = pygame.Rect(900, 0, 265, 125)
     main_surface.blit(quit_in_gamebuttonpng, (900, 0))
-
+    surface.blit(bordload, (0,0))
     klik = 0
     testlist = []
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         ev = pygame.event.poll()            #kan alle events zijn zoals mouse_click
-
-        surface.blit(bordload, (0,0))   # Draw bord
 
         if ev.type == pygame.MOUSEBUTTONDOWN and quitingamebutton.collidepoint(mouse_pos):
             klik = 1
@@ -58,7 +56,10 @@ def draw_board(the_board):
             if ev.type == pygame.MOUSEBUTTONDOWN and yes123.collidepoint(mouse_pos):
                 Menu.menu(main_surface)
             elif ev.type == pygame.MOUSEBUTTONDOWN and no123.collidepoint(mouse_pos):
-                klik = 0
+                klik = 2
+        elif klik == 2:
+            surface.blit(bordload, (0,0))
+            klik = 0
         
         for T in Map:
             testrect = pygame.Rect(T.Position.x * offset, T.Position.y * offset, 50, 50)
