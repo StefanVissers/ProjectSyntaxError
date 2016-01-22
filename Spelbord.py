@@ -11,8 +11,6 @@ BLUE = ( 0, 0, 255)
 main_surface = pygame.display.set_mode((1200, 900))
 
 
-
-
 def draw_board(the_board):
     main_surface = pygame.display.set_mode((1200, 900))
     colors = [(BLUE), (BLACK)]

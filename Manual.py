@@ -31,6 +31,7 @@ def manual():
     manual_page12 = pygame.image.load('Pics/manual_page12.png')
     manual_page12 = pygame.transform.smoothscale(manual_page12, (550, 900))
 
+
     some_color = (255, 0, 0)
     nextpage = pygame.Rect(1150, 350, 50, 50)
     previouspage = pygame.Rect(0, 350, 50, 50)
