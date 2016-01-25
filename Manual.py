@@ -31,11 +31,12 @@ def manual():
     manual_page12 = pygame.image.load('Pics/manual_page12.png')
     manual_page12 = pygame.transform.smoothscale(manual_page12, (550, 900))
 
-
     some_color = (255, 0, 0)
-    nextpage = pygame.Rect(1150, 350, 50, 50)
-    previouspage = pygame.Rect(0, 350, 50, 50)
 
+    nextpage = pygame.image.load('Pics/next_button.png')
+    previouspage = pygame.image.load('Pics/previous_button.png')
+    nextpagebutton = pygame.Rect(1150, 450, 50, 50)
+    previouspagebutton = pygame.Rect(0, 450, 50, 50)
     page = 0
 
     while True:
@@ -47,9 +48,8 @@ def manual():
         #lastpage = pygame.Rect()
         mouse_pos = pygame.mouse.get_pos()
         event = pygame.event.get()
-
-        main_surface.fill(some_color, nextpage)
-        main_surface.fill(some_color, previouspage)
+        main_surface.blit(nextpage, (1150, 450))
+        main_surface.blit(previouspage, (0, 450))
 
         for ev in event:
             if ev.type == pygame.QUIT:    #als je op de quit game knop drukt
@@ -59,9 +59,9 @@ def manual():
                 if ev.key == pygame.K_ESCAPE:
                     print ("ESC")
                     Menu.menu(main_surface)
-            elif ev.type == pygame.MOUSEBUTTONDOWN and nextpage.collidepoint(mouse_pos):
+            elif ev.type == pygame.MOUSEBUTTONDOWN and nextpagebutton.collidepoint(mouse_pos):
                page += 1
-            elif ev.type == pygame.MOUSEBUTTONDOWN and previouspage.collidepoint(mouse_pos):
+            elif ev.type == pygame.MOUSEBUTTONDOWN and previouspagebutton.collidepoint(mouse_pos):
                 page -= 1
 
         if page == 0:
