@@ -14,31 +14,7 @@ def main():
 
     while True:
         Menu.menu(main_surface)
-        pygame.display.flip()
+        pygame.display.flip()                   #Display it
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                   #Display it
 main()
