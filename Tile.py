@@ -57,7 +57,7 @@ def clickOnTile():
     for event in ev:
         if event == pygame.MOUSEBUTTONDOWN:
             for i in Map:
-                if i.Rectangle.collidepoint(mouse_pos):
+                if Map[i].Rectangle.collidepoint(mouse_pos):
                     print ("Yay")
 
 0x02E58350
