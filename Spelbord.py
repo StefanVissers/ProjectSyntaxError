@@ -20,9 +20,6 @@ def draw_board():
     main_surface.blit(bordload, (0,0))
     klik = 0
     testlist = []
-
-    createBase()
-
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         ev = pygame.event.poll()            #kan alle events zijn zoals mouse_click
@@ -47,5 +44,6 @@ def draw_board():
             quit()
         elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:   # back to main menu
             klik = 1
-
+            print (1)
+            
         pygame.display.flip()
