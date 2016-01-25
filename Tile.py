@@ -56,6 +56,8 @@ def clickTile(event, mouse_pos):
                 if i.Rectangle.collidepoint(mouse_pos):
                     print(i.Position.x, i.Position.y, i.Traversable)
 
+                    
+
 print (Map[0])
 
 
