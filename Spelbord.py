@@ -64,9 +64,7 @@ def draw_board(the_board):
             surface.blit(bordload, (0,0))
             klik = 0
         
-        for T in Map:
-            testrect = pygame.Rect(T.Position.x * offset, T.Position.y * offset, 50, 50)
-            testlist.append(testrect)
+        surface.blit(bordload, (0,0))
 
         if ev.type == pygame.QUIT:   # Window close button clicked?
             pygame.quit()
