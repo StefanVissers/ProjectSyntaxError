@@ -42,6 +42,9 @@ def draw_board(the_board):
     surface.blit(bordload, (0,0))
     klik = 0
     testlist = []
+
+    createBase()
+
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         ev = pygame.event.poll()            #kan alle events zijn zoals mouse_click
