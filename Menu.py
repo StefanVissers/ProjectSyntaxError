@@ -4,6 +4,7 @@ import time
 import random
 import Spelbord
 import Manual
+
 def menu(main_surface):
     while True:
         startgamebuttonpng = pygame.image.load('Pics/startgame_button.png').convert_alpha()         #laad de plaatjes voor het menu
