@@ -41,11 +41,8 @@ def manual():
 
     while True:
 
-        #manualtext = my_font.render("Play Game!".format(), True, (255,255,255))
         main_surface.fill((0, 0, 128))      #Background fill first!!!!
-
-        #nextpage = pygame.rect(x, y, breedte, hoogte)
-        #lastpage = pygame.Rect()
+        
         mouse_pos = pygame.mouse.get_pos()
         event = pygame.event.get()
         main_surface.blit(nextpage, (1150, 450))
