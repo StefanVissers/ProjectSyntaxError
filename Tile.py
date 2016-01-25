@@ -4,7 +4,7 @@ from random import *
 
 offset = 50
 
-testlist = []
+
 
 class Tile:
     def __init__(self, tilex, tiley, income, playerNR, traversable):
@@ -47,6 +47,17 @@ def create_Tilelist():
                 list.append(Tile(x, y, 50, 0, True))
     return list
 
-
-
 Map = create_Tilelist()
+
+print (Map[1])
+
+def clickOnTile():
+    ev = pygame.event.get()
+    mouse_pos = pygame.mouse.get_pos()
+    for event in ev:
+        if event == pygame.MOUSEBUTTONDOWN:
+            for i in Map:
+                if i.Rectangle.collidepoint(mouse_pos):
+                    print ("Yay")
+
+0x02E58350
