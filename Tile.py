@@ -31,7 +31,7 @@ def create_Tilelist():
                 list.append(Tile(x, y, None, None, False))
             elif x == 11 and y >= 5 and y <= 12:
                 list.append(Tile(x, y, None, None, False))
-            elif x == 12 and y >= 6 and y <= 12:
+            elif x == 12 and y >= 6 and y <= 11:
                 list.append(Tile(x, y, None, None, False))
             elif x >= 0 and x <= 4 and y >= 7 and y <= 10:
                 list.append(Tile(x, y, None, None, False))
