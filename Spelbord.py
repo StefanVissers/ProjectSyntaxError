@@ -44,6 +44,5 @@ def draw_board():
             quit()
         elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:   # back to main menu
             klik = 1
-            print (1)
-            
+
         pygame.display.flip()
