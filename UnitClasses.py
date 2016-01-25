@@ -1,5 +1,6 @@
 __author__ = 'stefan'
 import Tile
+import pygame
 
 class Unit:
     def Move(self):
@@ -30,13 +31,13 @@ class Tank:
         self.Tile = Tile
         self.Cost = 750
         self.Health = 2
-        self.Attack = 2
+        self.Attack = 3
 
 class Boat:
     def __init__(self, player):
         self.Unit = Unit
         self.Player = player
-        self.Tile = Tile
+        self.Tile = RiverTile
         self.Cost = 1000
         self.Health = 1
         self.Attack = 0
