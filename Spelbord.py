@@ -21,31 +21,36 @@ def draw_board():
     main_surface.blit(bordload, (0,0))
     klik = 0
     testlist = []
-    drawUnits()
+    #drawUnits()
 
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
-        ev = pygame.event.poll()            #kan alle events zijn zoals mouse_click
-        if ev.type == pygame.MOUSEBUTTONDOWN and quitingamebutton.collidepoint(mouse_pos):
-            klik = 1
-            # Menu.menu(main_surface)
-        if klik == 1:
-            main_surface.blit(areyousurepng, (300, 200))
-            yes123 = pygame.Rect(410, 415, 190, 100)    # position yes button
-            no123 = pygame.Rect(630, 415, 190, 100)     # position no button
-            if ev.type == pygame.MOUSEBUTTONDOWN and yes123.collidepoint(mouse_pos):
-                Menu.menu(main_surface)
-            elif ev.type == pygame.MOUSEBUTTONDOWN and no123.collidepoint(mouse_pos):
-                klik = 2
-        elif klik == 2:
-            main_surface.blit(bordload, (0,0))
-            drawUnits()
-            klik = 0
+        event = pygame.event.get()            #kan alle events zijn zoals mouse_click
 
-        if ev.type == pygame.QUIT:   # Window close button clicked?
-            pygame.quit()
-            quit()
-        elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:   # back to main menu
-            klik = 1
+        for ev in event:
+            if ev.type == pygame.MOUSEBUTTONDOWN and quitingamebutton.collidepoint(mouse_pos):
+                klik = 1
+                # Menu.menu(main_surface)
+            elif ev.type == pygame.QUIT:   # Window close button clicked?
+                pygame.quit()
+                quit()
+            elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:   # back to main menu
+                klik = 1
+            if klik == 1:
+                main_surface.blit(areyousurepng, (300, 200))
+                yes123 = pygame.Rect(410, 415, 190, 100)    # position yes button
+                no123 = pygame.Rect(630, 415, 190, 100)     # position no button
+                if ev.type == pygame.MOUSEBUTTONDOWN and yes123.collidepoint(mouse_pos):
+                    Menu.menu(main_surface)
+                elif ev.type == pygame.MOUSEBUTTONDOWN and no123.collidepoint(mouse_pos):
+                    klik = 2
+            elif klik == 2:
+                main_surface.blit(bordload, (0,0))
+                #drawUnits()
+                klik = 0
+
+        clickTile(event, mouse_pos)
+
+
 
         pygame.display.flip()
