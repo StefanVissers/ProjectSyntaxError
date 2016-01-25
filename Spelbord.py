@@ -1,6 +1,7 @@
 import pygame
 import Menu
 from Tile import *
+from UnitClasses import *
 
 bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
 BLACK = ( 0, 0, 0)
@@ -20,6 +21,8 @@ def draw_board():
     main_surface.blit(bordload, (0,0))
     klik = 0
     testlist = []
+    drawUnits()
+
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         ev = pygame.event.poll()            #kan alle events zijn zoals mouse_click
@@ -37,6 +40,7 @@ def draw_board():
                 klik = 2
         elif klik == 2:
             main_surface.blit(bordload, (0,0))
+            drawUnits()
             klik = 0
 
         if ev.type == pygame.QUIT:   # Window close button clicked?
