@@ -3,7 +3,6 @@ import Menu
 from Tile import *
 from UnitClasses import *
 
-bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
 BLACK = ( 0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0,)
@@ -15,11 +14,13 @@ offset = 50
 def draw_board():
     quit_in_gamebuttonpng = pygame.image.load('Pics/exitgame_button.png').convert_alpha()
     areyousurepng = pygame.image.load('Pics/areyousure.png').convert_alpha()
+    bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
 
     quitingamebutton = pygame.Rect(900, 0, 265, 125)
     main_surface.blit(quit_in_gamebuttonpng, (900, 0))
     main_surface.blit(bordload, (0,0))
     klik = 0
+    menu = 0
     testlist = []
     #drawUnits()
 
@@ -49,7 +50,7 @@ def draw_board():
                 #drawUnits()
                 klik = 0
 
-        clickTile(event, mouse_pos)
+        clickTile(event, mouse_pos, bordload, quit_in_gamebuttonpng)
 
 
 
