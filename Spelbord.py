@@ -51,8 +51,9 @@ def draw_board():
                 # drawUnits(clickTile)
                 klik = 0
 
-        clickTile(event, mouse_pos, bordload, quit_in_gamebuttonpng)
+        #coordinates = clickTile(event, mouse_pos, bordload, quit_in_gamebuttonpng)
+        getTile(event, mouse_pos)
 
-        drawUnits(coordinates)
+        #drawUnits(coordinates)
 
         pygame.display.flip()
