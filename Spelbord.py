@@ -24,10 +24,33 @@ def draw_board():
     testlist = []
     #drawUnits()
 
+    font = pygame.font.SysFont("Courier", 20)
+    shopmenuButton1Text = font.render("Buy a Soldier! " + str(150 ), 1, (255,255,0))
+    balancetext = font.render("Balance: " + str(800), 1, (255,255,0))
+    menuLayout = pygame.Rect(900, 650, 500, 300)
+    shopmenuButton1 = pygame.Rect(900, 700, 500, 50)
+    shopmenuButton2 = pygame.Rect(900, 750, 500, 50)
+    shopmenuButton3 = pygame.Rect(900, 800, 500, 50)
+    background = pygame.image.load('Pics/Background.jpg')
+    main_surface.blit(background, (0, 0))
+    main_surface.fill((255, 0, 0), (menuLayout))
+    main_surface.fill((0, 255, 0), (shopmenuButton1))
+    main_surface.fill((0, 0, 255), (shopmenuButton2))
+    main_surface.fill((255, 255, 0), (shopmenuButton3))
+    main_surface.blit(shopmenuButton1Text, (900, 700))
+    main_surface.blit(balancetext, (900, 850))
+    main_surface.blit(bordload, (0, 0))
+    main_surface.blit(quit_in_gamebuttonpng, (900, 0))
+
+    army = []
+
+    Base1 = UnitClasses.Base(1, Tile.Tile(0,0,None,1, True))
+    army.append(Base1)
+
+
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         event = pygame.event.get()            #kan alle events zijn zoals mouse_click
-
         for ev in event:
             if ev.type == pygame.MOUSEBUTTONDOWN and quitingamebutton.collidepoint(mouse_pos):
                 klik = 1
@@ -37,6 +60,13 @@ def draw_board():
                 quit()
             elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:   # back to main menu
                 klik = 1
+            elif ev.type == pygame.MOUSEBUTTONDOWN and shopmenuButton1.collidepoint(mouse_pos):
+                print ("SPAWN UNIT")
+                army.append(UnitClasses.Tank(1, Tile.Tile(0, 0, None, None, True)))
+
+
+
+
             if klik == 1:
                 main_surface.blit(areyousurepng, (300, 200))
                 yes123 = pygame.Rect(410, 415, 190, 100)    # position yes button
@@ -50,8 +80,9 @@ def draw_board():
                 #drawUnits()
                 klik = 0
 
-        clickTile(event, mouse_pos, bordload, quit_in_gamebuttonpng)
 
 
+        clickTile(event, mouse_pos)
+        UnitClasses.drawUnits(army)
 
         pygame.display.flip()

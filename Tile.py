@@ -50,36 +50,10 @@ def create_Tilelist():
 
 Map = create_Tilelist()
 
-def clickTile(event, mouse_pos, bordload, quitingamepng):
+def clickTile(event, mouse_pos):
     click = pygame.mouse.get_pressed()
     for ev in event:
         if ev.type == pygame.MOUSEBUTTONDOWN and click[0]==1:
             for i in Map:
                 if i.Rectangle.collidepoint(mouse_pos):
                     print(i.Position.x, i.Position.y, i.Traversable)
-                    if i.Position.x == 0 and i.Position.y == 0:
-                        print ("BASE 1")
-                        shopMenu(pygame.display.set_mode((1200, 900)), bordload, quitingamepng, event, mouse_pos)
-
-def shopMenu(main_surface, bordload, quitingamepng, event, mouse_pos):
-    font = pygame.font.SysFont("Courier", 20)
-    shopmenuButton1Text = font.render("Buy a Soldier! " + str(150 ), 1, (255,255,0))
-    balancetext = font.render("Balance: " + str(800), 1, (255,255,0))
-    menuLayout = pygame.Rect(900, 650, 500, 300)
-    shopmenuButton1 = pygame.Rect(900, 700, 500, 50)
-    shopmenuButton2 = pygame.Rect(900, 750, 500, 50)
-    shopmenuButton3 = pygame.Rect(900, 800, 500, 50)
-    background = pygame.image.load('Pics/Background.jpg')
-    main_surface.blit(background, (0, 0))
-    main_surface.fill((255, 0, 0), (menuLayout))
-    main_surface.fill((0, 255, 0), (shopmenuButton1))
-    main_surface.fill((0, 0, 255), (shopmenuButton2))
-    main_surface.fill((255, 255, 0), (shopmenuButton3))
-    main_surface.blit(shopmenuButton1Text, (900, 700))
-    main_surface.blit(balancetext, (900, 850))
-    main_surface.blit(bordload, (0, 0))
-    main_surface.blit(quitingamepng, (900, 0))
-    for ev in event:
-        if ev.type == pygame.MOUSEBUTTONDOWN and shopmenuButton1.collidepoint(mouse_pos):
-            print ("SPAWN UNIT")
-
