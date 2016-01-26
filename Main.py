@@ -34,7 +34,7 @@ def main():
     pygame.display.set_caption("SyntaXError")
 
     pygame.mixer.music.load('Pics\Battle.mp3')
-    pygame.mixer.music.play(-1, 0.0)
+    #pygame.mixer.music.play(-1, 0.0)
 
     while True:
         # game_intro(main_surface)                                      # begint de intro
