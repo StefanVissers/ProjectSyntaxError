@@ -51,6 +51,7 @@ def draw_board():
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         event = pygame.event.get()            #kan alle events zijn zoals mouse_click
+
         for ev in event:
             if ev.type == pygame.MOUSEBUTTONDOWN and quitingamebutton.collidepoint(mouse_pos):
                 klik = 1
@@ -77,9 +78,11 @@ def draw_board():
                     klik = 2
             elif klik == 2:
                 main_surface.blit(bordload, (0,0))
-                #drawUnits()
+                # drawUnits(clickTile)
                 klik = 0
 
+        #coordinates = clickTile(event, mouse_pos, bordload, quit_in_gamebuttonpng)
+        getTile(event, mouse_pos)
 
 
         clickTile(event, mouse_pos)
