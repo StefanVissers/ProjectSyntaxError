@@ -65,5 +65,7 @@ class Boat:
 
 def drawUnits(army):
     for i in army:
-        main_surface.blit(i.Texture, (i.Tile.Position.x * 50 + 3, i.Tile.Position.y * 50 + 3))
-    # test_tile = main_surface.fill ((255,0,0), (53, 53, 45, 45))
+        if i is not None:
+            main_surface.blit(i.Texture, (i.Tile.Position.x * 50 + 3, i.Tile.Position.y *  50 + 3))
+
+    #test_tile = main_surface.fill ((255,0,0), (53, 53, 45, 45))

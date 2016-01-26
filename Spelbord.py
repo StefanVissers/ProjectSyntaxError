@@ -43,8 +43,9 @@ def draw_board():
     main_surface.blit(quit_in_gamebuttonpng, (900, 0))
 
     army = []
-
-    Base1 = UnitClasses.Base(1, Tile.Tile(0,0,None,1, True))
+    Map = Tile.create_Tilelist()
+    Base1 = UnitClasses.Base(1, Map[0])
+    Base1.Tile.Barack = True
     army.append(Base1)
 
 
@@ -62,8 +63,7 @@ def draw_board():
             elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:   # back to main menu
                 klik = 1
             elif ev.type == pygame.MOUSEBUTTONDOWN and shopmenuButton1.collidepoint(mouse_pos):
-                print ("SPAWN UNIT 1")
-                army.append(UnitClasses.Soldier(1, Tile.Tile(0, 0, None, None, True)))
+                print ("SPAWN UNIT")
 
 
 
@@ -82,10 +82,12 @@ def draw_board():
                 klik = 0
 
         #coordinates = clickTile(event, mouse_pos, bordload, quit_in_gamebuttonpng)
-        getTile(event, mouse_pos)
-
+        clickedtile = getTile(event, mouse_pos)
+        if clickedtile is not None:
+            unit = Tile.placeUnit(event, mouse_pos, None, clickedtile)
+            army.append(unit)
 
         UnitClasses.drawUnits(army)
-        
+
 
         pygame.display.flip()
