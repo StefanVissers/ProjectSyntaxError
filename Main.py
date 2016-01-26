@@ -1,4 +1,4 @@
-__author__ = 'Stefan'
+__author__ = 'Stefan/Jacob'
 import pygame
 import time
 import Menu

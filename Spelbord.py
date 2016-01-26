@@ -48,10 +48,10 @@ def draw_board():
                     klik = 2
             elif klik == 2:
                 main_surface.blit(bordload, (0,0))
-                # drawUnits(clickTile)
+                #drawUnits()
                 klik = 0
 
-        clickTile(event, mouse_pos, bordload, quit_in_gamebuttonpng)
+        coordi  nates = clickTile(event, mouse_pos, bordload, quit_in_gamebuttonpng)
 
         drawUnits(coordinates)
 
