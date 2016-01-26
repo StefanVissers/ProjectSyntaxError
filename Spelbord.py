@@ -62,8 +62,8 @@ def draw_board():
             elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:   # back to main menu
                 klik = 1
             elif ev.type == pygame.MOUSEBUTTONDOWN and shopmenuButton1.collidepoint(mouse_pos):
-                print ("SPAWN UNIT")
-                army.append(UnitClasses.Tank(1, Tile.Tile(0, 0, None, None, True)))
+                print ("SPAWN UNIT 1")
+                army.append(UnitClasses.Soldier(1, Tile.Tile(0, 0, None, None, True)))
 
 
 

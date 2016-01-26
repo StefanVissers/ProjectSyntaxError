@@ -14,7 +14,7 @@ class Base:
         self.Tile = tile
         self.Health = 25
         self.Barack = BarackObama(player, tile)
-        self.Texture = pygame.transform.scale(pygame.image.load('Pics/flag.png'), (45, 45))
+        self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45))
 
 class BarackObama:
     def __init__(self, player, tile):
@@ -30,6 +30,7 @@ class Soldier:
         self.Cost = 150
         self.Health = 1
         self.Attack = 1
+        self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/soldier1.png'), (45, 45))
 
 class Robot:
     def __init__(self, player, tile):
@@ -39,6 +40,7 @@ class Robot:
         self.Cost = 300
         self.Health = 2
         self.Attack = 2
+        self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/robot11.png'), (45, 45))
 
 class Tank:
     def __init__(self, player, tile):
@@ -48,7 +50,7 @@ class Tank:
         self.Cost = 750
         self.Health = 2
         self.Attack = 2
-        self.Texture = pygame.transform.scale(pygame.image.load('Pics/monster1.png'), (45, 45))
+        self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/tank1.png'), (45, 45))
 
 class Boat:
     def __init__(self, player, tile):
@@ -59,8 +61,9 @@ class Boat:
         self.Health = 1
         self.Attack = 0
         self.Units = []
+        self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/baot1.png'), (45, 45))
 
 def drawUnits(army):
     for i in army:
-        main_surface.blit(i.Texture, (i.Tile.Position.x * 50 + 3, i.Tile.Position.y *  50 + 3))
-    #test_tile = main_surface.fill ((255,0,0), (53, 53, 45, 45))
+        main_surface.blit(i.Texture, (i.Tile.Position.x * 50 + 3, i.Tile.Position.y * 50 + 3))
+    # test_tile = main_surface.fill ((255,0,0), (53, 53, 45, 45))
