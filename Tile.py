@@ -15,6 +15,7 @@ class Tile:
         self.Traversable = traversable
         self.Rectangle = pygame.Rect(self.Position.x * offset, self.Position.y  * offset, offset, offset)
         self.Unitcount = []
+        self.Barack = False
 
 class Vector2:
     def __init__(self, X, Y):
@@ -58,3 +59,23 @@ def getTile(event, mouse_pos):
                 if i.Rectangle.collidepoint(mouse_pos):
                     print(i.Position.x, i.Position.y, i.Traversable)
                     return i
+
+def placeBarack(event, mouse_pos):
+    clickedTile = getTile(event, mouse_pos)
+    clickedTile.Barack = True
+
+
+def placeUnit(event, mouse_pos, noen, clickedtile):
+    for i in Map:
+        if clickedtile.Position.x + 1 == i.Position.x and clickedtile.Position.y == i.Position.y and i.Barack:
+            unit = UnitClasses.Tank(None, i)
+            clickedtile.Unitcount.append(unit)
+            return unit
+        elif clickedtile.Position.x - 1 == i.Position.x and clickedtile.Position.y == i.Position.y and i.Barack:
+            unit = UnitClasses.Tank(None, i)
+            clickedtile.Unitcount.append(unit)
+            return unit
+        elif clickedtile.Position.x == i.Position.x and clickedtile.Position.y + 1 == i.Position.y and i.Barack:
+            unit = UnitClasses.Tank(None, i)
+            clickedtile.Unitcount.append(unit)
+            return unit
