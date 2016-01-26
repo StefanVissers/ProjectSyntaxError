@@ -49,26 +49,27 @@ def create_Tilelist():
 
 Map = create_Tilelist()
 
-def clickTile(event, mouse_pos):
-    global clickedtiles
+
+def clickTile(event, mouse_pos, bordload, quitingamepng):
+    click = pygame.mouse.get_pressed()
     clickedtiles = []
     for ev in event:
-        if ev.type == pygame.MOUSEBUTTONDOWN:
+        if ev.type == pygame.MOUSEBUTTONDOWN and click[0]==1:
             for i in Map:
                 if i.Rectangle.collidepoint(mouse_pos):
                     clickedtiles.append(i)
                     print(i.Position.x, i.Position.y, i.Traversable)
+                    if i.Position.x == 0 and i.Position.y == 0:
+                        print ("BASE 1")
+                        shopMenu(pygame.display.set_mode((1200, 900)), bordload, quitingamepng)
     return clickedtiles
 
-
-#return clickedtiles
-
-
-
-
-
-print (Map[0])
-
-
-
+def shopMenu(main_surface, bordload, quitingamepng):
+    menuLayout = pygame.Rect(900, 650, 500, 300)
+    background = pygame.image.load('Pics/Background.jpg')
+    main_surface.blit(background, (0, 0))
+    main_surface.fill((255, 0, 0), (menuLayout))
+    main_surface.blit(bordload, (0, 0))
+    main_surface.blit(quitingamepng, (900, 0))
+  
 
