@@ -85,7 +85,7 @@ def draw_board():
         getTile(event, mouse_pos)
 
 
-        clickTile(event, mouse_pos)
         UnitClasses.drawUnits(army)
+        
 
         pygame.display.flip()
