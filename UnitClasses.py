@@ -1,5 +1,5 @@
 __author__ = 'stefan'
-import Tile
+from Tile import *
 import pygame
 
 main_surface = pygame.display.set_mode((1200, 900))
@@ -46,11 +46,25 @@ class Boat:
         self.Attack = 0
         self.Units = []
 
-def drawUnits():
+
+
+
+def drawUnits(units):
     tankTexture = pygame.image.load('Pics/monster1.png')
     tankTexture = pygame.transform.scale(tankTexture, (45, 45))
     tank = Tank(None, None, tankTexture)
-    for i in range(0, 18):
-        for j in range(0, 18):
-            main_surface.blit(tank.Texture, (i * 50 + 3, j * 50 + 3))
+    for u in units:
+        unitx = u.Position.x
+        unity = u.Position.y
+        main_surface.blit(tank.Texture,(unitx * 50 + 3, unity * 50 + 3, 45, 45))
+
     #test_tile = main_surface.fill ((255,0,0), (53, 53, 45, 45))
+
+def updateUnits(units):
+    for u in units:
+        u.Position.x += 1
+
+
+
+
+print ("Hello")

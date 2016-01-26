@@ -50,15 +50,25 @@ def create_Tilelist():
 Map = create_Tilelist()
 
 def clickTile(event, mouse_pos):
+    global clickedtiles
+    clickedtiles = []
     for ev in event:
         if ev.type == pygame.MOUSEBUTTONDOWN:
             for i in Map:
                 if i.Rectangle.collidepoint(mouse_pos):
+                    clickedtiles.append(i)
                     print(i.Position.x, i.Position.y, i.Traversable)
+    return clickedtiles
 
-                    
+
+#return clickedtiles
+
+
+
+
 
 print (Map[0])
+
 
 
 

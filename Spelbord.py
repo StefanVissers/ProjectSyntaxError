@@ -46,10 +46,13 @@ def draw_board():
                     klik = 2
             elif klik == 2:
                 main_surface.blit(bordload, (0,0))
-                #drawUnits()
+                # drawUnits(clickTile)
                 klik = 0
 
-        clickTile(event, mouse_pos)
+
+        coordinates = clickTile(event, mouse_pos)
+
+        drawUnits(coordinates)
 
 
 
