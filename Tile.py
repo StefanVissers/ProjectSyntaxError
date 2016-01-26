@@ -51,8 +51,9 @@ def create_Tilelist():
 Map = create_Tilelist()
 
 def clickTile(event, mouse_pos, bordload, quitingamepng):
+    click = pygame.mouse.get_pressed()
     for ev in event:
-        if ev.type == pygame.MOUSEBUTTONDOWN:
+        if ev.type == pygame.MOUSEBUTTONDOWN and click[0]==1:
             for i in Map:
                 if i.Rectangle.collidepoint(mouse_pos):
                     print(i.Position.x, i.Position.y, i.Traversable)
