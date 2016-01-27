@@ -6,8 +6,6 @@ import UnitClasses
 main_surface = pygame.display.set_mode((1200, 900))
 offset = 50
 
-
-
 class Tile:
     def __init__(self, tilex, tiley, income, playerNR, traversable):
         self.Position = Vector2(tilex, tiley)
@@ -16,7 +14,10 @@ class Tile:
         self.Traversable = traversable
         self.Rectangle = pygame.Rect(self.Position.x * offset, self.Position.y  * offset, offset, offset)
         self.Barack = False
-        self.Unitcount = []
+        self.Soldier = []
+        self.Tank = []
+        self.Robot = []
+        self.Boat = []
 
 class Vector2:
     def __init__(self, X, Y):
@@ -60,42 +61,34 @@ def getTile(event, mouse_pos, Map):
                     return i
 
 
-
-def placeUnit(clickedtile, Map): #TODO Add unit to unitcount at clicked tile
-    for i in Map:
-        unit = UnitClasses.Tank(None, i)
-        clickedtile.Unitcount.append(unit)
-        return unit
-
-
 #TODO Create a function through which as a player i can see the unitcount on any given tile
-def viewunitcount(coordinates, Map):
+def countUnits(coordinates, Map):
     if coordinates is not None:
         for i in Map:
             if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
-                a = (i.Unitcount.count(UnitClasses.BarackObama))
-                return a
-
-
-
-def SpawnBarack(coordinates, army, klik, Map):
-    if coordinates is not None and klik is not 1:
-        for i in Map:
-            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable and i.Barack == False:
-                unit = UnitClasses.BarackObama(None, i)
-                army.append(unit)
-                i.Unitcount.append(unit)
-                i.Barack = True
-
+                a = len(i.Soldier)
+                b = len(i.Tank)
+                c = len(i.Robot)
+                d = len(i.Boat)
+                print(str(a) + " Soldiers")
+                print(str(b) + " Tanks")
+                print(str(c) + " Robots")
+                print(str(d) + " Boats")
 
 def drawUnits(map):
     for x in map:
-        for u in x.Unitcount:
+        for u in x.Soldier:
+            main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
+        for u in x.Tank:
+            main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
+        for u in x.Robot:
+            main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
+        for u in x.Boat:
             main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
 
 #TODO Create a function through which the player can select the tile.unitcount, highlight the selected Tile
 #TODO Create a function through which the player can move the selected unit through the use of passing the Tile.unitcount to another Tile
-def selectUnit(coordinates1, coordinates2):
+def selectUnit(coordinates1, coordinates2, Map):
     Movelist = []
     if coordinates1 is not None:
         for i in Map:
