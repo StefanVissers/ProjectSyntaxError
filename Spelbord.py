@@ -22,10 +22,10 @@ def draw_board():
     main_surface.blit(bordload, (0,0))
     klik = 0
 
+    moveunitklik = 0
+
     mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
     event = pygame.event.get()
-
-    coordinates = getTile(event, mouse_pos)
 
     font = pygame.font.SysFont("Courier", 20)
     shopmenuButton1Text = font.render("Buy a Soldier! " + str(150 ), 1, (255,255,0))
@@ -71,10 +71,23 @@ def draw_board():
         coordinates = getTile(event, mouse_pos)
         SpawnBarack(coordinates, army, klik)
         drawUnits(army)
-        if coordinates is not None:
-            unitcounttext = font.render("Units: " + str(viewunitcount(coordinates)), 1, (255,255,0))
-            main_surface.fill((255, 0 , 255), (ViewUnitsButton))
-            main_surface.blit(unitcounttext, (900, 600))
+        # if coordinates is not None:
+        #     unitcounttext = font.render("Units: " + str(viewunitcount(coordinates)), 1, (255,255,0))
+        #     main_surface.fill((255, 0 , 255), (ViewUnitsButton))
+        #     main_surface.blit(unitcounttext, (900, 600))
+
+        if coordinates is not None and moveunitklik == 0:
+            moveunitklik = 1
+            clickedTile1 = coordinates
+
+        coordinates = None
+
+        if coordinates is not None and moveunitklik == 1:
+            clickedTile2 = coordinates
+            UnitClasses.selectUnit(clickedTile1, clickedTile2)
+
+
+
 
 
         if klik == 1:

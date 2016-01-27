@@ -6,8 +6,6 @@ import UnitClasses
 main_surface = pygame.display.set_mode((1200, 900))
 offset = 50
 
-
-
 class Tile:
     def __init__(self, tilex, tiley, income, playerNR, traversable):
         self.Position = Vector2(tilex, tiley)
@@ -22,7 +20,6 @@ class Vector2:
     def __init__(self, X, Y):
         self.x = X
         self.y = Y
-
 
 def create_Tilelist():
     list = []
@@ -61,24 +58,19 @@ def getTile(event, mouse_pos):
                     print(i.Position.x, i.Position.y, i.Traversable)
                     return i
 
-
-
 def placeUnit(clickedtile): #TODO Add unit to unitcount at clicked tile
     for i in Map:
         unit = UnitClasses.Tank(None, i)
         clickedtile.Unitcount.append(unit)
         return unit
 
-
 #TODO Create a function through which as a player i can see the unitcount on any given tile
-def viewunitcount(coordinates):
+def viewUnitcount(coordinates):
     if coordinates is not None:
         for i in Map:
             if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
                 a = (i.Unitcount.count(UnitClasses.BarackObama))
                 return a
-#TODO Create a submenu which the player can access after choosing "Buy a unit" in which the player can choose between units
-
 
 def SpawnBarack(coordinates, army, klik):
     if coordinates is not None and klik is not 1:
@@ -89,12 +81,22 @@ def SpawnBarack(coordinates, army, klik):
                 i.Unitcount.append(unit)
                 i.Barack = True
 
-
 def drawUnits(units):
     for u in units:
         main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
 
 #TODO Create a function through which the player can select the tile.unitcount, highlight the selected Tile
-
 #TODO Create a function through which the player can move the selected unit through the use of passing the Tile.unitcount to another Tile
+def selectUnit(coordinates1, coordinates2):
+    Movelist = []
+    if coordinates1 is not None:
+        for i in Map:
+            if coordinates1.Position.x == i.Position.x and coordinates1.Position.y == i.Position.y:
+               Movelist = i.Unitcount
+               del i.Unitcount[:]
+    if coordinates2 is not None:
+        for i in Map:
+            if coordinates2.Position.x == i.Position.x and coordinates2.Position.y == i.Position.y:
+                i.Unitcount = Movelist
 
+#TODO Create a submenu which the player can access after choosing "Buy a unit" in which the player can choose between units
