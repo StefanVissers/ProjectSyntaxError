@@ -3,91 +3,148 @@ import Menu
 from Tile import *
 from UnitClasses import *
 
+# Wat kleuren variabelen
 BLACK = ( 0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0,)
 GREEN = ( 0, 255, 0)
 BLUE = ( 0, 0, 255)
-main_surface = pygame.display.set_mode((1200, 900))
+main_surface = pygame.display.set_mode((1200, 900))                 # zet de resolutie naar de parameters; 1200(x), 900(y) in dit geval
 offset = 50
+task = None
 
+quit_in_gamebuttonpng = pygame.image.load('Pics/exitgame_button.png').convert_alpha()
+areyousurepng = pygame.image.load('Pics/areyousure.png').convert_alpha()
+bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
+background = pygame.image.load('Pics/Background.jpg')
+quitingamebutton = pygame.Rect(900, 0, 265, 125)
+shop = pygame.Rect(950, 200, 200, 50)
+
+def reload():                                                       # herinstantieert het bord
+    main_surface.blit(background, (0,0))
+    main_surface.blit(quit_in_gamebuttonpng, (900, 0))
+    main_surface.fill((WHITE), (shop))
+    main_surface.blit(bordload, (0,0))
 
 def draw_board():
-    quit_in_gamebuttonpng = pygame.image.load('Pics/exitgame_button.png').convert_alpha()
-    areyousurepng = pygame.image.load('Pics/areyousure.png').convert_alpha()
-    bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
-
-    quitingamebutton = pygame.Rect(900, 0, 265, 125)
+    main_surface.blit(background, (0,0))
     main_surface.blit(quit_in_gamebuttonpng, (900, 0))
     main_surface.blit(bordload, (0,0))
+
     klik = 0
+    shopmenu = 0
+    soldier = 0
+    tank = 0
+    robot = 0
+    boot = 0
+    barak = 0
+    menu = 0
+    testlist = []
+    #drawUnits()
 
-    moveunitklik = 0
+    main_surface.fill((WHITE), (shop))
 
-    mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
-    event = pygame.event.get()
-
-    coordinates = getTile(event, mouse_pos)
-
-    font = pygame.font.SysFont("Courier", 20)
-    shopmenuButton1Text = font.render("Buy a Soldier! " + str(150 ), 1, (255,255,0))
-    balancetext = font.render("Balance: " + str(800), 1, (255,255,0))
-    menuLayout = pygame.Rect(900, 650, 500, 300)
-    shopmenuButton1 = pygame.Rect(900, 700, 500, 50)
-    shopmenuButton2 = pygame.Rect(900, 750, 500, 50)
-    shopmenuButton3 = pygame.Rect(900, 800, 500, 50)
-    ViewUnitsButton = pygame.Rect(900, 600, 500, 50)
-    background = pygame.image.load('Pics/Background.jpg')
-    main_surface.blit(background, (0, 0))
-    main_surface.fill((255, 0, 0), (menuLayout))
-    main_surface.fill((0, 255, 0), (shopmenuButton1))
-    main_surface.fill((0, 0, 255), (shopmenuButton2))
-    main_surface.fill((255, 255, 0), (shopmenuButton3))
-    main_surface.blit(shopmenuButton1Text, (900, 700))
-    main_surface.blit(balancetext, (900, 850))
-    main_surface.blit(bordload, (0, 0))
-    main_surface.blit(quit_in_gamebuttonpng, (900, 0))
-
-    army = []
     Map = Tile.create_Tilelist()
-    Base1 = UnitClasses.Base(1, Map[0])
-    Base1.Tile.Barack = True
-    army.append(Base1)
-
 
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         event = pygame.event.get()            #kan alle events zijn zoals mouse_click
+        coordinates = getTile(event, mouse_pos, Map)
 
         for ev in event:
-            if ev.type == pygame.MOUSEBUTTONDOWN and quitingamebutton.collidepoint(mouse_pos): # Menu.menu(main_surface)
+            if ev.type == pygame.MOUSEBUTTONDOWN and quitingamebutton.collidepoint(mouse_pos):
                 klik = 1
-            elif ev.type == pygame.QUIT:   # Window close button clicked?
+            elif ev.type == pygame.QUIT:            # Window close button clicked?
                 pygame.quit()
                 quit()
             elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:   # back to main menu
                 klik = 1
-            elif ev.type == pygame.MOUSEBUTTONDOWN and shopmenuButton1.collidepoint(mouse_pos):
-                print ("SPAWN UNIT")
+            elif ev.type == pygame.MOUSEBUTTONDOWN and shop.collidepoint(mouse_pos):
+                shopmenu = 1
 
-        coordinates = getTile(event, mouse_pos)
-        SpawnBarack(coordinates, army, klik)
-        drawUnits(army)
-        # if coordinates is not None:
-        #     unitcounttext = font.render("Units: " + str(viewunitcount(coordinates)), 1, (255,255,0))
-        #     main_surface.fill((255, 0 , 255), (ViewUnitsButton))
-        #     main_surface.blit(unitcounttext, (900, 600))
+        if shopmenu == 1:
+            UnitS = pygame.Rect(900, 300, 100, 50)
+            UnitT = pygame.Rect(1000, 300, 100, 50)
+            UnitR = pygame.Rect(900, 400, 100, 50)
+            UnitB = pygame.Rect(1000, 400, 100, 50)
+            UnitBr = pygame.Rect(900, 500, 100, 50)
+            Back  = pygame.Rect(1000, 500, 100, 50)
 
-        if coordinates is not None and moveunitklik == 0:
-            moveunitklik = 1
-            clickedTile1 = coordinates
+            main_surface.fill((WHITE), (UnitS))
+            main_surface.fill((BLUE), (UnitT))
+            main_surface.fill((RED), (UnitR))
+            main_surface.fill((BLUE), (UnitB))
+            main_surface.fill((GREEN), (UnitBr))
+            main_surface.fill((BLACK), (Back))
 
-        coordinates = None
+            if ev.type == pygame.MOUSEBUTTONDOWN and UnitS.collidepoint(mouse_pos):
+                soldier = 1
+                shopmenu = 0
+                reload()
+            elif ev.type == pygame.MOUSEBUTTONDOWN and UnitT.collidepoint(mouse_pos):
+                tank = 1
+                shopmenu = 0
+                reload()
+            elif ev.type == pygame.MOUSEBUTTONDOWN and UnitR.collidepoint(mouse_pos):
+                robot = 1
+                shopmenu = 0
+                reload()
+            elif ev.type == pygame.MOUSEBUTTONDOWN and UnitB.collidepoint(mouse_pos):
+                boot = 1
+                shopmenu = 0
+                reload()
+            elif ev.type == pygame.MOUSEBUTTONDOWN and UnitBr.collidepoint(mouse_pos):
+                barak = 1
+                shopmenu = 0
+                reload()
+            elif ev.type == pygame.MOUSEBUTTONDOWN and Back.collidepoint(mouse_pos):
+                shopmenu = 0
+                reload()
 
-        if coordinates is not None and moveunitklik == 1:
-            clickedTile2 = coordinates
-            UnitClasses.selectUnit(clickedTile1, clickedTile2)
+        if soldier == 1:
+            if coordinates is not None:
+                for i in Map:
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
+                        unit = UnitClasses.Soldier(None, i)
+                        i.Unitcount.append(unit)
+                        print ("spawn Soldier")
+                        soldier = 0
+        if tank == 1:
+            if coordinates is not None:
+                for i in Map:
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
+                        unit = UnitClasses.Tank(None, i)
+                        i.Unitcount.append(unit)
+                        print ("spawn Soldier")
+                        tank = 0
+        if robot == 1:
+            if coordinates is not None:
+                for i in Map:
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
+                        unit = UnitClasses.Robot(None, i)
+                        i.Unitcount.append(unit)
+                        print ("spawn Soldier")
+                        robot = 0
+        if boot == 1:
+            if coordinates is not None:
+                for i in Map:
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
+                        unit = UnitClasses.Boat(None, i)
+                        i.Unitcount.append(unit)
+                        print ("spawn Soldier")
+                        boot = 0
+        if barak == 1:
+            if coordinates is not None:
+                for i in Map:
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
+                        unit = UnitClasses.BarackObama(None, i)
+                        i.Unitcount.append(unit)
+                        print ("spawn Soldier")
+                        barak = 0
 
+        getTile(event, mouse_pos, Map)
+
+        drawUnits(Map)
 
         if klik == 1:
             main_surface.blit(areyousurepng, (300, 200))
