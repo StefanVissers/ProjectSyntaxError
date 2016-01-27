@@ -11,6 +11,7 @@ BLUE = ( 0, 0, 255)
 main_surface = pygame.display.set_mode((1200, 900))
 offset = 50
 
+
 def draw_board():
     quit_in_gamebuttonpng = pygame.image.load('Pics/exitgame_button.png').convert_alpha()
     areyousurepng = pygame.image.load('Pics/areyousure.png').convert_alpha()
@@ -20,9 +21,11 @@ def draw_board():
     main_surface.blit(quit_in_gamebuttonpng, (900, 0))
     main_surface.blit(bordload, (0,0))
     klik = 0
-    menu = 0
-    testlist = []
-    #drawUnits()
+
+    mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
+    event = pygame.event.get()
+
+    coordinates = getTile(event, mouse_pos)
 
     font = pygame.font.SysFont("Courier", 20)
     shopmenuButton1Text = font.render("Buy a Soldier! " + str(150 ), 1, (255,255,0))
@@ -31,6 +34,7 @@ def draw_board():
     shopmenuButton1 = pygame.Rect(900, 700, 500, 50)
     shopmenuButton2 = pygame.Rect(900, 750, 500, 50)
     shopmenuButton3 = pygame.Rect(900, 800, 500, 50)
+    ViewUnitsButton = pygame.Rect(900, 600, 500, 50)
     background = pygame.image.load('Pics/Background.jpg')
     main_surface.blit(background, (0, 0))
     main_surface.fill((255, 0, 0), (menuLayout))
@@ -54,9 +58,8 @@ def draw_board():
         event = pygame.event.get()            #kan alle events zijn zoals mouse_click
 
         for ev in event:
-            if ev.type == pygame.MOUSEBUTTONDOWN and quitingamebutton.collidepoint(mouse_pos):
+            if ev.type == pygame.MOUSEBUTTONDOWN and quitingamebutton.collidepoint(mouse_pos): # Menu.menu(main_surface)
                 klik = 1
-                # Menu.menu(main_surface)
             elif ev.type == pygame.QUIT:   # Window close button clicked?
                 pygame.quit()
                 quit()
@@ -65,20 +68,14 @@ def draw_board():
             elif ev.type == pygame.MOUSEBUTTONDOWN and shopmenuButton1.collidepoint(mouse_pos):
                 print ("SPAWN UNIT")
 
-
-
         coordinates = getTile(event, mouse_pos)
-
-        if coordinates is not None and klik is not 1:
-            for i in Map:
-                if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable:
-                    unit = UnitClasses.BarackObama(None, i)
-                    army.append(unit)
-                    i.Unitcount.append(unit)
-                    i.Barack = True
-
-
+        SpawnBarack(coordinates, army, klik)
         drawUnits(army)
+        if coordinates is not None:
+            unitcounttext = font.render("Units: " + str(viewunitcount(coordinates)), 1, (255,255,0))
+            main_surface.fill((255, 0 , 255), (ViewUnitsButton))
+            main_surface.blit(unitcounttext, (900, 600))
+
 
         if klik == 1:
             main_surface.blit(areyousurepng, (300, 200))

@@ -22,6 +22,7 @@ class BarackObama:
         self.Tile = tile
         self.Health = 5
         self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45))
+        self.Name = "Barack"
 
 class Soldier:
     def __init__(self, player, tile):
@@ -32,6 +33,7 @@ class Soldier:
         self.Health = 1
         self.Attack = 1
         self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/soldier1.png'), (45, 45))
+        self.Name = "Soldier"
 
 class Robot:
     def __init__(self, player, tile):
@@ -42,6 +44,7 @@ class Robot:
         self.Health = 2
         self.Attack = 2
         self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/robot11.png'), (45, 45))
+        self.Name = "Robot"
 
 class Tank:
     def __init__(self, player, tile):
@@ -52,6 +55,7 @@ class Tank:
         self.Health = 2
         self.Attack = 2
         self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/tank1.png'), (45, 45))
+        self.Name = "Tank"
 
 class Boat:
     def __init__(self, player, tile):
@@ -63,16 +67,5 @@ class Boat:
         self.Attack = 0
         self.Units = []
         self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/boat1.png'), (45, 45))
+        self.Name = "Boat"
 
-
-
-
-def drawUnits(units):
-    for u in units:
-        main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
-
-    #test_tile = main_surface.fill ((255,0,0), (53, 53, 45, 45))
-
-
-
-print ("Hello")
