@@ -3,6 +3,7 @@ import pygame
 from random import *
 from Spelbord import *
 import UnitClasses
+main_surface = pygame.display.set_mode((1200, 900))
 offset = 50
 
 
@@ -14,8 +15,8 @@ class Tile:
         self.Player = playerNR
         self.Traversable = traversable
         self.Rectangle = pygame.Rect(self.Position.x * offset, self.Position.y  * offset, offset, offset)
-        self.Unitcount = []
         self.Barack = False
+        self.Unitcount = []
 
 class Vector2:
     def __init__(self, X, Y):
@@ -60,22 +61,48 @@ def getTile(event, mouse_pos):
                     print(i.Position.x, i.Position.y, i.Traversable)
                     return i
 
-def placeBarack(event, mouse_pos):
-    clickedTile = getTile(event, mouse_pos)
-    clickedTile.Barack = True
+#TODO Change Tile.Barack Boolean at cursor
 
-
-def placeUnit(event, mouse_pos, noen, clickedtile):
+def placeUnit(clickedtile): #TODO Add unit to unitcount at clicked tile
     for i in Map:
-        if clickedtile.Position.x + 1 == i.Position.x and clickedtile.Position.y == i.Position.y and i.Barack:
-            unit = UnitClasses.Tank(None, i)
-            clickedtile.Unitcount.append(unit)
-            return unit
-        elif clickedtile.Position.x - 1 == i.Position.x and clickedtile.Position.y == i.Position.y and i.Barack:
-            unit = UnitClasses.Tank(None, i)
-            clickedtile.Unitcount.append(unit)
-            return unit
-        elif clickedtile.Position.x == i.Position.x and clickedtile.Position.y + 1 == i.Position.y and i.Barack:
-            unit = UnitClasses.Tank(None, i)
-            clickedtile.Unitcount.append(unit)
-            return unit
+        unit = UnitClasses.Tank(None, i)
+        clickedtile.Unitcount.append(unit)
+        return unit
+
+def drawUnits(army): #TODO Draw unit if a Tile.unitcount > 0
+    for i in army:
+        if i is not None:
+            main_surface.blit(i.Texture, (i.Tile.Position.x * 50 + 3, i.Tile.Position.y * 50 + 3))
+
+
+#TODO Create a function through which as a player i can see the unitcount on any given tile
+
+
+
+def SelectedUnit(event, mouse_pos): #TODO Create a submenu which the player can access after choosing "Buy a unit" in which the player can choose between units
+    for ev in event:
+        if ev.type == pygame.MOUSEBUTTONDOWN and shopmenusubButton1.collidepoint(mouse_pos):
+            return Soldier
+        if ev.type == pygame.MOUSEBUTTONDOWN and shopmenusubButton2.collidepoint(mouse_pos):
+            return Robot
+        if ev.type == pygame.MOUSEBUTTONDOWN and shopmenusubButton3.collidepoint(mouse_pos):
+            return Tank
+        if ev.type == pygame.MOUSEBUTTONDOWN and shopmenusubButton4.collidepoint(mouse_pos):
+            return Boat
+
+def createArmylist(clickedtile, SelectedUnit):
+    unit = UnitClasses.SelectedUnit.append(unit)
+    clickedtile.Unitcount.append(unit)
+    return clickedtile
+
+
+# def clickTile(event, mouse_pos):
+#     global clickedtiles
+#     clickedtiles = []
+#     for ev in event:
+#         if ev.type == pygame.MOUSEBUTTONDOWN:
+#             for i in Map:
+#                 if i.Rectangle.collidepoint(mouse_pos):
+#                     clickedtiles.append(i)
+#                     print(i.Position.x, i.Position.y, i.Traversable)
+#     return clickedtiles

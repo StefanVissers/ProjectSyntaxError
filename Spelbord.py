@@ -65,29 +65,22 @@ def draw_board():
             elif ev.type == pygame.MOUSEBUTTONDOWN and shopmenuButton1.collidepoint(mouse_pos):
                 print ("SPAWN UNIT")
 
-
-
-
             if klik == 1:
                 main_surface.blit(areyousurepng, (300, 200))
-                yes123 = pygame.Rect(410, 415, 190, 100)    # position yes button
-                no123 = pygame.Rect(630, 415, 190, 100)     # position no button
-                if ev.type == pygame.MOUSEBUTTONDOWN and yes123.collidepoint(mouse_pos):
+                yesbutton = pygame.Rect(410, 415, 190, 100)    # position yes button
+                nobutton = pygame.Rect(630, 415, 190, 100)     # position no button
+                if ev.type == pygame.MOUSEBUTTONDOWN and yesbutton.collidepoint(mouse_pos):
                     Menu.menu(main_surface)
-                elif ev.type == pygame.MOUSEBUTTONDOWN and no123.collidepoint(mouse_pos):
+                elif ev.type == pygame.MOUSEBUTTONDOWN and nobutton.collidepoint(mouse_pos):
                     klik = 2
             elif klik == 2:
                 main_surface.blit(bordload, (0,0))
-                # drawUnits(clickTile)
                 klik = 0
 
-        #coordinates = clickTile(event, mouse_pos, bordload, quit_in_gamebuttonpng)
-        clickedtile = getTile(event, mouse_pos)
-        if clickedtile is not None:
-            unit = Tile.placeUnit(event, mouse_pos, None, clickedtile)
-            army.append(unit)
+        coordinates = getTile(event, mouse_pos)
 
-        UnitClasses.drawUnits(army)
+        drawUnits(coordinates)
+
 
 
         pygame.display.flip()

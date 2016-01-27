@@ -63,9 +63,20 @@ class Boat:
         self.Units = []
         self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/baot1.png'), (45, 45))
 
-def drawUnits(army):
-    for i in army:
-        if i is not None:
-            main_surface.blit(i.Texture, (i.Tile.Position.x * 50 + 3, i.Tile.Position.y *  50 + 3))
+
+
+
+def drawUnits(units):
+    tankTexture = pygame.image.load('Pics/monster1.png')
+    tankTexture = pygame.transform.scale(tankTexture, (45, 45))
+    tank = Tank(None, None, tankTexture)
+    for u in units:
+        unitx = u.Position.x
+        unity = u.Position.y
+        main_surface.blit(tank.Texture,(unitx * 50 + 3, unity * 50 + 3, 45, 45))
 
     #test_tile = main_surface.fill ((255,0,0), (53, 53, 45, 45))
+
+
+
+print ("Hello")
