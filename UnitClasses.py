@@ -14,7 +14,8 @@ class Base:
         self.Tile = tile
         self.Health = 25
         self.Barack = BarackObama(player, tile)
-        self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45))
+        if player == 1:
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45))
 
 class BarackObama:
     def __init__(self, player, tile):
@@ -43,7 +44,7 @@ class Robot:
         self.Cost = 300
         self.Health = 2
         self.Attack = 2
-        self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/robot11.png'), (45, 45))
+        self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/robot1.png'), (45, 45))
         self.Name = "Robot"
 
 class Tank:
