@@ -25,8 +25,6 @@ def draw_board():
     mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
     event = pygame.event.get()
 
-    coordinates = getTile(event, mouse_pos)
-
     font = pygame.font.SysFont("Courier", 20)
     shopmenuButton1Text = font.render("Buy a Soldier! " + str(150 ), 1, (255,255,0))
     balancetext = font.render("Balance: " + str(800), 1, (255,255,0))
@@ -68,11 +66,11 @@ def draw_board():
             elif ev.type == pygame.MOUSEBUTTONDOWN and shopmenuButton1.collidepoint(mouse_pos):
                 print ("SPAWN UNIT")
 
-        coordinates = getTile(event, mouse_pos)
-        SpawnBarack(coordinates, army, klik)
-        drawUnits(army)
+        coordinates = getTile(event, mouse_pos, Map)
+        SpawnBarack(coordinates, army, klik, Map)
+        drawUnits(Map)
         if coordinates is not None:
-            unitcounttext = font.render("Units: " + str(viewunitcount(coordinates)), 1, (255,255,0))
+            unitcounttext = font.render("Units: " + str(viewunitcount(coordinates, Map)), 1, (255,255,0))
             main_surface.fill((255, 0 , 255), (ViewUnitsButton))
             main_surface.blit(unitcounttext, (900, 600))
 
