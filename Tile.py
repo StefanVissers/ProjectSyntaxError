@@ -6,6 +6,8 @@ import UnitClasses
 main_surface = pygame.display.set_mode((1200, 900))
 offset = 50
 
+
+
 class Tile:
     def __init__(self, tilex, tiley, income, playerNR, traversable):
         self.Position = Vector2(tilex, tiley)
@@ -20,6 +22,7 @@ class Vector2:
     def __init__(self, X, Y):
         self.x = X
         self.y = Y
+
 
 def create_Tilelist():
     list = []
@@ -47,9 +50,7 @@ def create_Tilelist():
                 list.append(Tile(x, y, 50, 0, True))
     return list
 
-Map = create_Tilelist()
-
-def getTile(event, mouse_pos):
+def getTile(event, mouse_pos, Map):
     click = pygame.mouse.get_pressed()
     for ev in event:
         if ev.type == pygame.MOUSEBUTTONDOWN and click[0] == 1:
@@ -58,21 +59,26 @@ def getTile(event, mouse_pos):
                     print(i.Position.x, i.Position.y, i.Traversable)
                     return i
 
-def placeUnit(clickedtile): #TODO Add unit to unitcount at clicked tile
+
+
+def placeUnit(clickedtile, Map): #TODO Add unit to unitcount at clicked tile
     for i in Map:
         unit = UnitClasses.Tank(None, i)
         clickedtile.Unitcount.append(unit)
         return unit
 
+
 #TODO Create a function through which as a player i can see the unitcount on any given tile
-def viewUnitcount(coordinates):
+def viewunitcount(coordinates, Map):
     if coordinates is not None:
         for i in Map:
             if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
                 a = (i.Unitcount.count(UnitClasses.BarackObama))
                 return a
 
-def SpawnBarack(coordinates, army, klik):
+
+
+def SpawnBarack(coordinates, army, klik, Map):
     if coordinates is not None and klik is not 1:
         for i in Map:
             if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable and i.Barack == False:
@@ -81,9 +87,11 @@ def SpawnBarack(coordinates, army, klik):
                 i.Unitcount.append(unit)
                 i.Barack = True
 
-def drawUnits(units):
-    for u in units:
-        main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
+
+def drawUnits(map):
+    for x in map:
+        for u in x.Unitcount:
+            main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
 
 #TODO Create a function through which the player can select the tile.unitcount, highlight the selected Tile
 #TODO Create a function through which the player can move the selected unit through the use of passing the Tile.unitcount to another Tile

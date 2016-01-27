@@ -27,6 +27,8 @@ def draw_board():
     mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
     event = pygame.event.get()
 
+    coordinates = getTile(event, mouse_pos)
+
     font = pygame.font.SysFont("Courier", 20)
     shopmenuButton1Text = font.render("Buy a Soldier! " + str(150 ), 1, (255,255,0))
     balancetext = font.render("Balance: " + str(800), 1, (255,255,0))
@@ -85,9 +87,6 @@ def draw_board():
         if coordinates is not None and moveunitklik == 1:
             clickedTile2 = coordinates
             UnitClasses.selectUnit(clickedTile1, clickedTile2)
-
-
-
 
 
         if klik == 1:
