@@ -69,10 +69,10 @@ def placeUnit(clickedtile): #TODO Add unit to unitcount at clicked tile
         clickedtile.Unitcount.append(unit)
         return unit
 
-def drawUnits(army): #TODO Draw unit if a Tile.unitcount > 0
-    for i in army:
-        if i is not None:
-            main_surface.blit(i.Texture, (i.Tile.Position.x * 50 + 3, i.Tile.Position.y * 50 + 3))
+# def drawUnits(army): #TODO Draw unit if a Tile.unitcount > 0
+#     for i in army:
+#         if i is not None:
+#             main_surface.blit(i.Texture, (i.Tile.Position.x * 50 + 3, i.Tile.Position.y * 50 + 3))
 
 
 #TODO Create a function through which as a player i can see the unitcount on any given tile
@@ -90,10 +90,10 @@ def SelectedUnit(event, mouse_pos): #TODO Create a submenu which the player can 
         if ev.type == pygame.MOUSEBUTTONDOWN and shopmenusubButton4.collidepoint(mouse_pos):
             return Boat
 
-def createArmylist(clickedtile, SelectedUnit):
-    unit = UnitClasses.SelectedUnit.append(unit)
-    clickedtile.Unitcount.append(unit)
-    return clickedtile
+# def createArmylist(clickedtile, SelectedUnit):
+#     unit = UnitClasses.SelectedUnit.append(unit)
+#     clickedtile.Unitcount.append(unit)
+#     return clickedtile
 
 
 # def clickTile(event, mouse_pos):
