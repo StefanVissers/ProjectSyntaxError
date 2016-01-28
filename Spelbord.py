@@ -120,7 +120,7 @@ def draw_board():
         if soldier == 1:
             if coordinates is not None:
                 for i in Map:
-                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True: #and i.Barack == True:
                         unit = UnitClasses.Soldier(None, i)
                         i.Soldier.append(unit)
                         print ("spawn Soldier")
@@ -128,7 +128,7 @@ def draw_board():
         if tank == 1:
             if coordinates is not None:
                 for i in Map:
-                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True: #and i.Barack == True:
                         unit = UnitClasses.Tank(None, i)
                         i.Tank.append(unit)
                         print ("spawn Tank")
@@ -136,7 +136,7 @@ def draw_board():
         if robot == 1:
             if coordinates is not None:
                 for i in Map:
-                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True: #and i.Barack == True:
                         unit = UnitClasses.Robot(None, i)
                         i.Robot.append(unit)
                         print ("spawn Robot")
@@ -144,7 +144,7 @@ def draw_board():
         if boot == 1:
             if coordinates is not None:
                 for i in Map:
-                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is False: #and i.Barack == True:
                         unit = UnitClasses.Boat(None, i)
                         i.Boat.append(unit)
                         print ("spawn Boat")
@@ -152,8 +152,9 @@ def draw_board():
         if barak == 1:
             if coordinates is not None:
                 for i in Map:
-                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True: #and i.Barack == True:
                         print ("spawn Barack")
+                        i.Barack = True
                         barak = 0
 
         getTile(event, mouse_pos, Map)
