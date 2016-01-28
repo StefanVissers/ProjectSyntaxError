@@ -70,16 +70,45 @@ def countUnits(coordinates, Map):
                 b = len(i.Tank)
                 c = len(i.Robot)
                 d = len(i.Boat)
-                print(str(a) + " Soldiers")
-                print(str(b) + " Tanks")
-                print(str(c) + " Robots")
-                print(str(d) + " Boats")
+                print(str(a) + " Soldier(s)")
+                print(str(b) + " Tank(s)")
+                print(str(c) + " Robot(s)")
+                print(str(d) + " Boat(s)")
                 print(i.Barack)
+
+
+def countSoldiers(coordinates, Map):
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                a = len(i.Soldier)
+                return "Soldiers : " + str(a)
+
+def countTanks(coordinates, Map):
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                b = len(i.Tank)
+                return "Tanks : " + str(b)
+
+def countRobots(coordinates, Map):
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                c = len(i.Robot)
+                return "Robots : " + str(c)
+
+def countBoats(coordinates, Map):
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                d = len(i.Boat)
+                return "Boats : " + str(d)
 
 def drawUnits(map):
     for x in map:
         if x.Barack == True:
-            main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
+            main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         for u in x.Soldier:
             main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         for u in x.Tank:

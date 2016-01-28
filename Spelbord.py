@@ -19,7 +19,10 @@ bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
 background = pygame.image.load('Pics/Background.jpg')
 quitingamebutton = pygame.Rect(900, 0, 265, 125)
 shop = pygame.Rect(950, 200, 200, 50)
-ViewUnitsButton = pygame.Rect(900, 600, 500, 50)
+ViewSoldierButton = pygame.Rect(900, 700, 500, 50)
+ViewTankButton = pygame.Rect(900, 750, 500, 50)
+ViewRobotButton = pygame.Rect(900, 800, 500, 50)
+ViewBoatButton = pygame.Rect(900, 850, 500, 50)
 shopmenubutton = pygame.image.load('Pics/units/shop_menu_button.png')
 
 
@@ -49,6 +52,7 @@ def draw_board():
     #main_surface.fill((WHITE), (shop))
     main_surface.blit(shopmenubutton, (950, 200))
     coordinates1 = None
+    font = pygame.font.SysFont(None, 25)
 
     Map = Tile.create_Tilelist()
 
@@ -68,10 +72,20 @@ def draw_board():
             elif ev.type == pygame.MOUSEBUTTONDOWN and shop.collidepoint(mouse_pos):
                 shopmenu = 1
 
-        # if coordinates is not None:
-        #      unitcounttext = font.render("Units: " + str(viewUnitcount(coordinates, Map)), 1, (255,255,0))
-        #      main_surface.fill((255, 0 , 255), (ViewUnitsButton))
-        #      main_surface.blit(unitcounttext, (900, 600))
+        if coordinates is not None:
+              soldierCounttext = font.render(str(countSoldiers(coordinates, Map)), 1, (255,255,0))
+              main_surface.fill((0, 0 , 0), (ViewSoldierButton))
+              main_surface.blit(soldierCounttext, (900, 700))
+              tankCounttext = font.render(str(countTanks(coordinates, Map)), 1, (255,0,0))
+              main_surface.fill((0, 0 , 0), (ViewTankButton))
+              main_surface.blit(tankCounttext, (900, 750))
+              robotCounttext = font.render(str(countRobots(coordinates, Map)), 1, (255,50,0))
+              main_surface.fill((0, 0 , 0), (ViewRobotButton))
+              main_surface.blit(robotCounttext, (900, 800))
+              boatCounttext = font.render(str(countBoats(coordinates, Map)), 1, (255,100,0))
+              main_surface.fill((0, 0 , 0), (ViewBoatButton))
+              main_surface.blit(boatCounttext, (900, 850))
+
 
         countUnits(coordinates, Map)
         if shopmenu == 1:
