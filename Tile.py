@@ -70,10 +70,10 @@ def countUnits(coordinates, Map):
                 b = len(i.Tank)
                 c = len(i.Robot)
                 d = len(i.Boat)
-                print(str(a) + " Soldiers")
-                print(str(b) + " Tanks")
-                print(str(c) + " Robots")
-                print(str(d) + " Boats")
+                print(str(a) + " Soldier(s)")
+                print(str(b) + " Tank(s)")
+                print(str(c) + " Robot(s)")
+                print(str(d) + " Boat(s)")
                 print(i.Barack)
 
 
@@ -108,7 +108,7 @@ def countBoats(coordinates, Map):
 def drawUnits(map):
     for x in map:
         if x.Barack == True:
-            main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
+            main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         for u in x.Soldier:
             main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
         for u in x.Tank:

@@ -53,6 +53,7 @@ def draw_board():
     main_surface.blit(shopmenubutton, (950, 200))
     font = pygame.font.SysFont(None, 25)
 
+
     Map = Tile.create_Tilelist()
 
     while True:
@@ -165,13 +166,14 @@ def draw_board():
         if barak == 1:
             if coordinates is not None:
                 for i in Map:
-                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
                         print ("spawn Barack")
                         i.Barack = True
                         barak = 0
 
         getTile(event, mouse_pos, Map)
-
+        # dict = {1:"Hello", "world":2}
+        # print(dict[2])
 
         drawUnits(Map)
 
