@@ -37,7 +37,7 @@ def main():
     pygame.mixer.music.play(-1, 0.0)
 
     while True:
-        game_intro(main_surface)                                      # begint de intro
+        #game_intro(main_surface)                                      # begint de intro
         Menu.menu(main_surface)
         pygame.display.flip()
 

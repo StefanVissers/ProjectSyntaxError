@@ -19,12 +19,15 @@ bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
 background = pygame.image.load('Pics/Background.jpg')
 quitingamebutton = pygame.Rect(900, 0, 265, 125)
 shop = pygame.Rect(950, 200, 200, 50)
+shopmenubutton = pygame.image.load('Pics/units/shop_menu_button.png')
+
 
 def reload():                                                       # herinstantieert het bord
     main_surface.blit(background, (0,0))
     main_surface.blit(quit_in_gamebuttonpng, (900, 0))
-    main_surface.fill((WHITE), (shop))
+    #main_surface.fill((WHITE), (shop))
     main_surface.blit(bordload, (0,0))
+    main_surface.blit(shopmenubutton, (950, 200))
 
 def draw_board():
     main_surface.blit(background, (0,0))
@@ -41,8 +44,9 @@ def draw_board():
     menu = 0
     testlist = []
     #drawUnits()
-
-    main_surface.fill((WHITE), (shop))
+    shopmenuimage = pygame.image.load('Pics/units/Shop_menu_unf.png')
+    #main_surface.fill((WHITE), (shop))
+    main_surface.blit(shopmenubutton, (950, 200))
 
     Map = Tile.create_Tilelist()
 
@@ -63,19 +67,23 @@ def draw_board():
                 shopmenu = 1
 
         if shopmenu == 1:
-            UnitS = pygame.Rect(900, 300, 100, 50)
-            UnitT = pygame.Rect(1000, 300, 100, 50)
-            UnitR = pygame.Rect(900, 400, 100, 50)
-            UnitB = pygame.Rect(1000, 400, 100, 50)
-            UnitBr = pygame.Rect(900, 500, 100, 50)
-            Back  = pygame.Rect(1000, 500, 100, 50)
+            UnitS = pygame.Rect(900, 300, 142, 68)
+            UnitT = pygame.Rect(1060, 300, 142, 68)
+            UnitR = pygame.Rect(900, 392, 140, 68)
+            UnitB = pygame.Rect(1060, 392, 142, 68)
+            UnitBr = pygame.Rect(900, 480, 142, 68)
+            Back  = pygame.Rect(1059, 480, 142, 68)
 
-            main_surface.fill((WHITE), (UnitS))
-            main_surface.fill((BLUE), (UnitT))
-            main_surface.fill((RED), (UnitR))
-            main_surface.fill((BLUE), (UnitB))
-            main_surface.fill((GREEN), (UnitBr))
-            main_surface.fill((BLACK), (Back))
+
+            # main_surface.fill((WHITE), (UnitS))
+            # main_surface.fill((BLUE), (UnitT))
+            # main_surface.fill((RED), (UnitR))
+            # main_surface.fill((BLUE), (UnitB))
+            # main_surface.fill((GREEN), (UnitBr))
+            # main_surface.fill((WHITE), (Back))
+
+            main_surface.blit(shopmenuimage, (900, 300))
+
 
             if ev.type == pygame.MOUSEBUTTONDOWN and UnitS.collidepoint(mouse_pos):
                 soldier = 1
@@ -143,6 +151,8 @@ def draw_board():
                         barak = 0
 
         getTile(event, mouse_pos, Map)
+        # dict = {1:"Hello", "world":2}
+        # print(dict[2])
 
         drawUnits(Map)
 
