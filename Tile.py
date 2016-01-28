@@ -74,6 +74,7 @@ def countUnits(coordinates, Map):
                 print(str(b) + " Tanks")
                 print(str(c) + " Robots")
                 print(str(d) + " Boats")
+                print(i.Barack)
 
 def drawUnits(map):
     for x in map:
