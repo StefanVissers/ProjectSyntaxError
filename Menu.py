@@ -16,8 +16,6 @@ def menu(main_surface):
         optionbutton = pygame.Rect(150, 400, 265, 125)
         quitgamebutton = pygame.Rect(150, 550, 265, 125)
 
-        my_font = pygame.font.SysFont("Courier", 20)
-
         event = pygame.event.get()            #kan alle events zijn zoals mouse_click
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         for ev in event:
@@ -27,7 +25,7 @@ def menu(main_surface):
                 pygame.quit()
                 quit()
             elif ev.type == pygame.MOUSEBUTTONDOWN and optionbutton.collidepoint(mouse_pos):    #als je op de opties knop drukt
-                print ("OPTIES HIER") #TODO OPTIE MENU
+                print ("OPTIES HIER")
             elif ev.type == pygame.MOUSEBUTTONDOWN and instructionbutton.collidepoint(mouse_pos):   #als je op de instructies knop drukt
                 Manual.manual()
         # Other Logic Here

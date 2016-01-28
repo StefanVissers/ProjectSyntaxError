@@ -127,10 +127,16 @@ def countBoats(coordinates, Map):
                 d = len(i.Boat)
                 return "Boats : " + str(d)
 
-def drawUnits(map):
+def drawUnits(map, a):
     for x in map:
-        if x.Barack == True:
+        if x.Barack == True and a == 1:
+            main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/brown_tent.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
+        if x.Barack == True and a == 2:
+            main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/red_tent.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
+        if x.Barack == True and a == 3:
             main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
+        if x.Barack == True and a == 4:
+            main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/green_tent.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         if x.Barack == True and x.Base == True:
             main_surface.blit(UnitClasses.Base.Texture)
         for u in x.Soldier:
@@ -257,4 +263,9 @@ def selectUnit(coordinates1, coordinates2, Map):
                     for x in MovelistBoat:
                         i.Boat.append(x)
 
-#TODO Create a submenu which the player can access after choosing "Buy a unit" in which the player can choose between units
+def turn(x):
+    x += 1
+    if x > 4:
+        x = 1
+        return x
+    return x

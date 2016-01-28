@@ -23,19 +23,20 @@ class Base:
         else:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_green.png'), (50, 50))
 
+
 class BarackObama:
     def __init__(self, player):
         self.Player = player
         self.Health = 5
         self.Name = "Barack"
         if player == 1:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/brown_tent.png'), (45, 45))
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45))
         elif player == 2:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/red_tent.png'), (45, 45))
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45))
         elif player == 3:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45))
         else:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/green_tent.png'), (45, 45))
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45))
 
 
 class Soldier:

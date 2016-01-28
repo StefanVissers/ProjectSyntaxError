@@ -53,6 +53,8 @@ def draw_board():
 
     Map = Tile.create_Tilelist()
     drawBase(Map)
+    zetten = 0
+    x = 1
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         event = pygame.event.get()            #kan alle events zijn zoals mouse_click
@@ -124,35 +126,43 @@ def draw_board():
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
                         if i.Barack == True or i.Base == True:
-                            unit = UnitClasses.Soldier(None)
+                            unit = UnitClasses.Soldier(x)
                             i.Soldier.append(unit)
                             soldier = 0
+                            zetten += 1
+                            print(zetten)
 
         if tank == 1:
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
                         if i.Barack == True or i.Base == True:
-                            unit = UnitClasses.Tank(None)
+                            unit = UnitClasses.Tank(x)
                             i.Tank.append(unit)
                             tank = 0
+                            zetten += 1
+                            print(zetten)
 
         if robot == 1:
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
                         if i.Barack == True or i.Base == True:
-                            unit = UnitClasses.Robot(None)
+                            unit = UnitClasses.Robot(x)
                             i.Robot.append(unit)
                             robot = 0
+                            zetten += 1
+                            print(zetten)
 
         if boot == 1:
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is False:
-                        unit = UnitClasses.Boat(None)
+                        unit = UnitClasses.Boat(x)
                         i.Boat.append(unit)
                         boot = 0
+                        zetten += 1
+                        print(zetten)
 
         if barak == 1:
             if coordinates is not None:
@@ -160,6 +170,8 @@ def draw_board():
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
                         i.Barack = True
                         barak = 0
+                        zetten += 1
+                        print(zetten)
 
         if coordinates is not None and coordinates1 is None:
             if (coordinates.Soldier != [] or coordinates.Tank != [] or coordinates.Robot != [] or coordinates.Boat != []):
@@ -169,11 +181,19 @@ def draw_board():
             if (coordinates1.Soldier != [] or coordinates1.Tank != [] or coordinates1.Robot != [] or coordinates1.Boat != []):
                 coordinates2 = getTile(event, mouse_pos, Map)
                 Tile.selectUnit(coordinates1, coordinates2, Map)
+                zetten += 1
+                print(zetten)
                 coordinates1 = None
                 coordinates2 = None
                 coordinates = None
                 reload(Map)
-        drawUnits(Map)
+        drawUnits(Map, x)
+
+        if zetten == 4:
+            x = turn(x)
+            print("A new Turn!")
+            print(x)
+            zetten = 0
 
         if klik == 1:
             main_surface.blit(areyousurepng, (300, 200))
