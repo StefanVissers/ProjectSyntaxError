@@ -1,7 +1,5 @@
 __author__ = 'stefan'
 import pygame
-import time
-import random
 import Spelbord
 import Manual
 

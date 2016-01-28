@@ -1,7 +1,6 @@
-import pygame
 import Menu
-import time
 import pygame
+
 
 def manual():
     main_surface = pygame.display.set_mode((1200, 900))

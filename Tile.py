@@ -14,6 +14,7 @@ class Tile:
         self.Traversable = traversable
         self.Rectangle = pygame.Rect(self.Position.x * offset, self.Position.y  * offset, offset, offset)
         self.Barack = False
+        self.Base = False
         self.Soldier = []
         self.Tank = []
         self.Robot = []
@@ -23,6 +24,29 @@ class Vector2:
     def __init__(self, X, Y):
         self.x = X
         self.y = Y
+
+def drawBase(Map):
+    for i in Map:
+        if i.Position.x == 0 and i.Position.y == 0:
+            i.Base = True
+            if i.Base == True:
+                Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_green.png'), (50,50))
+                main_surface.blit((Texture), (i.Position.x * offset, i.Position.y * offset))
+        if i.Position.x == 17 and i.Position.y == 0:
+            i.Base = True
+            if i.Base == True:
+                Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_blue.png'), (50,50))
+                main_surface.blit((Texture), (i.Position.x * offset, i.Position.y * offset))
+        if i.Position.x == 0 and i.Position.y == 17:
+            i.Base = True
+            if i.Base == True:
+                Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_red.png'), (50,50))
+                main_surface.blit((Texture), (i.Position.x * offset, i.Position.y * offset))
+        if i.Position.x == 17 and i.Position.y == 17:
+            i.Base = True
+            if i.Base == True:
+                Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_brown.png'), (50,50))
+                main_surface.blit((Texture), (i.Position.x * offset, i.Position.y * offset))
 
 
 def create_Tilelist():
@@ -60,8 +84,6 @@ def getTile(event, mouse_pos, Map):
                     print(i.Position.x, i.Position.y, i.Traversable)
                     return i
 
-
-#TODO Create a function through which as a player i can see the unitcount on any given tile
 def countUnits(coordinates, Map):
     if coordinates is not None:
         for i in Map:
@@ -109,6 +131,8 @@ def drawUnits(map):
     for x in map:
         if x.Barack == True:
             main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
+        if x.Barack == True and x.Base == True:
+            main_surface.blit(UnitClasses.Base.Texture)
         for u in x.Soldier:
             main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         for u in x.Tank:
@@ -119,8 +143,6 @@ def drawUnits(map):
             main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
 
 
-#TODO Create a function through which the player can select the tile.unitcount
-#TODO Create a function through which the player can move the selected unit through the use of passing the Tile.unitcount to another Tile
 def selectUnit(coordinates1, coordinates2, Map):
     #Units op land verplaatsen
     if coordinates1 is not None:

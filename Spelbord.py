@@ -1,9 +1,8 @@
-import pygame
-import Menu
 from Tile import *
 from UnitClasses import *
+import Menu
 
-# Wat kleuren variabelen
+# Wat kleur variabelen
 BLACK = ( 0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0,)
@@ -26,12 +25,12 @@ ViewBoatButton = pygame.Rect(900, 850, 500, 50)
 shopmenubutton = pygame.image.load('Pics/units/shop_menu_button.png')
 
 
-def reload():                                                       # herinstantieert het bord
+def reload(Map):                                                       # herinstantieert het bord
     main_surface.blit(background, (0,0))
     main_surface.blit(quit_in_gamebuttonpng, (900, 0))
-    #main_surface.fill((WHITE), (shop))
     main_surface.blit(bordload, (0,0))
     main_surface.blit(shopmenubutton, (950, 200))
+    drawBase(Map)
 
 def draw_board():
     main_surface.blit(background, (0,0))
@@ -47,15 +46,13 @@ def draw_board():
     barak = 0
     menu = 0
     testlist = []
-    #drawUnits()
     shopmenuimage = pygame.image.load('Pics/units/Shop_menu_unf.png')
-    #main_surface.fill((WHITE), (shop))
     main_surface.blit(shopmenubutton, (950, 200))
     coordinates1 = None
     font = pygame.font.SysFont(None, 25)
 
     Map = Tile.create_Tilelist()
-
+    drawBase(Map)
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         event = pygame.event.get()            #kan alle events zijn zoals mouse_click
@@ -96,81 +93,73 @@ def draw_board():
             UnitBr = pygame.Rect(900, 480, 142, 68)
             Back  = pygame.Rect(1059, 480, 142, 68)
 
-
-            # main_surface.fill((WHITE), (UnitS))
-            # main_surface.fill((BLUE), (UnitT))
-            # main_surface.fill((RED), (UnitR))
-            # main_surface.fill((BLUE), (UnitB))
-            # main_surface.fill((GREEN), (UnitBr))
-            # main_surface.fill((WHITE), (Back))
-
             main_surface.blit(shopmenuimage, (900, 300))
-
 
             if ev.type == pygame.MOUSEBUTTONDOWN and UnitS.collidepoint(mouse_pos):
                 soldier = 1
                 shopmenu = 0
-                reload()
+                reload(Map)
             elif ev.type == pygame.MOUSEBUTTONDOWN and UnitT.collidepoint(mouse_pos):
                 tank = 1
                 shopmenu = 0
-                reload()
+                reload(Map)
             elif ev.type == pygame.MOUSEBUTTONDOWN and UnitR.collidepoint(mouse_pos):
                 robot = 1
                 shopmenu = 0
-                reload()
+                reload(Map)
             elif ev.type == pygame.MOUSEBUTTONDOWN and UnitB.collidepoint(mouse_pos):
                 boot = 1
                 shopmenu = 0
-                reload()
+                reload(Map)
             elif ev.type == pygame.MOUSEBUTTONDOWN and UnitBr.collidepoint(mouse_pos):
                 barak = 1
                 shopmenu = 0
-                reload()
+                reload(Map)
             elif ev.type == pygame.MOUSEBUTTONDOWN and Back.collidepoint(mouse_pos):
                 shopmenu = 0
-                reload()
+                reload(Map)
 
         if soldier == 1:
             if coordinates is not None:
                 for i in Map:
-                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True and i.Barack == True:
-                        unit = UnitClasses.Soldier(None)
-                        i.Soldier.append(unit)
-                        print ("spawn Soldier")
-                        soldier = 0
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
+                        if i.Barack == True or i.Base == True:
+                            unit = UnitClasses.Soldier(None)
+                            i.Soldier.append(unit)
+                            soldier = 0
+
         if tank == 1:
             if coordinates is not None:
                 for i in Map:
-                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True and i.Barack == True:
-                        unit = UnitClasses.Tank(None)
-                        i.Tank.append(unit)
-                        print ("spawn Tank")
-                        tank = 0
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
+                        if i.Barack == True or i.Base == True:
+                            unit = UnitClasses.Tank(None)
+                            i.Tank.append(unit)
+                            tank = 0
+
         if robot == 1:
             if coordinates is not None:
                 for i in Map:
-                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True and i.Barack == True:
-                        unit = UnitClasses.Robot(None)
-                        i.Robot.append(unit)
-                        print ("spawn Robot")
-                        robot = 0
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
+                        if i.Barack == True or i.Base == True:
+                            unit = UnitClasses.Robot(None)
+                            i.Robot.append(unit)
+                            robot = 0
+
         if boot == 1:
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is False:
                         unit = UnitClasses.Boat(None)
                         i.Boat.append(unit)
-                        print ("spawn Boat")
                         boot = 0
+
         if barak == 1:
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
                         i.Barack = True
                         barak = 0
-        # dict = {1:"Hello", "world":2}
-        # print(dict[2])
 
         if coordinates is not None and coordinates1 is None:
             if (coordinates.Soldier != [] or coordinates.Tank != [] or coordinates.Robot != [] or coordinates.Boat != []):
@@ -183,8 +172,7 @@ def draw_board():
                 coordinates1 = None
                 coordinates2 = None
                 coordinates = None
-                reload()
-
+                reload(Map)
         drawUnits(Map)
 
         if klik == 1:

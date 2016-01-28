@@ -4,6 +4,7 @@ import pygame
 
 main_surface = pygame.display.set_mode((1200, 900))
 
+
 class Unit:
     def Move(self):
         pass
@@ -14,13 +15,13 @@ class Base:
         self.Health = 25
         self.Barack = BarackObama(player)
         if player == 1:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45))
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_brown.png'), (50, 50))
         elif player == 2:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45))
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_red.png'), (50, 50))
         elif player == 3:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45))
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_blue.png'), (50, 50))
         else:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45))
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_green.png'), (50, 50))
 
 class BarackObama:
     def __init__(self, player):
@@ -28,13 +29,13 @@ class BarackObama:
         self.Health = 5
         self.Name = "Barack"
         if player == 1:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45))
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/brown_tent.png'), (45, 45))
         elif player == 2:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45))
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/red_tent.png'), (45, 45))
         elif player == 3:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45))
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45))
         else:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45))
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/green_tent.png'), (45, 45))
 
 
 class Soldier:
