@@ -95,7 +95,9 @@ class Boat:
         self.Cost = 1000
         self.Health = 1
         self.Attack = 0
-        self.Units = []
+        self.Soldier = []
+        self.Robot = []
+        self.Tank = []
         self.Name = "Boat"
         if player == 1:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/boat1.png'), (45, 45))

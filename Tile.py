@@ -122,6 +122,7 @@ def drawUnits(map):
 #TODO Create a function through which the player can select the tile.unitcount
 #TODO Create a function through which the player can move the selected unit through the use of passing the Tile.unitcount to another Tile
 def selectUnit(coordinates1, coordinates2, Map):
+    #Units op land verplaatsen
     if coordinates1 is not None:
         if (coordinates1.Position.x + 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y and coordinates2.Traversable)\
                 or (coordinates1.Position.x - 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y and coordinates2.Traversable)\
@@ -143,19 +144,84 @@ def selectUnit(coordinates1, coordinates2, Map):
                 or (coordinates1.Position.y - 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x and coordinates2.Traversable):
             for i in Map:
                 if coordinates2.Position.x == i.Position.x and coordinates2.Position.y == i.Position.y:
-                    i.Soldier = MovelistSoldier
-                    i.Tank = MovelistTank
-                    i.Robot = MovelistRobot
+                    for x in MovelistSoldier:
+                        i.Soldier.append(x)
+                    for x in MovelistTank:
+                        i.Tank.append(x)
+                    for x in MovelistRobot:
+                        i.Robot.append(x)
+
+    #Boot units laden
+    if coordinates1 is not None:
+        if (coordinates1.Position.x + 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y)\
+                or (coordinates1.Position.x - 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y)\
+                or (coordinates1.Position.y + 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x)\
+                or (coordinates1.Position.y - 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x):
+            for i in Map:
+                if coordinates1.Position.x == i.Position.x and coordinates1.Position.y == i.Position.y and coordinates1.Traversable and coordinates2.Traversable == False:
+                    if coordinates2.Boat and (coordinates1.Soldier or coordinates1.Tank or coordinates1.Robot):
+                        MovelistSoldier = i.Soldier
+                        MovelistTank = i.Tank
+                        MovelistRobot = i.Robot
 
 
+    if coordinates2 is not None:
+        if (coordinates1.Position.x + 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y)\
+                or (coordinates1.Position.x - 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y)\
+                or (coordinates1.Position.y + 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x)\
+                or (coordinates1.Position.y - 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x):
+            for i in Map:
+                if coordinates1.Position.x == i.Position.x and coordinates1.Position.y == i.Position.y and coordinates1.Traversable and coordinates2.Traversable == False:
+                    if coordinates2.Boat and (coordinates1.Soldier or coordinates1.Tank or coordinates1.Robot):
+                        for x in MovelistSoldier:
+                            coordinates2.Boat[0].Soldier.append(x)
+                        for x in MovelistTank:
+                            coordinates2.Boat[0].Tank.append(x)
+                        for x in MovelistRobot:
+                            coordinates2.Boat[0].Robot.append(x)
+                        i.Soldier = []
+                        i.Tank = []
+                        i.Robot = []
 
+    #Boot Units uitladen
+    if coordinates1 is not None:
+        if (coordinates1.Position.x + 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y)\
+                or (coordinates1.Position.x - 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y)\
+                or (coordinates1.Position.y + 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x)\
+                or (coordinates1.Position.y - 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x):
+            for i in Map:
+                if coordinates1.Position.x == i.Position.x and coordinates1.Position.y == i.Position.y and coordinates1.Traversable == False and coordinates2.Traversable:
+                    if coordinates1.Boat and (coordinates1.Boat[0].Soldier or coordinates1.Boat[0].Tank or coordinates1.Boat[0].Robot):
+                        MovelistSoldier = i.Boat[0].Soldier
+                        MovelistTank = i.Boat[0].Tank
+                        MovelistRobot = i.Boat[0].Robot
+
+    if coordinates2 is not None:
+            if (coordinates1.Position.x + 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y)\
+                    or (coordinates1.Position.x - 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y)\
+                    or (coordinates1.Position.y + 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x)\
+                    or (coordinates1.Position.y - 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x):
+                for i in Map:
+                    if coordinates2.Position.x == i.Position.x and coordinates2.Position.y == i.Position.y and coordinates1.Traversable == False and coordinates2.Traversable:
+                        if not coordinates2.Boat and (coordinates1.Boat[0].Soldier or coordinates1.Boat[0].Tank or coordinates1.Boat[0].Robot):
+                            for x in MovelistSoldier:
+                                coordinates2.Soldier.append(x)
+                            for x in MovelistTank:
+                                coordinates2.Tank.append(x)
+                            for x in MovelistRobot:
+                                coordinates2.Robot.append(x)
+                            coordinates1.Boat[0].Soldier = []
+                            coordinates1.Boat[0].Tank = []
+                            coordinates1.Boat[0].Robot = []
+
+    #units op water verplaatsen
     if coordinates1 is not None:
         if (coordinates1.Position.x + 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y and coordinates2.Traversable == False)\
                 or (coordinates1.Position.x - 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y and coordinates2.Traversable == False)\
                 or (coordinates1.Position.y + 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x and coordinates2.Traversable == False)\
                 or (coordinates1.Position.y - 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x and coordinates2.Traversable == False):
             for i in Map:
-                if coordinates1.Position.x == i.Position.x and coordinates1.Position.y == i.Position.y and i.Boat is not []:
+                if coordinates1.Position.x == i.Position.x and coordinates1.Position.y == i.Position.y and coordinates1.Boat is not []:
                     MovelistBoat = i.Boat
                     i.Boat = []
 
@@ -166,6 +232,7 @@ def selectUnit(coordinates1, coordinates2, Map):
                 or (coordinates1.Position.y - 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x and coordinates2.Traversable == False):
             for i in Map:
                 if coordinates2.Position.x == i.Position.x and coordinates2.Position.y == i.Position.y:
-                    i.Boat = MovelistBoat
+                    for x in MovelistBoat:
+                        i.Boat.append(x)
 
 #TODO Create a submenu which the player can access after choosing "Buy a unit" in which the player can choose between units
