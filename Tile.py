@@ -76,6 +76,35 @@ def countUnits(coordinates, Map):
                 print(str(d) + " Boats")
                 print(i.Barack)
 
+
+def countSoldiers(coordinates, Map):
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                a = len(i.Soldier)
+                return "Soldiers : " + str(a)
+
+def countTanks(coordinates, Map):
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                b = len(i.Tank)
+                return "Tanks : " + str(b)
+
+def countRobots(coordinates, Map):
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                c = len(i.Robot)
+                return "Robots : " + str(c)
+
+def countBoats(coordinates, Map):
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                d = len(i.Boat)
+                return "Boats : " + str(d)
+
 def drawUnits(map):
     for x in map:
         if x.Barack == True:
