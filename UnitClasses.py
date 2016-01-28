@@ -9,11 +9,10 @@ class Unit:
         pass
 
 class Base:
-    def __init__(self, player, tile):
+    def __init__(self, player):
         self.Player = player
-        self.Tile = tile
         self.Health = 25
-        self.Barack = BarackObama(player, tile)
+        self.Barack = BarackObama(player)
         if player == 1:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45))
         elif player == 2:
@@ -24,9 +23,8 @@ class Base:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45))
 
 class BarackObama:
-    def __init__(self, player, tile):
+    def __init__(self, player):
         self.Player = player
-        self.Tile = tile
         self.Health = 5
         self.Name = "Barack"
         if player == 1:
@@ -40,10 +38,9 @@ class BarackObama:
 
 
 class Soldier:
-    def __init__(self, player, tile):
+    def __init__(self, player):
         self.Unit = Unit
         self.Player = player
-        self.Tile = tile
         self.Cost = 150
         self.Health = 1
         self.Attack = 1
@@ -58,10 +55,9 @@ class Soldier:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/soldier4.png'), (45, 45))
 
 class Robot:
-    def __init__(self, player, tile):
+    def __init__(self, player):
         self.Unit = Unit
         self.Player = player
-        self.Tile = tile
         self.Cost = 300
         self.Health = 2
         self.Attack = 2
@@ -76,10 +72,9 @@ class Robot:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/robot4.png'), (45, 45))
 
 class Tank:
-    def __init__(self, player, tile):
+    def __init__(self, player):
         self.Unit = Unit
         self.Player = player
-        self.Tile = tile
         self.Cost = 750
         self.Health = 2
         self.Attack = 2
@@ -94,10 +89,9 @@ class Tank:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/tank4.png'), (45, 45))
 
 class Boat:
-    def __init__(self, player, tile):
+    def __init__(self, player):
         self.Unit = Unit
         self.Player = player
-        self.Tile = tile
         self.Cost = 1000
         self.Health = 1
         self.Attack = 0

@@ -81,27 +81,45 @@ def drawUnits(map):
         if x.Barack == True:
             main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         for u in x.Soldier:
-            main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
+            main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         for u in x.Tank:
-            main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
+            main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         for u in x.Robot:
-            main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
+            main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         for u in x.Boat:
-            main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
+            main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
 
 
 #TODO Create a function through which the player can select the tile.unitcount
 #TODO Create a function through which the player can move the selected unit through the use of passing the Tile.unitcount to another Tile
 def selectUnit(coordinates1, coordinates2, Map):
-    Movelist = []
     if coordinates1 is not None:
-        for i in Map:
-            if coordinates1.Position.x == i.Position.x and coordinates1.Position.y == i.Position.y:
-               Movelist = i.Unitcount
-               del i.Unitcount[:]
+        if (coordinates1.Position.x + 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y)\
+                or (coordinates1.Position.x - 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y)\
+                or (coordinates1.Position.y + 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x)\
+                or (coordinates1.Position.y - 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x):
+            for i in Map:
+                if coordinates1.Position.x == i.Position.x and coordinates1.Position.y == i.Position.y and i.Soldier is not [] and i.Tank is not [] and i.Robot is not []:
+                    MovelistSoldier = i.Soldier
+                    MovelistTank = i.Tank
+                    MovelistBoat = i.Boat
+                    MovelistRobot = i.Robot
+                    i.Soldier = []
+                    i.Tank = []
+                    i.Boat = []
+                    i.Robot = []
+
     if coordinates2 is not None:
-        for i in Map:
-            if coordinates2.Position.x == i.Position.x and coordinates2.Position.y == i.Position.y:
-                i.Unitcount = Movelist
+        if (coordinates1.Position.x + 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y)\
+                or (coordinates1.Position.x - 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y)\
+                or (coordinates1.Position.y + 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x)\
+                or (coordinates1.Position.y - 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x):
+            for i in Map:
+                if coordinates2.Position.x == i.Position.x and coordinates2.Position.y == i.Position.y:
+                    i.Soldier = MovelistSoldier
+                    i.Tank = MovelistTank
+                    i.Boat = MovelistBoat
+                    i.Robot = MovelistRobot
+
 
 #TODO Create a submenu which the player can access after choosing "Buy a unit" in which the player can choose between units

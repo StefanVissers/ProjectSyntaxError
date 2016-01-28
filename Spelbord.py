@@ -48,7 +48,7 @@ def draw_board():
     shopmenuimage = pygame.image.load('Pics/units/Shop_menu_unf.png')
     #main_surface.fill((WHITE), (shop))
     main_surface.blit(shopmenubutton, (950, 200))
-
+    coordinates1 = None
 
     Map = Tile.create_Tilelist()
 
@@ -121,7 +121,7 @@ def draw_board():
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True and i.Barack == True:
-                        unit = UnitClasses.Soldier(None, i)
+                        unit = UnitClasses.Soldier(None)
                         i.Soldier.append(unit)
                         print ("spawn Soldier")
                         soldier = 0
@@ -129,7 +129,7 @@ def draw_board():
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True and i.Barack == True:
-                        unit = UnitClasses.Tank(None, i)
+                        unit = UnitClasses.Tank(None)
                         i.Tank.append(unit)
                         print ("spawn Tank")
                         tank = 0
@@ -137,29 +137,39 @@ def draw_board():
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True and i.Barack == True:
-                        unit = UnitClasses.Robot(None, i)
+                        unit = UnitClasses.Robot(None)
                         i.Robot.append(unit)
                         print ("spawn Robot")
                         robot = 0
         if boot == 1:
             if coordinates is not None:
                 for i in Map:
-                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is False: #and i.Barack == True:
-                        unit = UnitClasses.Boat(None, i)
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is False:
+                        unit = UnitClasses.Boat(None)
                         i.Boat.append(unit)
                         print ("spawn Boat")
                         boot = 0
         if barak == 1:
             if coordinates is not None:
                 for i in Map:
-                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True: #i.Barack == True:
-                        print ("spawn Barack")
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
                         i.Barack = True
                         barak = 0
-
-        getTile(event, mouse_pos, Map)
         # dict = {1:"Hello", "world":2}
         # print(dict[2])
+
+        if coordinates is not None and coordinates1 is None:
+            if (coordinates.Soldier != [] or coordinates.Tank != [] or coordinates.Robot != [] or coordinates.Boat != []):
+                coordinates1 = getTile(event, mouse_pos, Map)
+
+        if coordinates1 != coordinates and coordinates is not None and coordinates1 is not None:
+            if (coordinates1.Soldier != [] or coordinates1.Tank != [] or coordinates1.Robot != [] or coordinates1.Boat != []):
+                coordinates2 = getTile(event, mouse_pos, Map)
+                Tile.selectUnit(coordinates1, coordinates2, Map)
+                coordinates1 = None
+                coordinates2 = None
+                coordinates = None
+                reload()
 
         drawUnits(Map)
 
