@@ -19,6 +19,7 @@ bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
 background = pygame.image.load('Pics/Background.jpg')
 quitingamebutton = pygame.Rect(900, 0, 265, 125)
 shop = pygame.Rect(950, 200, 200, 50)
+ViewUnitsButton = pygame.Rect(900, 600, 500, 50)
 shopmenubutton = pygame.image.load('Pics/units/shop_menu_button.png')
 
 
@@ -48,6 +49,7 @@ def draw_board():
     #main_surface.fill((WHITE), (shop))
     main_surface.blit(shopmenubutton, (950, 200))
 
+
     Map = Tile.create_Tilelist()
 
     while True:
@@ -66,6 +68,12 @@ def draw_board():
             elif ev.type == pygame.MOUSEBUTTONDOWN and shop.collidepoint(mouse_pos):
                 shopmenu = 1
 
+        # if coordinates is not None:
+        #      unitcounttext = font.render("Units: " + str(viewUnitcount(coordinates, Map)), 1, (255,255,0))
+        #      main_surface.fill((255, 0 , 255), (ViewUnitsButton))
+        #      main_surface.blit(unitcounttext, (900, 600))
+
+        countUnits(coordinates, Map)
         if shopmenu == 1:
             UnitS = pygame.Rect(900, 300, 142, 68)
             UnitT = pygame.Rect(1060, 300, 142, 68)
@@ -114,7 +122,7 @@ def draw_board():
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
                         unit = UnitClasses.Soldier(None, i)
-                        i.Unitcount.append(unit)
+                        i.Soldier.append(unit)
                         print ("spawn Soldier")
                         soldier = 0
         if tank == 1:
@@ -122,32 +130,30 @@ def draw_board():
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
                         unit = UnitClasses.Tank(None, i)
-                        i.Unitcount.append(unit)
-                        print ("spawn Soldier")
+                        i.Tank.append(unit)
+                        print ("spawn Tank")
                         tank = 0
         if robot == 1:
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
                         unit = UnitClasses.Robot(None, i)
-                        i.Unitcount.append(unit)
-                        print ("spawn Soldier")
+                        i.Robot.append(unit)
+                        print ("spawn Robot")
                         robot = 0
         if boot == 1:
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
                         unit = UnitClasses.Boat(None, i)
-                        i.Unitcount.append(unit)
-                        print ("spawn Soldier")
+                        i.Boat.append(unit)
+                        print ("spawn Boat")
                         boot = 0
         if barak == 1:
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y: #and i.Barack == True:
-                        unit = UnitClasses.BarackObama(None, i)
-                        i.Unitcount.append(unit)
-                        print ("spawn Soldier")
+                        print ("spawn Barack")
                         barak = 0
 
         getTile(event, mouse_pos, Map)
