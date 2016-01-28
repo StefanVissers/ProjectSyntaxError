@@ -78,6 +78,8 @@ def countUnits(coordinates, Map):
 
 def drawUnits(map):
     for x in map:
+        if x.Barack == True:
+            main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/flag.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         for u in x.Soldier:
             main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
         for u in x.Tank:
@@ -87,7 +89,8 @@ def drawUnits(map):
         for u in x.Boat:
             main_surface.blit(u.Texture,(u.Tile.Position.x * 50 + 3, u.Tile.Position.y * 50 + 3, 45, 45))
 
-#TODO Create a function through which the player can select the tile.unitcount, highlight the selected Tile
+
+#TODO Create a function through which the player can select the tile.unitcount
 #TODO Create a function through which the player can move the selected unit through the use of passing the Tile.unitcount to another Tile
 def selectUnit(coordinates1, coordinates2, Map):
     Movelist = []
