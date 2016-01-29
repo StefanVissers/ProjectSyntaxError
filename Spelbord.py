@@ -165,11 +165,16 @@ def draw_board():
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is False:
-                        unit = UnitClasses.Boat(x)
-                        i.Boat.append(unit)
-                        boot = 0
-                        zetten += 1
-                        print(zetten)
+                        for i in Map:
+                            if (coordinates.Position.x + 1 == i.Position.x and coordinates.Position.y == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
+                                    or (coordinates.Position.x - 1 == i.Position.x and coordinates.Position.y == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
+                                    or (coordinates.Position.x == i.Position.x and coordinates.Position.y + 1 == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
+                                    or (coordinates.Position.x == i.Position.x and coordinates.Position.y - 1 == i.Position.y and (i.Robot or i.Soldier or i.Tank)):
+                                unit = UnitClasses.Boat(x)
+                                coordinates.Boat.append(unit)
+                                boot = 0
+                                zetten += 1
+                                print(zetten)
 
         #TODO a barack can only be spawned on a unit
         if barak == 1:
