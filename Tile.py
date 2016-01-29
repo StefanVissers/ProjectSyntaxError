@@ -132,7 +132,7 @@ def drawMoney(startmoney):
     font = pygame.font.SysFont(None, 40)
     Moneytext = font.render("Money : " + str(startmoney), 1, (255, 255, 255))
     #main_surface.fill((0, 0 , 0), (moneydisplay))
-    main_surface.blit(Moneytext, (950, 600))
+    main_surface.blit(Moneytext, (970, 260))
 
 
 def drawUnits(map, a):
