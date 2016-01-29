@@ -127,6 +127,14 @@ def countBoats(coordinates, Map):
                 d = len(i.Boat)
                 return "Boats : " + str(d)
 
+def drawMoney(startmoney):
+    #moneydisplay = pygame.Rect(1100, 500, 200, 50)
+    font = pygame.font.SysFont(None, 40)
+    Moneytext = font.render("Money : " + str(startmoney), 1, (255, 255, 255))
+    #main_surface.fill((0, 0 , 0), (moneydisplay))
+    main_surface.blit(Moneytext, (950, 600))
+
+
 def drawUnits(map, a):
     for x in map:
         if x.Barack == True and a == 1:

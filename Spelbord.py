@@ -23,8 +23,9 @@ ViewTankButton = pygame.Rect(900, 750, 500, 50)
 ViewRobotButton = pygame.Rect(900, 800, 500, 50)
 ViewBoatButton = pygame.Rect(900, 850, 500, 50)
 shopmenubutton = pygame.image.load('Pics/units/shop_menu_button.png')
+moneydisplay = pygame.Rect(1100, 450, 200, 50)
 #TODO A RECTANGLE WITH MONEY VARIABLE IS DISPLAYED ABOVE THE SHOP
-
+Base = Base(1)
 
 def reload(Map):                                                       # herinstantieert het bord
     main_surface.blit(background, (0,0))
@@ -52,6 +53,8 @@ def draw_board():
     coordinates1 = None
     font = pygame.font.SysFont(None, 25)
 
+    #main_surface.fill(WHITE, moneydisplay)
+
     Map = Tile.create_Tilelist()
     drawBase(Map)
     zetten = 0
@@ -60,6 +63,7 @@ def draw_board():
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         event = pygame.event.get()            #kan alle events zijn zoals mouse_click
         coordinates = getTile(event, mouse_pos, Map)
+        drawMoney(Base.Money)
 
         for ev in event:
             if ev.type == pygame.MOUSEBUTTONDOWN and quitingamebutton.collidepoint(mouse_pos):

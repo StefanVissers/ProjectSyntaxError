@@ -20,7 +20,7 @@ def menu(main_surface):
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         for ev in event:
             if ev.type == pygame.MOUSEBUTTONDOWN and startgamebutton.collidepoint(mouse_pos):   #als je op de start game knop drukt
-                Spelbord.draw_board()               #hier mmoet play game komen!
+                Spelbord.draw_board()               #hier moet play game komen!
             elif ev.type == pygame.MOUSEBUTTONDOWN and quitgamebutton.collidepoint(mouse_pos) or ev.type == pygame.QUIT:    #als je op de quit game knop drukt
                 pygame.quit()
                 quit()
