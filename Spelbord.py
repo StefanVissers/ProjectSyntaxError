@@ -23,6 +23,7 @@ ViewTankButton = pygame.Rect(900, 750, 500, 50)
 ViewRobotButton = pygame.Rect(900, 800, 500, 50)
 ViewBoatButton = pygame.Rect(900, 850, 500, 50)
 shopmenubutton = pygame.image.load('Pics/units/shop_menu_button.png')
+#TODO A RECTANGLE WITH MONEY VARIABLE IS DISPLAYED ABOVE THE SHOP
 
 
 def reload(Map):                                                       # herinstantieert het bord
@@ -121,6 +122,7 @@ def draw_board():
                 shopmenu = 0
                 reload(Map)
 
+        #TODO if a unit is built money is substracted
         if soldier == 1:
             if coordinates is not None:
                 for i in Map:
@@ -154,6 +156,7 @@ def draw_board():
                             zetten += 1
                             print(zetten)
 
+        #TODO a boat can only be spawned next to a unit in water
         if boot == 1:
             if coordinates is not None:
                 for i in Map:
@@ -164,6 +167,7 @@ def draw_board():
                         zetten += 1
                         print(zetten)
 
+        #TODO a barack can only be spawned on a unit
         if barak == 1:
             if coordinates is not None:
                 for i in Map:
@@ -173,6 +177,8 @@ def draw_board():
                         zetten += 1
                         print(zetten)
 
+
+        #TODO Players can only move units when a unit their playernumber == (x)
         if coordinates is not None and coordinates1 is None:
             if (coordinates.Soldier != [] or coordinates.Tank != [] or coordinates.Robot != [] or coordinates.Boat != []):
                 coordinates1 = getTile(event, mouse_pos, Map)
