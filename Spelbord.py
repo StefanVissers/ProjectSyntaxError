@@ -25,7 +25,7 @@ ViewBoatButton = pygame.Rect(900, 850, 500, 50)
 shopmenubutton = pygame.image.load('Pics/units/shop_menu_button.png')
 moneydisplay = pygame.Rect(1100, 450, 200, 50)
 #TODO A RECTANGLE WITH MONEY VARIABLE IS DISPLAYED ABOVE THE SHOP
-Base = Base(1)
+BaseMoney = Base(1)
 
 def reload(Map):                                                       # herinstantieert het bord
     main_surface.blit(background, (0,0))
@@ -53,17 +53,16 @@ def draw_board():
     coordinates1 = None
     font = pygame.font.SysFont(None, 25)
 
-    #main_surface.fill(WHITE, moneydisplay)
-
     Map = Tile.create_Tilelist()
     drawBase(Map)
     zetten = 0
-    x = 1
+    players = [Base(1), Base(2), Base(3), Base(4)]
+    currentplayer = players[0].Player
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         event = pygame.event.get()            #kan alle events zijn zoals mouse_click
         coordinates = getTile(event, mouse_pos, Map)
-        drawMoney(Base.Money)
+        drawMoney(BaseMoney.Money)
 
         for ev in event:
             if ev.type == pygame.MOUSEBUTTONDOWN and quitingamebutton.collidepoint(mouse_pos):
@@ -91,7 +90,6 @@ def draw_board():
               main_surface.blit(boatCounttext, (900, 850))
 
 
-        countUnits(coordinates, Map)
         if shopmenu == 1:
             UnitS = pygame.Rect(900, 300, 142, 68)
             UnitT = pygame.Rect(1060, 300, 142, 68)
@@ -132,33 +130,34 @@ def draw_board():
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
                         if i.Barack == True or i.Base == True:
-                            unit = UnitClasses.Soldier(x)
+                            unit = UnitClasses.Soldier(currentplayer)
+                            print("De huidige player = "+ str(currentplayer))
                             i.Soldier.append(unit)
                             soldier = 0
                             zetten += 1
-                            print(zetten)
+                            print("Het aantal zetten = " +str(zetten))
 
         if tank == 1:
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
                         if i.Barack == True or i.Base == True:
-                            unit = UnitClasses.Tank(x)
+                            unit = UnitClasses.Tank(currentplayer)
                             i.Tank.append(unit)
                             tank = 0
                             zetten += 1
-                            print(zetten)
+                            print("Het aantal zetten = " +str(zetten))
 
         if robot == 1:
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
                         if i.Barack == True or i.Base == True:
-                            unit = UnitClasses.Robot(x)
+                            unit = UnitClasses.Robot(currentplayer)
                             i.Robot.append(unit)
                             robot = 0
                             zetten += 1
-                            print(zetten)
+                            print("Het aantal zetten = " +str(zetten))
 
         #TODO a boat can only be spawned next to a unit in water
         if boot == 1:
@@ -170,7 +169,7 @@ def draw_board():
                                     or (coordinates.Position.x - 1 == i.Position.x and coordinates.Position.y == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
                                     or (coordinates.Position.x == i.Position.x and coordinates.Position.y + 1 == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
                                     or (coordinates.Position.x == i.Position.x and coordinates.Position.y - 1 == i.Position.y and (i.Robot or i.Soldier or i.Tank)):
-                                unit = UnitClasses.Boat(x)
+                                unit = UnitClasses.Boat(currentplayer)
                                 coordinates.Boat.append(unit)
                                 boot = 0
                                 zetten += 1
@@ -184,31 +183,38 @@ def draw_board():
                         i.Barack = True
                         barak = 0
                         zetten += 1
-                        print(zetten)
+                        print("Het aantal zetten = " +str(zetten))
 
 
         #TODO Players can only move units when a unit their playernumber == (x)
         if coordinates is not None and coordinates1 is None:
             if (coordinates.Soldier != [] or coordinates.Tank != [] or coordinates.Robot != [] or coordinates.Boat != []):
-                coordinates1 = getTile(event, mouse_pos, Map)
+                if len(coordinates.Soldier) > 0:
+                    if coordinates.Soldier[0].Player == currentplayer:
+                        coordinates1 = getTile(event, mouse_pos, Map)
+
 
         if coordinates1 != coordinates and coordinates is not None and coordinates1 is not None:
             if (coordinates1.Soldier != [] or coordinates1.Tank != [] or coordinates1.Robot != [] or coordinates1.Boat != []):
-                coordinates2 = getTile(event, mouse_pos, Map)
-                Tile.selectUnit(coordinates1, coordinates2, Map)
-                zetten += 1
-                print(zetten)
-                coordinates1 = None
-                coordinates2 = None
-                coordinates = None
-                reload(Map)
-        drawUnits(Map, x)
+                    print("Deze unit behoort tot player: " + str(coordinates1.Soldier[0].Player))
+                    coordinates2 = getTile(event, mouse_pos, Map)
+                    Tile.selectUnit(coordinates1, coordinates2, Map)
+                    zetten += 1
+                    print("Het aantal zetten = " +str(zetten))
+                    coordinates1 = None
+                    coordinates2 = None
+                    coordinates = None
+                    reload(Map)
+        drawUnits(Map, currentplayer)
 
+        #TODO Get a good picture in the middle of the screen that displays which player his turn it is
         if zetten == 4:
-            x = turn(x)
-            print("A new Turn!")
-            print(x)
+            print("De beurt van player " + str(currentplayer) + " is nu voorbij")
+            currentplayer = turn(currentplayer)
+            print("De beurt van player " + str(currentplayer) + " begint nu")
             zetten = 0
+            TurnText = font.render("Current player : " + str(currentplayer), 1, (255,255,255))
+            main_surface.blit(TurnText, (970, 150))
 
         if klik == 1:
             main_surface.blit(areyousurepng, (300, 200))

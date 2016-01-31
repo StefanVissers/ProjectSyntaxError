@@ -81,7 +81,6 @@ def getTile(event, mouse_pos, Map):
         if ev.type == pygame.MOUSEBUTTONDOWN and click[0] == 1:
             for i in Map:
                 if i.Rectangle.collidepoint(mouse_pos):
-                    print(i.Position.x, i.Position.y, i.Traversable)
                     return i
 
 def countUnits(coordinates, Map):
@@ -300,5 +299,4 @@ def turn(x):
     x += 1
     if x > 4:
         x = 1
-        return x
     return x
