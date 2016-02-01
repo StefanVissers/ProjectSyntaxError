@@ -207,14 +207,14 @@ def draw_board():
                 if len(coordinates.Tank) > 0:
                     tankcheck = 0
                     for i in coordinates.Tank:
-                        if i.Tank == currentplayer:
+                        if i.Player == currentplayer:
                             tankcheck += 1
                             if tankcheck == len(coordinates.Tank):
                                 coordinates1 = getTile(event, mouse_pos, Map)
                 if len(coordinates.Boat) > 0:
                     boatcheck = 0
                     for i in coordinates.Boat:
-                        if i.Boat == currentplayer:
+                        if i.Player == currentplayer:
                             boatcheck += 1
                             if boatcheck == len(coordinates.Boat):
                                 coordinates1 = getTile(event, mouse_pos, Map)
