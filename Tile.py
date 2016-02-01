@@ -126,13 +126,40 @@ def countBoats(coordinates, Map):
                 d = len(i.Boat)
                 return "Boats : " + str(d)
 
+# def countHealth(coordinates, Map):
+#     HealthSoldiers = 0
+#     HealthTank = 0
+#     HealthRobot = 0
+#     HealthBoat = 0
+#     HealthBarack = 0
+#     HealthBase = 0
+#     if coordinates is not None:
+#         for i in Map:
+#             if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+#                 for a in i.Soldier:
+#                     HealthSoldiers += a.Health
+#                 for a in i.Tank:
+#                     HealthTank += a.Heatlh
+#                 for a in i.Robot:
+#                     HealthRobot += a.Heatlh
+#                 for a in i.Boat:
+#                     HealthBoat += a.Heatlh
+#                 UnitHealth = HealthSoldiers + HealthTank + HealthRobot + HealthBoat
+#                 # for a in i.Barack:
+#                 #     HealthBarack += a.Health
+#                 # for a in i.Base:
+#                 #     HealthBase += a.Health
+#                 return "Health Unit(s): " + str(UnitHealth)
+#
+#     else:
+#         return 0
+
 def drawMoney(startmoney):
     #moneydisplay = pygame.Rect(1100, 500, 200, 50)
     font = pygame.font.SysFont(None, 40)
     Moneytext = font.render("Money : " + str(startmoney), 1, (255, 255, 255))
     #main_surface.fill((0, 0 , 0), (moneydisplay))
     main_surface.blit(Moneytext, (970, 260))
-
 
 def drawUnits(map, a):
     for x in map:

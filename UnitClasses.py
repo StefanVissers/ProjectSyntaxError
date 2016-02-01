@@ -31,13 +31,13 @@ class BarackObama:
         self.Health = 5
         self.Name = "Barack"
         if player == 1:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45))
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/brown_tent.png'), (45, 45))
         elif player == 2:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45))
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/red_tent.png'), (45, 45))
         elif player == 3:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45))
         else:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45))
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/green_tent.png'), (45, 45))
 
 
 class Soldier:

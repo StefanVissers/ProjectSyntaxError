@@ -84,19 +84,23 @@ def draw_board():
                 reload(Map)
 
         if coordinates is not None:
-              soldierCounttext = font.render(str(countSoldiers(coordinates, Map)), 1, (255,255,0))
-              main_surface.fill((0, 0 , 0), (ViewSoldierButton))
-              main_surface.blit(soldierCounttext, (900, 700))
-              tankCounttext = font.render(str(countTanks(coordinates, Map)), 1, (255,0,0))
-              main_surface.fill((0, 0 , 0), (ViewTankButton))
-              main_surface.blit(tankCounttext, (900, 750))
-              robotCounttext = font.render(str(countRobots(coordinates, Map)), 1, (255,50,0))
-              main_surface.fill((0, 0 , 0), (ViewRobotButton))
-              main_surface.blit(robotCounttext, (900, 800))
-              boatCounttext = font.render(str(countBoats(coordinates, Map)), 1, (255,100,0))
-              main_surface.fill((0, 0 , 0), (ViewBoatButton))
-              main_surface.blit(boatCounttext, (900, 850))
+            # Unit Count TEXT
+            soldierCounttext = font.render(str(countSoldiers(coordinates, Map)), 1, (255,255,0))
+            main_surface.fill((0, 0 , 0), (ViewSoldierButton))
+            main_surface.blit(soldierCounttext, (900, 700))
+            tankCounttext = font.render(str(countTanks(coordinates, Map)), 1, (255,0,0))
+            main_surface.fill((0, 0 , 0), (ViewTankButton))
+            main_surface.blit(tankCounttext, (900, 720))
+            robotCounttext = font.render(str(countRobots(coordinates, Map)), 1, (255,50,0))
+            main_surface.fill((0, 0 , 0), (ViewRobotButton))
+            main_surface.blit(robotCounttext, (900, 740))
+            boatCounttext = font.render(str(countBoats(coordinates, Map)), 1, (255,100,0))
+            main_surface.fill((0, 0 , 0), (ViewBoatButton))
+            main_surface.blit(boatCounttext, (900, 760))
 
+            # Unit Health TEXT
+            # Healthtext = font.render(str(countHealth(coordinates, Map)), 1, (255,150,0))
+            # main_surface.blit(Healthtext, (900, 780))
 
         if shopmenu == 1:
             UnitS = pygame.Rect(900, 300, 142, 68)
@@ -188,10 +192,11 @@ def draw_board():
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
-                        i.Barack = True
-                        barak = 0
-                        zetten += 1
-                        print("Het aantal zetten = " +str(zetten))
+                        if len(i.Soldier) >= 1 or len(i.Tank) >= 1 or len(i.Robot) >= 1:                      
+                            i.Barack = True
+                            barak = 0
+                            zetten += 1
+                            print("Het aantal zetten = " +str(zetten))
 
 
         #TODO Players can only move units when a unit their playernumber == (x)
