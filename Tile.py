@@ -322,8 +322,3 @@ def selectUnit(coordinates1, coordinates2, Map):
                     for x in MovelistBoat:
                         i.Boat.append(x)
 
-def turn(x):
-    x += 1
-    if x > 4:
-        x = 1
-    return x
