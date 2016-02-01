@@ -76,6 +76,7 @@ def draw_board():
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         event = pygame.event.get()            #kan alle events zijn zoals mouse_click
         coordinates = getTile(event, mouse_pos, Map)
+        #drawMoney(BaseMoney.Money)
 
         for ev in event:
             if ev.type == pygame.MOUSEBUTTONDOWN and quitingamebutton.collidepoint(mouse_pos):
@@ -283,11 +284,13 @@ def draw_board():
         if zetten >= 4:
             print("De beurt van player " + str(currentplayer.Player) + " is nu voorbij")
             player += 1
+            if player > 3:
+                player = 0
             currentplayer = players[player]
             print("De beurt van player " + str(currentplayer.Player) + " begint nu")
             zetten = 0
             moneycheck = False
-            TurnText = turnfont.render("Player " + str(currentplayer) + "'s turn!", 1, (0, 0, 0))
+            TurnText = turnfont.render("Player " + str(currentplayer.Player) + "'s turn!", 1, (0, 0, 0))
             TurnPNG = pygame.image.load('Pics/units/playerturn_button.png')
             main_surface.blit(TurnPNG, (300, 200))
             main_surface.blit(TurnText, (325, 235))
