@@ -29,7 +29,6 @@ shopmenubutton = pygame.image.load('Pics/units/shop_menu_button.png')
 moneydisplay = pygame.Rect(1100, 450, 200, 50)
 optionsbuttongame = pygame.image.load('Pics/units/options_button_game.png')
 manualbuttongame = pygame.image.load('Pics/units/manual_button_game.png')
-#TODO A RECTANGLE WITH MONEY VARIABLE IS DISPLAYED ABOVE THE SHOP
 BaseMoney = Base(1)
 
 def reload(Map):                                                       # herinstantieert het bord
