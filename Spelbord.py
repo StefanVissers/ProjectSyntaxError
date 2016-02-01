@@ -190,13 +190,36 @@ def draw_board():
         if coordinates is not None and coordinates1 is None:
             if (coordinates.Soldier != [] or coordinates.Tank != [] or coordinates.Robot != [] or coordinates.Boat != []):
                 if len(coordinates.Soldier) > 0:
-                    if coordinates.Soldier[0].Player == currentplayer:
-                        coordinates1 = getTile(event, mouse_pos, Map)
-
+                    soldiercheck = 0
+                    for i in coordinates.Soldier:
+                        if i.Player == currentplayer:
+                            soldiercheck += 1
+                            if soldiercheck == len(coordinates.Soldier):
+                                coordinates1 = getTile(event, mouse_pos, Map)
+                if len(coordinates.Robot) > 0:
+                    robotcheck = 0
+                    for i in coordinates.Robot:
+                        if i.Player == currentplayer:
+                            robotcheck += 1
+                            if robotcheck == len(coordinates.Robot):
+                                coordinates1 = getTile(event, mouse_pos, Map)
+                if len(coordinates.Tank) > 0:
+                    tankcheck = 0
+                    for i in coordinates.Tank:
+                        if i.Tank == currentplayer:
+                            tankcheck += 1
+                            if tankcheck == len(coordinates.Tank):
+                                coordinates1 = getTile(event, mouse_pos, Map)
+                if len(coordinates.Boat) > 0:
+                    boatcheck = 0
+                    for i in coordinates.Boat:
+                        if i.Boat == currentplayer:
+                            boatcheck += 1
+                            if boatcheck == len(coordinates.Boat):
+                                coordinates1 = getTile(event, mouse_pos, Map)
 
         if coordinates1 != coordinates and coordinates is not None and coordinates1 is not None:
             if (coordinates1.Soldier != [] or coordinates1.Tank != [] or coordinates1.Robot != [] or coordinates1.Boat != []):
-                    print("Deze unit behoort tot player: " + str(coordinates1.Soldier[0].Player))
                     coordinates2 = getTile(event, mouse_pos, Map)
                     Tile.selectUnit(coordinates1, coordinates2, Map)
                     zetten += 1
