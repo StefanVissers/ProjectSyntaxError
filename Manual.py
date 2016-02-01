@@ -53,8 +53,7 @@ def manual():
                 quit()
             elif ev.type == pygame.KEYDOWN:
                 if ev.key == pygame.K_ESCAPE:
-                    print ("ESC")
-                    Menu.menu(main_surface)
+                    return
             elif ev.type == pygame.MOUSEBUTTONDOWN and nextpagebutton.collidepoint(mouse_pos):
                page += 1
             elif ev.type == pygame.MOUSEBUTTONDOWN and previouspagebutton.collidepoint(mouse_pos):
