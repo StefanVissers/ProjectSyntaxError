@@ -178,7 +178,6 @@ def draw_board():
                             zetten += 1
                             print("Het aantal zetten = " +str(zetten))
 
-        #TODO a boat can only be spawned next to a unit in water
         if boot == 1:
             if coordinates is not None:
                 for i in Map:
@@ -194,7 +193,7 @@ def draw_board():
                                 zetten += 1
                                 print(zetten)
 
-        #TODO a barack can only be spawned on a unit
+
         if barak == 1:
             if coordinates is not None:
                 for i in Map:
@@ -206,7 +205,6 @@ def draw_board():
                             print("Het aantal zetten = " +str(zetten))
 
 
-        #TODO Players can only move units when a unit their playernumber == (x)
         if coordinates is not None and coordinates1 is None:
             if (coordinates.Soldier != [] or coordinates.Tank != [] or coordinates.Robot != [] or coordinates.Boat != []):
                 if len(coordinates.Soldier) > 0:
@@ -241,7 +239,7 @@ def draw_board():
 
         if coordinates1 != coordinates and coordinates is not None and coordinates1 is not None:
             if (coordinates1.Soldier != [] or coordinates1.Tank != [] or coordinates1.Robot != [] or coordinates1.Boat != []):
-                    print("Deze unit behoort tot player: " + str(coordinates1.Soldier[0].Player))
+                    # print("Deze unit behoort tot player: " + str(coordinates1.Soldier[0].Player))
                     coordinates2 = getTile(event, mouse_pos, Map)
                     Tile.selectUnit(coordinates1, coordinates2, Map)
                     zetten += 1
@@ -252,7 +250,7 @@ def draw_board():
                     reload(Map)
         drawUnits(Map, currentplayer)
 
-        #TODO Get a good picture in the middle of the screen that displays which player his turn it is
+
         if zetten >= 4:
             print("De beurt van player " + str(currentplayer) + " is nu voorbij")
             currentplayer = turn(currentplayer)
