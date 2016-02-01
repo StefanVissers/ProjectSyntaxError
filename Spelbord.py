@@ -1,6 +1,8 @@
 from Tile import *
 from UnitClasses import *
 import Menu
+import time
+import Manual
 
 # Wat kleur variabelen
 BLACK = ( 0, 0, 0)
@@ -12,11 +14,12 @@ main_surface = pygame.display.set_mode((1200, 900))                 # zet de res
 offset = 50
 task = None
 
-quit_in_gamebuttonpng = pygame.image.load('Pics/exitgame_button.png').convert_alpha()
+quit_in_gamebuttonpng = pygame.image.load('Pics/units/quit_game_button.png').convert_alpha()
 areyousurepng = pygame.image.load('Pics/areyousure.png').convert_alpha()
 bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
 background = pygame.image.load('Pics/Background.jpg')
-quitingamebutton = pygame.Rect(900, 0, 265, 125)
+quitingamebutton = pygame.Rect(950, 0, 200, 50)
+manualbuttonrect = pygame.Rect(950, 100 + (50/3) + (50/3), 200, 50)
 shop = pygame.Rect(950, 200, 200, 50)
 ViewSoldierButton = pygame.Rect(900, 700, 500, 50)
 ViewTankButton = pygame.Rect(900, 750, 500, 50)
@@ -24,20 +27,27 @@ ViewRobotButton = pygame.Rect(900, 800, 500, 50)
 ViewBoatButton = pygame.Rect(900, 850, 500, 50)
 shopmenubutton = pygame.image.load('Pics/units/shop_menu_button.png')
 moneydisplay = pygame.Rect(1100, 450, 200, 50)
+optionsbuttongame = pygame.image.load('Pics/units/options_button_game.png')
+manualbuttongame = pygame.image.load('Pics/units/manual_button_game.png')
 #TODO A RECTANGLE WITH MONEY VARIABLE IS DISPLAYED ABOVE THE SHOP
 BaseMoney = Base(1)
 
 def reload(Map):                                                       # herinstantieert het bord
     main_surface.blit(background, (0,0))
-    main_surface.blit(quit_in_gamebuttonpng, (900, 0))
+    main_surface.blit(quit_in_gamebuttonpng, (950, 0))
+    main_surface.blit(optionsbuttongame, (950, 50 + (50/3)))
+    main_surface.blit(manualbuttongame, (950, 100 + (50/3) + (50/3)))
     main_surface.blit(bordload, (0,0))
     main_surface.blit(shopmenubutton, (950, 200))
     drawBase(Map)
 
 def draw_board():
     main_surface.blit(background, (0,0))
-    main_surface.blit(quit_in_gamebuttonpng, (900, 0))
+    main_surface.blit(quit_in_gamebuttonpng, (950, 0))
+    main_surface.blit(optionsbuttongame, (950, 50 + (50/3)))
+    main_surface.blit(manualbuttongame, (950, 100 + (50/3)+ (50/3)))
     main_surface.blit(bordload, (0,0))
+    main_surface.blit(shopmenubutton, (950, 200))
 
     klik = 0
     shopmenu = 0
@@ -49,9 +59,10 @@ def draw_board():
     menu = 0
     testlist = []
     shopmenuimage = pygame.image.load('Pics/units/Shop_menu_unf.png')
-    main_surface.blit(shopmenubutton, (950, 200))
+
     coordinates1 = None
     font = pygame.font.SysFont(None, 25)
+    turnfont = pygame.font.SysFont(None, 48)
 
     Map = Tile.create_Tilelist()
     drawBase(Map)
@@ -75,6 +86,9 @@ def draw_board():
                 klik = 1
             elif ev.type == pygame.MOUSEBUTTONDOWN and shop.collidepoint(mouse_pos):
                 shopmenu = 1
+            elif ev.type == pygame.MOUSEBUTTONDOWN and manualbuttonrect.collidepoint(mouse_pos):
+                Manual.manual()
+                reload(Map)
 
         if coordinates is not None:
               soldierCounttext = font.render(str(countSoldiers(coordinates, Map)), 1, (255,255,0))
@@ -209,13 +223,15 @@ def draw_board():
         drawUnits(Map, currentplayer)
 
         #TODO Get a good picture in the middle of the screen that displays which player his turn it is
-        if zetten == 4:
+        if zetten >= 4:
             print("De beurt van player " + str(currentplayer) + " is nu voorbij")
             currentplayer = turn(currentplayer)
             print("De beurt van player " + str(currentplayer) + " begint nu")
             zetten = 0
-            TurnText = font.render("Current player : " + str(currentplayer), 1, (255,255,255))
-            main_surface.blit(TurnText, (970, 150))
+            TurnText = turnfont.render("Player " + str(currentplayer) + "'s turn!", 1, (0, 0, 0))
+            TurnPNG = pygame.image.load('Pics/units/playerturn_button.png')
+            main_surface.blit(TurnPNG, (300, 200))
+            main_surface.blit(TurnText, (325, 235))
 
         if klik == 1:
             main_surface.blit(areyousurepng, (300, 200))
@@ -227,6 +243,7 @@ def draw_board():
                 klik = 2
         elif klik == 2:
             main_surface.blit(bordload, (0,0))
+            reload(Map)
             klik = 0
 
         pygame.display.flip()

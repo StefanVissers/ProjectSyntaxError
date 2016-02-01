@@ -133,7 +133,6 @@ def drawMoney(startmoney):
     #main_surface.fill((0, 0 , 0), (moneydisplay))
     main_surface.blit(Moneytext, (970, 260))
 
-
 def drawUnits(map, a):
     for x in map:
         if x.Barack == True and a == 1:
