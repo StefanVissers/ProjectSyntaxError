@@ -1,6 +1,7 @@
 from Tile import *
 from UnitClasses import *
 import Menu
+import Manual
 
 # Wat kleur variabelen
 BLACK = ( 0, 0, 0)
@@ -16,8 +17,10 @@ quit_in_gamebuttonpng = pygame.image.load('Pics/exitgame_button.png').convert_al
 areyousurepng = pygame.image.load('Pics/areyousure.png').convert_alpha()
 bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
 background = pygame.image.load('Pics/Background.jpg')
+manualbutton = pygame.image.load('Pics/manual_button.png').convert_alpha()
 quitingamebutton = pygame.Rect(900, 0, 265, 125)
 shop = pygame.Rect(950, 200, 200, 50)
+manual = pygame.Rect(900, 100, 200, 100)
 ViewSoldierButton = pygame.Rect(900, 700, 500, 50)
 ViewTankButton = pygame.Rect(900, 750, 500, 50)
 ViewRobotButton = pygame.Rect(900, 800, 500, 50)
@@ -32,6 +35,7 @@ def reload(Map):                                                       # herinst
     main_surface.blit(quit_in_gamebuttonpng, (900, 0))
     main_surface.blit(bordload, (0,0))
     main_surface.blit(shopmenubutton, (950, 200))
+    main_surface.blit(manualbutton, (900, 100))
     drawBase(Map)
 
 def draw_board():
@@ -75,6 +79,9 @@ def draw_board():
                 klik = 1
             elif ev.type == pygame.MOUSEBUTTONDOWN and shop.collidepoint(mouse_pos):
                 shopmenu = 1
+            elif ev.type == pygame.MOUSEBUTTONDOWN and manual.collidepoint(mouse_pos):
+                Manual.manual()
+                reload(Map)
 
         if coordinates is not None:
               soldierCounttext = font.render(str(countSoldiers(coordinates, Map)), 1, (255,255,0))
@@ -250,6 +257,7 @@ def draw_board():
                 klik = 2
         elif klik == 2:
             main_surface.blit(bordload, (0,0))
+            reload(Map)
             klik = 0
 
         pygame.display.flip()
