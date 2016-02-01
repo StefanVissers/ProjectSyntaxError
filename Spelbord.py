@@ -1,6 +1,7 @@
 from Tile import *
 from UnitClasses import *
 import Menu
+import time
 import Manual
 
 # Wat kleur variabelen
@@ -13,34 +14,40 @@ main_surface = pygame.display.set_mode((1200, 900))                 # zet de res
 offset = 50
 task = None
 
-quit_in_gamebuttonpng = pygame.image.load('Pics/exitgame_button.png').convert_alpha()
+quit_in_gamebuttonpng = pygame.image.load('Pics/units/quit_game_button.png').convert_alpha()
 areyousurepng = pygame.image.load('Pics/areyousure.png').convert_alpha()
 bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
 background = pygame.image.load('Pics/Background.jpg')
-manualbutton = pygame.image.load('Pics/manual_button.png').convert_alpha()
-quitingamebutton = pygame.Rect(900, 0, 265, 125)
+quitingamebutton = pygame.Rect(950, 0, 200, 50)
+manualbuttonrect = pygame.Rect(950, 100 + (50/3) + (50/3), 200, 50)
 shop = pygame.Rect(950, 200, 200, 50)
-manual = pygame.Rect(900, 100, 200, 100)
 ViewSoldierButton = pygame.Rect(900, 700, 500, 50)
 ViewTankButton = pygame.Rect(900, 750, 500, 50)
 ViewRobotButton = pygame.Rect(900, 800, 500, 50)
 ViewBoatButton = pygame.Rect(900, 850, 500, 50)
 shopmenubutton = pygame.image.load('Pics/units/shop_menu_button.png')
 moneydisplay = pygame.Rect(1100, 450, 200, 50)
+optionsbuttongame = pygame.image.load('Pics/units/options_button_game.png')
+manualbuttongame = pygame.image.load('Pics/units/manual_button_game.png')
+
 
 
 def reload(Map):                                                       # herinstantieert het bord
     main_surface.blit(background, (0,0))
-    main_surface.blit(quit_in_gamebuttonpng, (900, 0))
+    main_surface.blit(quit_in_gamebuttonpng, (950, 0))
+    main_surface.blit(optionsbuttongame, (950, 50 + (50/3)))
+    main_surface.blit(manualbuttongame, (950, 100 + (50/3) + (50/3)))
     main_surface.blit(bordload, (0,0))
     main_surface.blit(shopmenubutton, (950, 200))
-    main_surface.blit(manualbutton, (900, 100))
     drawBase(Map)
 
 def draw_board():
     main_surface.blit(background, (0,0))
-    main_surface.blit(quit_in_gamebuttonpng, (900, 0))
+    main_surface.blit(quit_in_gamebuttonpng, (950, 0))
+    main_surface.blit(optionsbuttongame, (950, 50 + (50/3)))
+    main_surface.blit(manualbuttongame, (950, 100 + (50/3)+ (50/3)))
     main_surface.blit(bordload, (0,0))
+    main_surface.blit(shopmenubutton, (950, 200))
 
     klik = 0
     shopmenu = 0
@@ -52,9 +59,10 @@ def draw_board():
     menu = 0
     testlist = []
     shopmenuimage = pygame.image.load('Pics/units/Shop_menu_unf.png')
-    main_surface.blit(shopmenubutton, (950, 200))
+
     coordinates1 = None
     font = pygame.font.SysFont(None, 25)
+    turnfont = pygame.font.SysFont(None, 48)
 
     Map = Tile.create_Tilelist()
     drawBase(Map)
@@ -79,7 +87,7 @@ def draw_board():
                 klik = 1
             elif ev.type == pygame.MOUSEBUTTONDOWN and shop.collidepoint(mouse_pos):
                 shopmenu = 1
-            elif ev.type == pygame.MOUSEBUTTONDOWN and manual.collidepoint(mouse_pos):
+            elif ev.type == pygame.MOUSEBUTTONDOWN and manualbuttonrect.collidepoint(mouse_pos):
                 Manual.manual()
                 reload(Map)
 
@@ -257,8 +265,10 @@ def draw_board():
                             if boatcheck == len(coordinates.Boat):
                                 coordinates1 = getTile(event, mouse_pos, Map)
 
+
         if coordinates1 != coordinates and coordinates is not None and coordinates1 is not None:
             if (coordinates1.Soldier != [] or coordinates1.Tank != [] or coordinates1.Robot != [] or coordinates1.Boat != []):
+                    # print("Deze unit behoort tot player: " + str(coordinates1.Soldier[0].Player))
                     coordinates2 = getTile(event, mouse_pos, Map)
                     Tile.selectUnit(coordinates1, coordinates2, Map)
                     zetten += 1
