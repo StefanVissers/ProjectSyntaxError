@@ -58,6 +58,7 @@ def draw_board():
     zetten = 0
     players = [Base(1), Base(2), Base(3), Base(4)]
     currentplayer = players[0].Player
+
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         event = pygame.event.get()            #kan alle events zijn zoals mouse_click
