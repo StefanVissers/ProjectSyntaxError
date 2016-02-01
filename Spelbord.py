@@ -69,9 +69,8 @@ def draw_board():
     zetten = 0
     players = [(Base(1)), (Base(2)), (Base(3)), (Base(4))]
     currentplayer = players[0]
-    currentmoney = players[0]
     moneycheck = False
-
+    player = 0
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
         event = pygame.event.get()            #kan alle events zijn zoals mouse_click
@@ -144,18 +143,19 @@ def draw_board():
                 shopmenu = 0
                 reload(Map)
 
+        drawMoney(currentplayer.Money)
         if not moneycheck:
             for i in Map:
                 if len(i.Soldier) > 0:
-                    currentmoney.Money += 50
+                    currentplayer.Money += 50
                 elif len(i.Tank) > 0:
-                    currentmoney.Money += 50
+                    currentplayer.Money += 50
                 elif len(i.Robot) > 0:
-                    currentmoney.Money += 50
+                    currentplayer.Money += 50
                 elif len(i.Boat) > 0:
-                    currentmoney.Money += 50
+                    currentplayer.Money += 50
             moneycheck = True
-            drawMoney(currentmoney.Money)
+            drawMoney(currentplayer.Money)
 
         if soldier == 1:
             if coordinates is not None:
@@ -168,9 +168,9 @@ def draw_board():
                             soldier = 0
                             zetten += 1
                             if currentplayer.Player == 4:
-                                currentmoney.Money -= 120
+                                currentplayer.Money -= 120
                             else:
-                                currentmoney.Money -= 150
+                                currentplayer.Money -= 150
                             print("Het aantal zetten = " +str(zetten))
 
         if tank == 1:
@@ -183,9 +183,9 @@ def draw_board():
                             tank = 0
                             zetten += 1
                             if currentplayer.Player == 1:
-                                currentmoney.Money -= 600
+                                currentplayer.Money -= 600
                             else:
-                                currentmoney.Money -= 750
+                                currentplayer.Money -= 750
                             print("Het aantal zetten = " +str(zetten))
 
         if robot == 1:
@@ -198,9 +198,9 @@ def draw_board():
                             robot = 0
                             zetten += 1
                             if currentplayer.Player == 2:
-                                currentmoney.Money -= 240
+                                currentplayer.Money -= 240
                             else:
-                                currentmoney.Money -= 300
+                                currentplayer.Money -= 300
                             print("Het aantal zetten = " +str(zetten))
 
         if boot == 1:
@@ -217,9 +217,9 @@ def draw_board():
                                 boot = 0
                                 zetten += 1
                                 if currentplayer.Player == 3:
-                                    currentmoney.Money -= 800
+                                    currentplayer.Money -= 800
                                 else:
-                                    currentmoney.Money -= 1000
+                                    currentplayer.Money -= 1000
                                 print(zetten)
 
         if barak == 1:
@@ -230,7 +230,7 @@ def draw_board():
                             i.Barack = True
                             barak = 0
                             zetten += 1
-                            currentmoney.Money -= 500
+                            currentplayer.Money -= 500
                             print("Het aantal zetten = " +str(zetten))
 
 
@@ -279,9 +279,10 @@ def draw_board():
                     reload(Map)
         drawUnits(Map, currentplayer.Player)
 
-        if zetten == 4:
+        if zetten >= 4:
             print("De beurt van player " + str(currentplayer.Player) + " is nu voorbij")
-            currentplayer = players[+ 1]
+            player += 1
+            currentplayer = players[player]
             print("De beurt van player " + str(currentplayer.Player) + " begint nu")
             zetten = 0
             moneycheck = False
