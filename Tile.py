@@ -19,6 +19,7 @@ class Tile:
         self.Tank = []
         self.Robot = []
         self.Boat = []
+        self.BarackObama = []
 
 class Vector2:
     def __init__(self, X, Y):
@@ -161,18 +162,10 @@ def drawMoney(startmoney):
     #main_surface.fill((0, 0 , 0), (moneydisplay))
     main_surface.blit(Moneytext, (970, 260))
 
-def drawUnits(map, a):
+def drawUnits(map):
     for x in map:
-        if x.Barack == True and a == 1:
-            main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
-        if x.Barack == True and a == 2:
-            main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
-        if x.Barack == True and a == 3:
-            main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
-        if x.Barack == True and a == 4:
-            main_surface.blit(pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45)), (x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
-        if x.Barack == True and x.Base == True:
-            main_surface.blit(UnitClasses.Base.Texture)
+        for u in x.BarackObama:
+            main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         for u in x.Soldier:
             main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         for u in x.Tank:

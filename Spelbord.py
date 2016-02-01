@@ -143,19 +143,27 @@ def draw_board():
                 shopmenu = 0
                 reload(Map)
 
-        drawMoney(currentplayer.Money)
+
         if not moneycheck:
             for i in Map:
                 if len(i.Soldier) > 0:
-                    currentplayer.Money += 50
+                    for x in i.Soldier:
+                        if x.Player == currentplayer.Player:
+                            currentplayer.Money += 50
                 elif len(i.Tank) > 0:
-                    currentplayer.Money += 50
+                    for x in i.Tank:
+                        if x.Player == currentplayer.Player:
+                            currentplayer.Money += 50
                 elif len(i.Robot) > 0:
-                    currentplayer.Money += 50
+                    for x in i.Robot:
+                        if x.Player == currentplayer.Player:
+                            currentplayer.Money += 50
                 elif len(i.Boat) > 0:
-                    currentplayer.Money += 50
+                    for x in i.Boat:
+                        if x.Player == currentplayer.Player:
+                            currentplayer.Money += 50
             moneycheck = True
-            drawMoney(currentplayer.Money)
+        drawMoney(currentplayer.Money)
 
         if soldier == 1:
             if coordinates is not None:
@@ -226,12 +234,15 @@ def draw_board():
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
-                        if len(i.Soldier) >= 1 or len(i.Tank) >= 1 or len(i.Robot) >= 1:                      
-                            i.Barack = True
-                            barak = 0
-                            zetten += 1
-                            currentplayer.Money -= 500
-                            print("Het aantal zetten = " +str(zetten))
+                        if len(i.Soldier) >= 1 or len(i.Tank) >= 1 or len(i.Robot) >= 1:
+                            if len(coordinates.BarackObama) < 1:
+                                unit = UnitClasses.BarackObama(currentplayer.Player)
+                                coordinates.BarackObama.append(unit)
+                                i.Barack = True
+                                barak = 0
+                                zetten += 1
+                                currentplayer.Money -= 500
+                                print("Het aantal zetten = " +str(zetten))
 
 
         if coordinates is not None and coordinates1 is None:
@@ -277,11 +288,14 @@ def draw_board():
                     coordinates2 = None
                     coordinates = None
                     reload(Map)
-        drawUnits(Map, currentplayer.Player)
+        drawUnits(Map)
+        drawBase(Map)
 
         if zetten >= 4:
             print("De beurt van player " + str(currentplayer.Player) + " is nu voorbij")
             player += 1
+            if player > 3:
+                player = 0
             currentplayer = players[player]
             print("De beurt van player " + str(currentplayer.Player) + " begint nu")
             zetten = 0
