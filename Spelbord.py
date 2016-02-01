@@ -32,6 +32,7 @@ manualbuttongame = pygame.image.load('Pics/units/manual_button_game.png')
 
 
 
+
 def reload(Map):                                                       # herinstantieert het bord
     main_surface.blit(background, (0,0))
     main_surface.blit(quit_in_gamebuttonpng, (950, 0))
@@ -300,8 +301,10 @@ def draw_board():
             print("De beurt van player " + str(currentplayer.Player) + " begint nu")
             zetten = 0
             moneycheck = False
-            TurnText = font.render("Current player : " + str(currentplayer.Player), 1, (255,255,255))
-            main_surface.blit(TurnText, (970, 150))
+            TurnText = turnfont.render("Player " + str(currentplayer) + "'s turn!", 1, (0, 0, 0))
+            TurnPNG = pygame.image.load('Pics/units/playerturn_button.png')
+            main_surface.blit(TurnPNG, (300, 200))
+            main_surface.blit(TurnText, (325, 235))
 
         if klik == 1:
             main_surface.blit(areyousurepng, (300, 200))

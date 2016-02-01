@@ -315,3 +315,97 @@ def selectUnit(coordinates1, coordinates2, Map):
                     for x in MovelistBoat:
                         i.Boat.append(x)
 
+    # if coordinates1 is not None and coordinates2 is not None:
+    #     if (coordinates1.Position.x + 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y and coordinates2.Traversable)\
+    #             or (coordinates1.Position.x - 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y and coordinates2.Traversable)\
+    #             or (coordinates1.Position.y + 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x and coordinates2.Traversable)\
+    #             or (coordinates1.Position.y - 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x and coordinates2.Traversable):
+    #         if coordinates1.Position.x == i.Position.x and coordinates1.Position.y == i.Position.y and i.Soldier is not [] and i.Tank is not [] and i.Robot is not []:
+    #
+    #             player1soldiers = 0
+    #             player2soldiers = 0
+    #             player3soldiers = 0
+    #             player4soldiers = 0
+    #             player1tanks = 0
+    #             player2tanks = 0
+    #             player3tanks = 0
+    #             player4tanks = 0
+    #             player1robots = 0
+    #             player2robots = 0
+    #             player3robots = 0
+    #             player4robots = 0
+    #
+    #             for x in coordinates2.Soldier:
+    #                 if x.Player == 1:
+    #                     player1soldiers += 1
+    #                 elif x.Player == 2:
+    #                     player2soldiers += 1
+    #                 elif x.Player == 3:
+    #                     player3soldiers += 1
+    #                 elif x.Player == 4:
+    #                     player4soldiers += 1
+    #
+    #             for x in coordinates2.Tank:
+    #                 if x.Player == 1:
+    #                     player1tanks += 3
+    #                 elif x.Player == 2:
+    #                     player2tanks += 3
+    #                 elif x.Player == 3:
+    #                     player3tanks += 3
+    #                 elif x.Player == 4 :
+    #                     player4tanks += 3
+    #
+    #             for x in coordinates2.Robot:
+    #                 if x.Player == 1:
+    #                     player1robots += 2
+    #                 elif x.Player == 2:
+    #                     player2robots += 2
+    #                 elif x.Player == 3:
+    #                     player3robots += 2
+    #                 elif x.Player == 4:
+    #                     player4robots += 2
+    #
+    #             totalATKplayer_1 = player1soldiers + player1tanks + player1robots
+    #             totalATKplayer_2 = player2soldiers + player2tanks + player2robots
+    #             totalATKplayer_3 = player3soldiers + player3tanks + player3robots
+    #             totalATKplayer_4 = player4soldiers + player4tanks + player4robots
+    #             totalDEFplayer_1 = player1soldiers + player1tanks + player1robots
+    #             totalDEFplayer_2 = player2soldiers + player2tanks + player2robots
+    #             totalDEFplayer_3 = player3soldiers + player3tanks + player3robots
+    #             totalDEFplayer_4 = player4soldiers + player4tanks + player4robots
+    #
+    #             if totalATKplayer_1 > totalDEFplayer_2:
+    #
+    #             elif totalATKplayer_1 > totalDEFplayer_3:
+    #
+    #             elif totalATKplayer_1 > totalDEFplayer_4:
+    #
+    #             elif totalATKplayer_2 > totalDEFplayer_1:
+    #
+    #             elif totalATKplayer_2 > totalDEFplayer_3:
+    #
+    #             elif totalATKplayer_2 > totalDEFplayer_4:
+    #
+    #             elif totalATKplayer_3 > totalDEFplayer_1:
+    #
+    #             elif totalATKplayer_3 > totalDEFplayer_2:
+    #
+    #             elif totalATKplayer_3 > totalDEFplayer_4:
+    #
+    #             elif totalATKplayer_4 > totalDEFplayer_1:
+    #
+    #             elif totalATKplayer_4 > totalDEFplayer_2:
+    #
+    #             elif totalATKplayer_4 > totalDEFplayer_3:
+    #
+    #             else:
+    #                 coordinates2.Soldier = []
+    #                 coordinates2.Tank = []
+    #                 coordinates2.Robot = []
+    #
+
+def turn(x):
+    x += 1
+    if x > 4:
+        x = 1
+    return x
