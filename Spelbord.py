@@ -166,21 +166,40 @@ def draw_board():
             moneycheck = True
         drawMoney(currentplayer.Money)
 
+
+        if barak == 1:
+            if coordinates is not None:
+                for i in Map:
+                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
+                        if len(i.Soldier) >= 1 or len(i.Tank) >= 1 or len(i.Robot) >= 1:
+                            if len(coordinates.BarackObama) < 1 and i.Base == False:
+                                for x in i.Soldier:
+                                    if x.Player == currentplayer.Player:
+                                        unit = UnitClasses.BarackObama(currentplayer.Player)
+                                        coordinates.BarackObama.append(unit)
+                                        i.Barack = True
+                                        barak = 0
+                                        zetten += 1
+                                        currentplayer.Money -= 500
+                                        print("Het aantal zetten = " +str(zetten))
+                                else:
+                                    barak = 0
+
         if soldier == 1:
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
                         if i.Barack == True or i.Base == True:
-                            unit = UnitClasses.Soldier(currentplayer.Player)
-                            print("De huidige player = "+ str(currentplayer.Player))
-                            i.Soldier.append(unit)
-                            soldier = 0
-                            zetten += 1
-                            if currentplayer.Player == 4:
-                                currentplayer.Money -= 120
-                            else:
-                                currentplayer.Money -= 150
-                            print("Het aantal zetten = " +str(zetten))
+                                unit = UnitClasses.Soldier(currentplayer.Player)
+                                print("De huidige player = "+ str(currentplayer.Player))
+                                i.Soldier.append(unit)
+                                soldier = 0
+                                zetten += 1
+                                if currentplayer.Player == 4:
+                                    currentplayer.Money -= 120
+                                else:
+                                    currentplayer.Money -= 150
+                                print("Het aantal zetten = " +str(zetten))
 
         if tank == 1:
             if coordinates is not None:
@@ -231,19 +250,7 @@ def draw_board():
                                     currentplayer.Money -= 1000
                                 print(zetten)
 
-        if barak == 1:
-            if coordinates is not None:
-                for i in Map:
-                    if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
-                        if len(i.Soldier) >= 1 or len(i.Tank) >= 1 or len(i.Robot) >= 1:
-                            if len(coordinates.BarackObama) < 1:
-                                unit = UnitClasses.BarackObama(currentplayer.Player)
-                                coordinates.BarackObama.append(unit)
-                                i.Barack = True
-                                barak = 0
-                                zetten += 1
-                                currentplayer.Money -= 500
-                                print("Het aantal zetten = " +str(zetten))
+
 
 
         if coordinates is not None and coordinates1 is None:
@@ -301,7 +308,7 @@ def draw_board():
             print("De beurt van player " + str(currentplayer.Player) + " begint nu")
             zetten = 0
             moneycheck = False
-            TurnText = turnfont.render("Player " + str(currentplayer) + "'s turn!", 1, (0, 0, 0))
+            TurnText = turnfont.render("Player " + str(currentplayer.Player) + "'s turn!", 1, (0, 0, 0))
             TurnPNG = pygame.image.load('Pics/units/playerturn_button.png')
             main_surface.blit(TurnPNG, (300, 200))
             main_surface.blit(TurnText, (325, 235))
