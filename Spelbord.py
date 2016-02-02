@@ -32,35 +32,40 @@ manualbuttongame = pygame.image.load('Pics/units/manual_button_game.png')
 
 
 def spawnbarak(currentplayer, coordinates, i):
-    unit = UnitClasses.BarackObama(currentplayer.Player)
-    coordinates.BarackObama.append(unit)
-    i.Barack = True
-    currentplayer.Money -= 500
+    if currentplayer.Money >= 500:
+        unit = UnitClasses.BarackObama(currentplayer.Player)
+        coordinates.BarackObama.append(unit)
+        i.Barack = True
+        currentplayer.Money -= 500
+
 
 def spawnSoldier(currentplayer, coordinates, i):
-    unit = UnitClasses.Soldier(currentplayer.Player)
-    print("De huidige player = "+ str(currentplayer.Player))
-    i.Soldier.append(unit)
-    if currentplayer.Player == 4:
-        currentplayer.Money -= 120
-    else:
-        currentplayer.Money -= 150
+    if currentplayer.Money >= 150 or (currentplayer.Player == 4 and currentplayer.Money >= 120):
+        unit = UnitClasses.Soldier(currentplayer.Player)
+        print("De huidige player = "+ str(currentplayer.Player))
+        i.Soldier.append(unit)
+        if currentplayer.Player == 4:
+            currentplayer.Money -= 120
+        else:
+            currentplayer.Money -= 150
 
 def spawnTank(currentplayer, coordinates, i):
-    unit = UnitClasses.Tank(currentplayer.Player)
-    i.Tank.append(unit)
-    if currentplayer.Player == 1:
-        currentplayer.Money -= 600
-    else:
-        currentplayer.Money -= 750
+    if currentplayer.Money >= 750 or (currentplayer.Player == 1 and currentplayer.Money >= 600):
+        unit = UnitClasses.Tank(currentplayer.Player)
+        i.Tank.append(unit)
+        if currentplayer.Player == 1:
+            currentplayer.Money -= 600
+        else:
+            currentplayer.Money -= 750
 
 def spawnRobot(currentplayer, coordinates, i):
-    unit = UnitClasses.Robot(currentplayer.Player)
-    i.Robot.append(unit)
-    if currentplayer.Player == 2:
-        currentplayer.Money -= 240
-    else:
-        currentplayer.Money -= 300
+    if currentplayer.Money >= 300 or (currentplayer.Player == 2 and currentplayer.Money >= 240):
+        unit = UnitClasses.Robot(currentplayer.Player)
+        i.Robot.append(unit)
+        if currentplayer.Player == 2:
+            currentplayer.Money -= 240
+        else:
+            currentplayer.Money -= 300
 
 
 def reload(Map):                                                       # herinstantieert het bord
@@ -312,7 +317,8 @@ def draw_board():
                             if (coordinates.Position.x + 1 == i.Position.x and coordinates.Position.y == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
                                     or (coordinates.Position.x - 1 == i.Position.x and coordinates.Position.y == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
                                     or (coordinates.Position.x == i.Position.x and coordinates.Position.y + 1 == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
-                                    or (coordinates.Position.x == i.Position.x and coordinates.Position.y - 1 == i.Position.y and (i.Robot or i.Soldier or i.Tank)):
+                                    or (coordinates.Position.x == i.Position.x and coordinates.Position.y - 1 == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
+                                    and (currentplayer.Money >= 1000 or (currentplayer.Player == 3 and currentplayer.Money >= 800)):
                                 unit = UnitClasses.Boat(currentplayer.Player)
                                 coordinates.Boat.append(unit)
                                 boot = 0
