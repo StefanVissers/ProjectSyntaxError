@@ -20,6 +20,7 @@ class Tile:
         self.Robot = []
         self.Boat = []
         self.BarackObama = []
+        self.Bases = []
 
 
 class Vector2:
@@ -33,23 +34,19 @@ def drawBase(Map):
         if i.Position.x == 0 and i.Position.y == 0:
             i.Base = True
             if i.Base == True:
-                Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_green.png'), (50,50))
-                main_surface.blit((Texture), (i.Position.x * offset, i.Position.y * offset))
+                i.Bases.append(UnitClasses.Base(4))
         if i.Position.x == 17 and i.Position.y == 0:
             i.Base = True
             if i.Base == True:
-                Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_blue.png'), (50,50))
-                main_surface.blit((Texture), (i.Position.x * offset, i.Position.y * offset))
-        if i.Position.x == 0 and i.Position.y == 17:
+                i.Bases.append(UnitClasses.Base(3))
+        if i.Position.x == 16 and i.Position.y == 0:        #0, 17
             i.Base = True
             if i.Base == True:
-                Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_red.png'), (50,50))
-                main_surface.blit((Texture), (i.Position.x * offset, i.Position.y * offset))
-        if i.Position.x == 17 and i.Position.y == 17:
+                i.Bases.append(UnitClasses.Base(2))
+        if i.Position.x == 5 and i.Position.y == 5:     #17,17
             i.Base = True
             if i.Base == True:
-                Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_brown.png'), (50,50))
-                main_surface.blit((Texture), (i.Position.x * offset, i.Position.y * offset))
+                i.Bases.append(UnitClasses.Base(1))
 
 
 def create_Tilelist():
@@ -145,6 +142,8 @@ def drawMoney(startmoney):
 
 def drawUnits(map):
     for x in map:
+        for u in x.Bases:
+            main_surface.blit((u.Texture), (x.Position.x * offset, x.Position.y * offset))
         for u in x.BarackObama:
             main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         for u in x.Soldier:
@@ -155,7 +154,6 @@ def drawUnits(map):
             main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         for u in x.Boat:
             main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
-
 
 def selectUnit(coordinates1, coordinates2, Map):
     #Units op land verplaatsen
