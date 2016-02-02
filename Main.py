@@ -10,6 +10,7 @@ RED = (255, 0, 0,)
 GREEN = ( 0, 255, 0)
 BLUE = ( 0, 0, 255)
 
+
 def game_intro(main_surface):
     Figuur1 = pygame.image.load('Pics/intro/1.png')
     Figuur2 = pygame.image.load('Pics/intro/2.png')
@@ -54,6 +55,7 @@ def game_intro(main_surface):
         elif time == 40:
             return
         time += 1
+
 
 def main():
     pygame.init()

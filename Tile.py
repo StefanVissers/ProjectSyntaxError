@@ -1,10 +1,10 @@
 __author__ = 'Jamal'
 import pygame
-from random import *
 from Spelbord import *
 import UnitClasses
 main_surface = pygame.display.set_mode((1200, 900))
 offset = 50
+
 
 class Tile:
     def __init__(self, tilex, tiley, income, playerNR, traversable):
@@ -21,10 +21,12 @@ class Tile:
         self.Boat = []
         self.BarackObama = []
 
+
 class Vector2:
     def __init__(self, X, Y):
         self.x = X
         self.y = Y
+
 
 def drawBase(Map):
     for i in Map:
@@ -76,6 +78,7 @@ def create_Tilelist():
                 list.append(Tile(x, y, 50, 0, True))
     return list
 
+
 def getTile(event, mouse_pos, Map):
     click = pygame.mouse.get_pressed()
     for ev in event:
@@ -83,6 +86,7 @@ def getTile(event, mouse_pos, Map):
             for i in Map:
                 if i.Rectangle.collidepoint(mouse_pos):
                     return i
+
 
 def countUnits(coordinates, Map):
     if coordinates is not None:
@@ -106,12 +110,14 @@ def countSoldiers(coordinates, Map):
                 a = len(i.Soldier)
                 return "Soldiers : " + str(a)
 
+
 def countTanks(coordinates, Map):
     if coordinates is not None:
         for i in Map:
             if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
                 b = len(i.Tank)
                 return "Tanks : " + str(b)
+
 
 def countRobots(coordinates, Map):
     if coordinates is not None:
@@ -120,6 +126,7 @@ def countRobots(coordinates, Map):
                 c = len(i.Robot)
                 return "Robots : " + str(c)
 
+
 def countBoats(coordinates, Map):
     if coordinates is not None:
         for i in Map:
@@ -127,33 +134,6 @@ def countBoats(coordinates, Map):
                 d = len(i.Boat)
                 return "Boats : " + str(d)
 
-# def countHealth(coordinates, Map):
-#     HealthSoldiers = 0
-#     HealthTank = 0
-#     HealthRobot = 0
-#     HealthBoat = 0
-#     HealthBarack = 0
-#     HealthBase = 0
-#     if coordinates is not None:
-#         for i in Map:
-#             if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
-#                 for a in i.Soldier:
-#                     HealthSoldiers += a.Health
-#                 for a in i.Tank:
-#                     HealthTank += a.Heatlh
-#                 for a in i.Robot:
-#                     HealthRobot += a.Heatlh
-#                 for a in i.Boat:
-#                     HealthBoat += a.Heatlh
-#                 UnitHealth = HealthSoldiers + HealthTank + HealthRobot + HealthBoat
-#                 # for a in i.Barack:
-#                 #     HealthBarack += a.Health
-#                 # for a in i.Base:
-#                 #     HealthBase += a.Health
-#                 return "Health Unit(s): " + str(UnitHealth)
-#
-#     else:
-#         return 0
 
 def drawMoney(startmoney):
     #moneydisplay = pygame.Rect(1100, 500, 200, 50)
@@ -161,6 +141,7 @@ def drawMoney(startmoney):
     Moneytext = font.render("Money : " + str(startmoney), 1, (255, 255, 255))
     #main_surface.fill((0, 0 , 0), (moneydisplay))
     main_surface.blit(Moneytext, (970, 260))
+
 
 def drawUnits(map):
     for x in map:
@@ -315,12 +296,7 @@ def selectUnit(coordinates1, coordinates2, Map):
                     for x in MovelistBoat:
                         i.Boat.append(x)
 
-    # if coordinates1 is not None and coordinates2 is not None:
-        # if (coordinates1.Position.x + 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y and coordinates2.Traversable)\
-        #         or (coordinates1.Position.x - 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y and coordinates2.Traversable)\
-        #         or (coordinates1.Position.y + 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x and coordinates2.Traversable)\
-        #         or (coordinates1.Position.y - 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x and coordinates2.Traversable):
-        #     if coordinates1.Position.x == i.Position.x and coordinates1.Position.y == i.Position.y and i.Soldier is not [] and i.Tank is not [] and i.Robot is not []:
+    #Het Vechten van de units
     if coordinates2.Soldier is not None or coordinates2.Robot is not None or coordinates2.Tank is not None:
         player1soldiers = 0
         player2soldiers = 0
@@ -593,12 +569,6 @@ def selectUnit(coordinates1, coordinates2, Map):
             coordinates2.Soldier = []
             coordinates2.Tank = []
             coordinates2.Robot = []
-
-
-        # else:
-        #     coordinates2.Soldier = []
-        #     coordinates2.Tank = []
-        #     coordinates2.Robot = []
 
 
 def turn(x):
