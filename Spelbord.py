@@ -175,7 +175,7 @@ def draw_board():
                         if len(i.Soldier) >= 1 or len(i.Tank) >= 1 or len(i.Robot) >= 1:
                             if len(coordinates.BarackObama) < 1 and i.Base == False:
                                 for x in i.Soldier:
-                                    if x.Player == currentplayer.Player:
+                                    if x.Player == currentplayer.Player and currentplayer.Money >= 500:
                                         unit = UnitClasses.BarackObama(currentplayer.Player)
                                         coordinates.BarackObama.append(unit)
                                         i.Barack = True
@@ -190,7 +190,7 @@ def draw_board():
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
-                        if i.Barack == True or i.Base == True:
+                        if (i.Barack == True or i.Base == True) and (currentplayer.Money >= 150 or (currentplayer.Player == 4 and currentplayer.Money >= 120)):
                                 unit = UnitClasses.Soldier(currentplayer.Player)
                                 print("De huidige player = "+ str(currentplayer.Player))
                                 i.Soldier.append(unit)
@@ -206,7 +206,7 @@ def draw_board():
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
-                        if i.Barack == True or i.Base == True:
+                        if (i.Barack == True or i.Base == True) and (currentplayer.Money >= 750 or (currentplayer.Player == 1 and currentplayer.Money >= 600)):
                             unit = UnitClasses.Tank(currentplayer.Player)
                             i.Tank.append(unit)
                             tank = 0
@@ -221,7 +221,7 @@ def draw_board():
             if coordinates is not None:
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is True:
-                        if i.Barack == True or i.Base == True:
+                        if (i.Barack == True or i.Base == True) and (currentplayer.Money >= 300 or (currentplayer.Player == 2 and currentplayer.Money >= 240)):
                             unit = UnitClasses.Robot(currentplayer.Player)
                             i.Robot.append(unit)
                             robot = 0
@@ -240,7 +240,8 @@ def draw_board():
                             if (coordinates.Position.x + 1 == i.Position.x and coordinates.Position.y == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
                                     or (coordinates.Position.x - 1 == i.Position.x and coordinates.Position.y == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
                                     or (coordinates.Position.x == i.Position.x and coordinates.Position.y + 1 == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
-                                    or (coordinates.Position.x == i.Position.x and coordinates.Position.y - 1 == i.Position.y and (i.Robot or i.Soldier or i.Tank)):
+                                    or (coordinates.Position.x == i.Position.x and coordinates.Position.y - 1 == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
+                                    and (currentplayer.Money >= 1000 or (currentplayer.Player == 3 and currentplayer.Money >= 800)):
                                 unit = UnitClasses.Boat(currentplayer.Player)
                                 coordinates.Boat.append(unit)
                                 boot = 0
