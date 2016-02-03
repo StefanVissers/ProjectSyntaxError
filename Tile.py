@@ -39,11 +39,11 @@ def drawBase(Map):
             i.Base = True
             if i.Base == True:
                 i.Bases.append(UnitClasses.Base(3))
-        if i.Position.x == 16 and i.Position.y == 0:        #0, 17
+        if i.Position.x == 0 and i.Position.y == 17:
             i.Base = True
             if i.Base == True:
                 i.Bases.append(UnitClasses.Base(2))
-        if i.Position.x == 5 and i.Position.y == 5:     #17,17
+        if i.Position.x == 17 and i.Position.y == 17:
             i.Base = True
             if i.Base == True:
                 i.Bases.append(UnitClasses.Base(1))
@@ -131,6 +131,97 @@ def countBoats(coordinates, Map):
                 d = len(i.Boat)
                 return "Boats : " + str(d)
 
+def HealthSoldier(coordinates, Map):
+    HealthSoldier = 0
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                if i.Soldier is not []:
+                    for i in range(len(i.Soldier)):
+                        HealthSoldier += 1
+                return HealthSoldier
+
+def HealthTank(coordinates, Map):
+    HealthTank = 0
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                if i.Tank is not []:
+                    for i in range(len(i.Tank)):
+                        HealthTank += 3
+                return HealthTank
+
+def HealthRobot(coordinates, Map):
+    HealthRobot = 0
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                if i.Robot is not []:
+                    for i in range(len(i.Robot)):
+                        HealthRobot += 2
+                return HealthRobot
+
+def HealthBoat(coordinates, Map):
+    HealthBoat = 0
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                if i.Boat is not []:
+                    for i in range(len(i.Boat)):
+                        HealthBoat += 2
+                return HealthBoat
+
+def HealthBase(coordinates, Map, players):
+    HealthBase = 0
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                if i.Bases is not []:
+                    for i in i.Bases:
+                        for d in players:
+                            if d.Player == i.Player:
+                                return d.Health
+        return 0
+
+def HealthBarack(coordinates, Map):
+    HealthBarack = 0
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                if i.BarackObama is not []:
+                    for i in range(len(i.BarackObama)):
+                        HealthBarack += 5
+                return HealthBarack
+
+def DMGSoldier (coordinates, Map):
+    DMGSoldier = 0
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                if i.Soldier is not []:
+                    for i in range(len(i.Soldier)):
+                        DMGSoldier += 1
+                return DMGSoldier
+
+def DMGTank (coordinates, Map):
+    DMGTank = 0
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                if i.Tank is not []:
+                    for i in range(len(i.Tank)):
+                        DMGTank += 3
+                return DMGTank
+
+def DMGRobot (coordinates, Map):
+    DMGRobot = 0
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                if i.Robot is not []:
+                    for i in range(len(i.Robot)):
+                        DMGRobot += 2
+                return DMGRobot
 
 def drawMoney(startmoney):
     #moneydisplay = pygame.Rect(1100, 500, 200, 50)

@@ -63,7 +63,7 @@ class Robot:
         self.Player = player
         self.Cost = 300
         self.Health = 2
-        self.Attack = 25
+        self.Attack = 2
         self.Name = "Robot"
         if player == 1:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/robot1.png'), (45, 45))
@@ -79,8 +79,8 @@ class Tank:
         self.Unit = Unit
         self.Player = player
         self.Cost = 750
-        self.Health = 2
-        self.Attack = 2
+        self.Health = 3
+        self.Attack = 3
         self.Name = "Tank"
         if player == 1:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/tank1.png'), (45, 45))

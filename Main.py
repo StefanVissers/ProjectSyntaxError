@@ -62,9 +62,6 @@ def main():
     main_surface = pygame.display.set_mode((1200, 900))
     pygame.display.set_caption("SyntaXError")
 
-    #pygame.mixer.music.load('Pics/sound/Battle.mp3')
-    #pygame.mixer.music.play(-1, 0.0)
-
     while True:
         # game_intro(main_surface)                                      # begint de intro
         Menu.menu(main_surface)
