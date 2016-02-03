@@ -143,8 +143,19 @@ def draw_board():
             main_surface.blit(boatCounttext, (900, 760))
 
             # Unit Health TEXT
-            # Healthtext = font.render(str(countHealth(coordinates, Map)), 1, (255,150,0))
-            # main_surface.blit(Healthtext, (900, 780))
+            TotalHealth = str(HealthSoldier(coordinates, Map) + HealthTank(coordinates, Map) + HealthRobot(coordinates, Map) + HealthBoat(coordinates, Map))
+            Healthtext = font.render(("Total Health Units: " + TotalHealth), 1, (255,255,255))
+            main_surface.blit(Healthtext, (900, 780))
+
+            # Base/Barack Health TEXT
+            Healthbuildings = str(HealthBarack(coordinates, Map) + HealthBase(coordinates, Map, players))
+            Healthtext2 = font.render(("Health Base/Barack: " + Healthbuildings), 1, (255,255,255))
+            main_surface.blit(Healthtext2, (900, 800))
+
+            # Unit DMG TEXT
+            TotalDMG = str(DMGSoldier(coordinates, Map) + DMGTank(coordinates, Map) + DMGRobot(coordinates, Map))
+            DMGtext = font.render(("Total DMG Units: " + TotalDMG), 1, (255,255,255))
+            main_surface.blit(DMGtext, (900, 820))
 
         if shopmenu == 1:
             UnitS = pygame.Rect(900, 300, 142, 68)
