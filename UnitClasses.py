@@ -63,7 +63,7 @@ class Robot:
         self.Player = player
         self.Cost = 300
         self.Health = 2
-        self.Attack = 2
+        self.Attack = 25
         self.Name = "Robot"
         if player == 1:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/robot1.png'), (45, 45))

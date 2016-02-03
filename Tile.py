@@ -1,10 +1,10 @@
 __author__ = 'Jamal'
 import pygame
-from random import *
 from Spelbord import *
 import UnitClasses
 main_surface = pygame.display.set_mode((1200, 900))
 offset = 50
+
 
 class Tile:
     def __init__(self, tilex, tiley, income, playerNR, traversable):
@@ -20,34 +20,33 @@ class Tile:
         self.Robot = []
         self.Boat = []
         self.BarackObama = []
+        self.Bases = []
+
 
 class Vector2:
     def __init__(self, X, Y):
         self.x = X
         self.y = Y
 
+
 def drawBase(Map):
     for i in Map:
         if i.Position.x == 0 and i.Position.y == 0:
             i.Base = True
             if i.Base == True:
-                Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_green.png'), (50,50))
-                main_surface.blit((Texture), (i.Position.x * offset, i.Position.y * offset))
+                i.Bases.append(UnitClasses.Base(4))
         if i.Position.x == 17 and i.Position.y == 0:
             i.Base = True
             if i.Base == True:
-                Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_blue.png'), (50,50))
-                main_surface.blit((Texture), (i.Position.x * offset, i.Position.y * offset))
-        if i.Position.x == 0 and i.Position.y == 17:
+                i.Bases.append(UnitClasses.Base(3))
+        if i.Position.x == 16 and i.Position.y == 0:        #0, 17
             i.Base = True
             if i.Base == True:
-                Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_red.png'), (50,50))
-                main_surface.blit((Texture), (i.Position.x * offset, i.Position.y * offset))
-        if i.Position.x == 17 and i.Position.y == 17:
+                i.Bases.append(UnitClasses.Base(2))
+        if i.Position.x == 5 and i.Position.y == 5:     #17,17
             i.Base = True
             if i.Base == True:
-                Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_brown.png'), (50,50))
-                main_surface.blit((Texture), (i.Position.x * offset, i.Position.y * offset))
+                i.Bases.append(UnitClasses.Base(1))
 
 
 def create_Tilelist():
@@ -76,6 +75,7 @@ def create_Tilelist():
                 list.append(Tile(x, y, 50, 0, True))
     return list
 
+
 def getTile(event, mouse_pos, Map):
     click = pygame.mouse.get_pressed()
     for ev in event:
@@ -83,6 +83,7 @@ def getTile(event, mouse_pos, Map):
             for i in Map:
                 if i.Rectangle.collidepoint(mouse_pos):
                     return i
+
 
 def countUnits(coordinates, Map):
     if coordinates is not None:
@@ -106,12 +107,14 @@ def countSoldiers(coordinates, Map):
                 a = len(i.Soldier)
                 return "Soldiers : " + str(a)
 
+
 def countTanks(coordinates, Map):
     if coordinates is not None:
         for i in Map:
             if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
                 b = len(i.Tank)
                 return "Tanks : " + str(b)
+
 
 def countRobots(coordinates, Map):
     if coordinates is not None:
@@ -120,6 +123,7 @@ def countRobots(coordinates, Map):
                 c = len(i.Robot)
                 return "Robots : " + str(c)
 
+
 def countBoats(coordinates, Map):
     if coordinates is not None:
         for i in Map:
@@ -127,33 +131,6 @@ def countBoats(coordinates, Map):
                 d = len(i.Boat)
                 return "Boats : " + str(d)
 
-# def countHealth(coordinates, Map):
-#     HealthSoldiers = 0
-#     HealthTank = 0
-#     HealthRobot = 0
-#     HealthBoat = 0
-#     HealthBarack = 0
-#     HealthBase = 0
-#     if coordinates is not None:
-#         for i in Map:
-#             if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
-#                 for a in i.Soldier:
-#                     HealthSoldiers += a.Health
-#                 for a in i.Tank:
-#                     HealthTank += a.Heatlh
-#                 for a in i.Robot:
-#                     HealthRobot += a.Heatlh
-#                 for a in i.Boat:
-#                     HealthBoat += a.Heatlh
-#                 UnitHealth = HealthSoldiers + HealthTank + HealthRobot + HealthBoat
-#                 # for a in i.Barack:
-#                 #     HealthBarack += a.Health
-#                 # for a in i.Base:
-#                 #     HealthBase += a.Health
-#                 return "Health Unit(s): " + str(UnitHealth)
-#
-#     else:
-#         return 0
 
 def drawMoney(startmoney):
     #moneydisplay = pygame.Rect(1100, 500, 200, 50)
@@ -162,8 +139,11 @@ def drawMoney(startmoney):
     #main_surface.fill((0, 0 , 0), (moneydisplay))
     main_surface.blit(Moneytext, (970, 260))
 
+
 def drawUnits(map):
     for x in map:
+        for u in x.Bases:
+            main_surface.blit((u.Texture), (x.Position.x * offset, x.Position.y * offset))
         for u in x.BarackObama:
             main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
         for u in x.Soldier:
@@ -175,8 +155,7 @@ def drawUnits(map):
         for u in x.Boat:
             main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
 
-
-def selectUnit(coordinates1, coordinates2, Map):
+def selectUnit(coordinates1, coordinates2, Map, currentplayer, players):
     #Units op land verplaatsen
     if coordinates1 is not None:
         #Kijkt of de coordinaten naast de oorspronkelijke Tile zit en of deze geen rivier is
@@ -315,12 +294,7 @@ def selectUnit(coordinates1, coordinates2, Map):
                     for x in MovelistBoat:
                         i.Boat.append(x)
 
-    # if coordinates1 is not None and coordinates2 is not None:
-        # if (coordinates1.Position.x + 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y and coordinates2.Traversable)\
-        #         or (coordinates1.Position.x - 1 == coordinates2.Position.x and coordinates1.Position.y == coordinates2.Position.y and coordinates2.Traversable)\
-        #         or (coordinates1.Position.y + 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x and coordinates2.Traversable)\
-        #         or (coordinates1.Position.y - 1 == coordinates2.Position.y and coordinates1.Position.x == coordinates2.Position.x and coordinates2.Traversable):
-        #     if coordinates1.Position.x == i.Position.x and coordinates1.Position.y == i.Position.y and i.Soldier is not [] and i.Tank is not [] and i.Robot is not []:
+    #Het Vechten van de units
     if coordinates2.Soldier is not None or coordinates2.Robot is not None or coordinates2.Tank is not None:
         player1soldiers = 0
         player2soldiers = 0
@@ -594,15 +568,45 @@ def selectUnit(coordinates1, coordinates2, Map):
             coordinates2.Tank = []
             coordinates2.Robot = []
 
-
-        # else:
-        #     coordinates2.Soldier = []
-        #     coordinates2.Tank = []
-        #     coordinates2.Robot = []
-
-
-def turn(x):
-    x += 1
-    if x > 4:
-        x = 1
-    return x
+    if coordinates2.Bases:# and (coordinates1.Soldier or coordinates1.Tank or coordinates1.Robot):
+        totalattack = 0
+        for i in coordinates2.Robot:
+            totalattack += i.Attack
+        for i in coordinates2.Soldier:
+            totalattack += i.Attack
+        for i in coordinates2.Tank:
+            totalattack += i.Attack
+        if coordinates2.Bases[0].Player != currentplayer.Player:
+            playernr = coordinates2.Bases[0].Player
+            for u in players:
+                print(u.Player)
+                if u.Player == playernr:
+                    u.Health -= totalattack
+                    if u.Health <= 0:
+                        for d in players:
+                            if d.Health <= 0:
+                                deadplayer = d
+                                for i in Map:
+                                    for u in i.Soldier:
+                                        if u.Player == deadplayer.Player:
+                                            i.Soldier = []
+                                    for u in i.Tank:
+                                        if u.Player == deadplayer.Player:
+                                            i.Tank = []
+                                    for u in i.Robot:
+                                        if u.Player == deadplayer.Player:
+                                            i.Robot = []
+                                    for u in i.Boat:
+                                        if u.Player == deadplayer.Player:
+                                            i.Boat = []
+                                    for u in i.BarackObama:
+                                        if u.Player == deadplayer.Player:
+                                            i.BarackObama = []
+                                    for u in i.Bases:
+                                        if u.Player == deadplayer.Player:
+                                            i.Bases = []
+                                for i in players:
+                                    if i.Player == deadplayer.Player:
+                                        players.remove(i)
+                                        return players
+    return players
