@@ -13,7 +13,7 @@ class Base:
     def __init__(self, player):
         self.Player = player
         self.Health = 25
-        self.Money = 500
+        self.Money = 5000
         self.Barack = BarackObama(player)
         if player == 1:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_brown.png'), (50, 50))
