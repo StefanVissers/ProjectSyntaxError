@@ -3,6 +3,7 @@ from UnitClasses import *
 import Menu
 import time
 import Manual
+import random
 
 # Wat kleur variabelen
 BLACK = ( 0, 0, 0)
@@ -106,6 +107,9 @@ def draw_board():
     currentplayer = players[0]
     moneycheck = False
     player = 0
+    battle = pygame.mixer.Sound('Pics/sound/battle.wav')
+    pygame.mixer.Sound.play(battle)
+
 
     while True:
         mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
@@ -271,6 +275,26 @@ def draw_board():
                                     soldier = 0
                         else:
                             soldier = 0
+                            zetten += 1
+                            if currentplayer.Player == 4:
+                                currentplayer.Money -= 120
+                            else:
+                                currentplayer.Money -= 150
+                            print("Het aantal zetten = " +str(zetten))
+                            randint = random.randint(0, 3)
+                            if randint == 0:
+                                pygame.mixer.music.load('Pics/sound/RiflemanYes1.wav')
+                                pygame.mixer.music.play(1, 0.0)
+                            elif randint == 1:
+                                pygame.mixer.music.load('Pics/sound/RiflemanYes2.wav')
+                                pygame.mixer.music.play(1, 0.0)
+                            elif randint == 2:
+                                pygame.mixer.music.load('Pics/sound/RiflemanYes3.wav')
+                                pygame.mixer.music.play(1, 0.0)
+                            elif randint == 3:
+                                pygame.mixer.music.load('Pics/sound/RiflemanYes4.wav')
+                                pygame.mixer.music.play(1, 0.0)
+
 
         if tank == 1:
             if coordinates is not None:
@@ -295,6 +319,26 @@ def draw_board():
                                     tank = 0
                         else:
                             tank = 0
+                            zetten += 1
+                            if currentplayer.Player == 1:
+                                currentplayer.Money -= 600
+                            else:
+                                currentplayer.Money -= 750
+                            print("Het aantal zetten = " +str(zetten))
+                            randint = random.randint(0, 3)
+                            if randint == 0:
+                                pygame.mixer.music.load('Pics/sound/ttawht00.wav')
+                                pygame.mixer.music.play(1, 0.0)
+                            elif randint == 1:
+                                pygame.mixer.music.load('Pics/sound/ttawht01.wav')
+                                pygame.mixer.music.play(1, 0.0)
+                            elif randint == 2:
+                                pygame.mixer.music.load('Pics/sound/ttawht02.wav')
+                                pygame.mixer.music.play(1, 0.0)
+                            elif randint == 3:
+                                pygame.mixer.music.load('Pics/sound/ttawht03.wav')
+                                pygame.mixer.music.play(1, 0.0)
+
 
         if robot == 1:
             if coordinates is not None:
@@ -319,6 +363,26 @@ def draw_board():
                                     robot = 0
                         else:
                             robot = 0
+                            zetten += 1
+                            if currentplayer.Player == 2:
+                                currentplayer.Money -= 240
+                            else:
+                                currentplayer.Money -= 300
+                            print("Het aantal zetten = " +str(zetten))
+                            randint = random.randint(0, 3)
+                            if randint == 0:
+                                pygame.mixer.music.load('Pics/sound/tgowht00.wav')
+                                pygame.mixer.music.play(1, 0.0)
+                            elif randint == 1:
+                                pygame.mixer.music.load('Pics/sound/tgowht01.wav')
+                                pygame.mixer.music.play(1, 0.0)
+                            elif randint == 2:
+                                pygame.mixer.music.load('Pics/sound/tgowht02.wav')
+                                pygame.mixer.music.play(1, 0.0)
+                            elif randint == 3:
+                                pygame.mixer.music.load('Pics/sound/tgowht03.wav')
+                                pygame.mixer.music.play(1, 0.0)
+
 
         if boot == 1:
             if coordinates is not None:
@@ -339,6 +403,22 @@ def draw_board():
                                 else:
                                     currentplayer.Money -= 1000
                                 print(zetten)
+                                randint = random.randint(0, 4)
+                                if randint == 0:
+                                    pygame.mixer.music.load('Pics/sound/Kunk_move_05.mp3')
+                                    pygame.mixer.music.play(1, 0.0)
+                                elif randint == 1:
+                                    pygame.mixer.music.load('Pics/sound/Kunk_level_05.mp3')
+                                    pygame.mixer.music.play(1, 0.0)
+                                elif randint == 2:
+                                    pygame.mixer.music.load('Pics/sound/Kunk_cast_02.mp3')
+                                    pygame.mixer.music.play(1, 0.0)
+                                elif randint == 3:
+                                    pygame.mixer.music.load('Pics/sound/Kunk_attack_06.mp3')
+                                    pygame.mixer.music.play(1, 0.0)
+                                elif randint == 4:
+                                    pygame.mixer.music.load('Pics/sound/Kunk_move_11.mp3')
+                                    pygame.mixer.music.play(1, 0.0)
 
         if coordinates is not None and coordinates1 is None:
             if (coordinates.Soldier != [] or coordinates.Tank != [] or coordinates.Robot != [] or coordinates.Boat != []):
@@ -403,6 +483,7 @@ def draw_board():
             yesbutton = pygame.Rect(410, 415, 190, 100)    # position yes button
             nobutton = pygame.Rect(630, 415, 190, 100)     # position no button
             if ev.type == pygame.MOUSEBUTTONDOWN and yesbutton.collidepoint(mouse_pos):
+                pygame.mixer.stop()
                 return
             elif ev.type == pygame.MOUSEBUTTONDOWN and nobutton.collidepoint(mouse_pos):
                 klik = 2
@@ -420,5 +501,8 @@ def draw_board():
             main_surface.blit(escapetext, (450, 700))
             if ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:  # back to main menu
                 return
+
+
+
 
         pygame.display.flip()
