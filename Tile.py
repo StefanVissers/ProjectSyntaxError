@@ -39,11 +39,11 @@ def drawBase(Map):
             i.Base = True
             if i.Base == True:
                 i.Bases.append(UnitClasses.Base(3))
-        if i.Position.x == 16 and i.Position.y == 0:        #0, 17
+        if i.Position.x == 0 and i.Position.y == 17:
             i.Base = True
             if i.Base == True:
                 i.Bases.append(UnitClasses.Base(2))
-        if i.Position.x == 5 and i.Position.y == 5:     #17,17
+        if i.Position.x == 17 and i.Position.y == 17:
             i.Base = True
             if i.Base == True:
                 i.Bases.append(UnitClasses.Base(1))
