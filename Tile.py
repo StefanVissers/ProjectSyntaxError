@@ -148,9 +148,9 @@ def HealthTank(coordinates, Map):
             if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
                 if i.Tank is not []:
                     for i in range(len(i.Tank)):
-                        HealthTank += 2
+                        HealthTank += 3
                 return HealthTank
-            
+
 def HealthRobot(coordinates, Map):
     HealthRobot = 0
     if coordinates is not None:
@@ -192,6 +192,36 @@ def HealthBarack(coordinates, Map):
                     for i in range(len(i.BarackObama)):
                         HealthBarack += 5
                 return HealthBarack
+
+def DMGSoldier (coordinates, Map):
+    DMGSoldier = 0
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                if i.Soldier is not []:
+                    for i in range(len(i.Soldier)):
+                        DMGSoldier += 1
+                return DMGSoldier
+
+def DMGTank (coordinates, Map):
+    DMGTank = 0
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                if i.Tank is not []:
+                    for i in range(len(i.Tank)):
+                        DMGTank += 3
+                return DMGTank
+
+def DMGRobot (coordinates, Map):
+    DMGRobot = 0
+    if coordinates is not None:
+        for i in Map:
+            if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y:
+                if i.Robot is not []:
+                    for i in range(len(i.Robot)):
+                        DMGRobot += 2
+                return DMGRobot
 
 def drawMoney(startmoney):
     #moneydisplay = pygame.Rect(1100, 500, 200, 50)

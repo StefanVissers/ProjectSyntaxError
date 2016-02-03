@@ -151,6 +151,11 @@ def draw_board():
             Healthtext2 = font.render(("Health Base/Barack: " + Healthbuildings), 1, (255,255,255))
             main_surface.blit(Healthtext2, (900, 800))
 
+            # Unit DMG TEXT
+            TotalDMG = str(DMGSoldier(coordinates, Map) + DMGTank(coordinates, Map) + DMGRobot(coordinates, Map))
+            DMGtext = font.render(("Total DMG Units: " + TotalDMG), 1, (255,255,255))
+            main_surface.blit(DMGtext, (900, 820))
+
         if shopmenu == 1:
             UnitS = pygame.Rect(900, 300, 142, 68)
             UnitT = pygame.Rect(1060, 300, 142, 68)
