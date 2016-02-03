@@ -392,12 +392,22 @@ def draw_board():
             yesbutton = pygame.Rect(410, 415, 190, 100)    # position yes button
             nobutton = pygame.Rect(630, 415, 190, 100)     # position no button
             if ev.type == pygame.MOUSEBUTTONDOWN and yesbutton.collidepoint(mouse_pos):
-                Menu.menu(main_surface)
+                return
             elif ev.type == pygame.MOUSEBUTTONDOWN and nobutton.collidepoint(mouse_pos):
                 klik = 2
         elif klik == 2:
             main_surface.blit(bordload, (0,0))
             reload(Map)
             klik = 0
+
+        if currentplayer.Money >= 50000:
+            main_surface.fill(BLACK)
+            main_surface.blit(pygame.image.load('Pics/winner.png'), (0, 0))
+            playertext = font.render(("Player " + str(currentplayer.Player) + " is the winner"), 1, (255,255,255))
+            main_surface.blit(playertext, (500, 670))
+            escapetext = font.render(("Press esc to go back to main menu"), 1, (255,255,255))
+            main_surface.blit(escapetext, (450, 700))
+            if ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:  # back to main menu
+                return
 
         pygame.display.flip()
