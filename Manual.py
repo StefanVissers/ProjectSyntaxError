@@ -29,8 +29,8 @@ def manual():
     manual_page11 = pygame.transform.smoothscale(manual_page11, (550, 900))
     manual_page12 = pygame.image.load('Pics/manual/manual_page12.png')
     manual_page12 = pygame.transform.smoothscale(manual_page12, (550, 900))
-
-    some_color = (255, 0, 0)
+    manual_page13 = pygame.image.load('Pics/manual/Controls.png')
+    manual_page13 = pygame.transform.smoothscale(manual_page13, (1100, 900))
 
     nextpage = pygame.image.load('Pics/next_button.png')
     previouspage = pygame.image.load('Pics/previous_button.png')
@@ -77,9 +77,11 @@ def manual():
         elif page == 5:
             main_surface.blit(manual_page11, (50,0))
             main_surface.blit(manual_page12, (600, 0))
-        elif page > 5:
+        elif page == 6:
+            main_surface.blit(manual_page13, (50, 0))
+        elif page > 6:
             page = 0
         elif page < 0:
-            page = 5
+            page = 6
 
         pygame.display.flip()

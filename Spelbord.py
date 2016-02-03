@@ -5,12 +5,12 @@ import time
 import Manual
 
 # Wat kleur variabelen
-BLACK = ( 0, 0, 0)
+BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0,)
-GREEN = ( 0, 255, 0)
-BLUE = ( 0, 0, 255)
-main_surface = pygame.display.set_mode((1200, 900))                 # zet de resolutie naar de parameters; 1200(x), 900(y) in dit geval
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+main_surface = pygame.display.set_mode((1200, 900))  # zet de resolutie naar de parameters; 1200(x), 900(y) in dit geval
 offset = 50
 task = None
 
@@ -19,7 +19,7 @@ areyousurepng = pygame.image.load('Pics/areyousure.png').convert_alpha()
 bordload = pygame.image.load('Pics/Spelbord_zonderzijkanten.png')
 background = pygame.image.load('Pics/Background.jpg')
 quitingamebutton = pygame.Rect(950, 0, 200, 50)
-manualbuttonrect = pygame.Rect(950, 100 + (50/3) + (50/3), 200, 50)
+manualbuttonrect = pygame.Rect(950, 100 + (50 / 3) + (50 / 3), 200, 50)
 shop = pygame.Rect(950, 200, 200, 50)
 ViewSoldierButton = pygame.Rect(900, 700, 500, 50)
 ViewTankButton = pygame.Rect(900, 750, 500, 50)
@@ -42,12 +42,13 @@ def spawnbarak(currentplayer, coordinates, i):
 def spawnSoldier(currentplayer, coordinates, i):
     if currentplayer.Money >= 150 or (currentplayer.Player == 4 and currentplayer.Money >= 120):
         unit = UnitClasses.Soldier(currentplayer.Player)
-        print("De huidige player = "+ str(currentplayer.Player))
+        print("De huidige player = " + str(currentplayer.Player))
         i.Soldier.append(unit)
         if currentplayer.Player == 4:
             currentplayer.Money -= 120
         else:
             currentplayer.Money -= 150
+
 
 def spawnTank(currentplayer, coordinates, i):
     if currentplayer.Money >= 750 or (currentplayer.Player == 1 and currentplayer.Money >= 600):
@@ -57,6 +58,7 @@ def spawnTank(currentplayer, coordinates, i):
             currentplayer.Money -= 600
         else:
             currentplayer.Money -= 750
+
 
 def spawnRobot(currentplayer, coordinates, i):
     if currentplayer.Money >= 300 or (currentplayer.Player == 2 and currentplayer.Money >= 240):
@@ -68,20 +70,21 @@ def spawnRobot(currentplayer, coordinates, i):
             currentplayer.Money -= 300
 
 
-def reload(Map):                                                       # herinstantieert het bord
-    main_surface.blit(background, (0,0))
+def reload(Map):  # herinstantieert het bord
+    main_surface.blit(background, (0, 0))
     main_surface.blit(quit_in_gamebuttonpng, (950, 0))
-    main_surface.blit(optionsbuttongame, (950, 50 + (50/3)))
-    main_surface.blit(manualbuttongame, (950, 100 + (50/3) + (50/3)))
-    main_surface.blit(bordload, (0,0))
+    main_surface.blit(optionsbuttongame, (950, 50 + (50 / 3)))
+    main_surface.blit(manualbuttongame, (950, 100 + (50 / 3) + (50 / 3)))
+    main_surface.blit(bordload, (0, 0))
     main_surface.blit(shopmenubutton, (950, 200))
 
+
 def draw_board():
-    main_surface.blit(background, (0,0))
+    main_surface.blit(background, (0, 0))
     main_surface.blit(quit_in_gamebuttonpng, (950, 0))
-    main_surface.blit(optionsbuttongame, (950, 50 + (50/3)))
-    main_surface.blit(manualbuttongame, (950, 100 + (50/3)+ (50/3)))
-    main_surface.blit(bordload, (0,0))
+    main_surface.blit(optionsbuttongame, (950, 50 + (50 / 3)))
+    main_surface.blit(manualbuttongame, (950, 100 + (50 / 3) + (50 / 3)))
+    main_surface.blit(bordload, (0, 0))
     main_surface.blit(shopmenubutton, (950, 200))
 
     klik = 0
@@ -91,8 +94,6 @@ def draw_board():
     robot = 0
     boot = 0
     barak = 0
-    menu = 0
-    testlist = []
     shopmenuimage = pygame.image.load('Pics/units/Shop_menu_unf.png')
 
     coordinates1 = None
@@ -108,17 +109,17 @@ def draw_board():
     player = 0
 
     while True:
-        mouse_pos = pygame.mouse.get_pos()  #krijgt de positie van de cursor
-        event = pygame.event.get()            #kan alle events zijn zoals mouse_click
+        mouse_pos = pygame.mouse.get_pos()  # krijgt de positie van de cursor
+        event = pygame.event.get()  # kan alle events zijn zoals mouse_click
         coordinates = getTile(event, mouse_pos, Map)
 
         for ev in event:
             if ev.type == pygame.MOUSEBUTTONDOWN and quitingamebutton.collidepoint(mouse_pos):
                 klik = 1
-            elif ev.type == pygame.QUIT:            # Window close button clicked?
+            elif ev.type == pygame.QUIT:  # Window close button clicked?
                 pygame.quit()
                 quit()
-            elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:   # back to main menu
+            elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:  # back to main menu
                 klik = 1
             elif ev.type == pygame.MOUSEBUTTONDOWN and shop.collidepoint(mouse_pos):
                 shopmenu = 1
@@ -128,17 +129,17 @@ def draw_board():
 
         if coordinates is not None:
             # Unit Count TEXT
-            soldierCounttext = font.render(str(countSoldiers(coordinates, Map)), 1, (255,255,0))
-            main_surface.fill((0, 0 , 0), (ViewSoldierButton))
+            soldierCounttext = font.render(str(countSoldiers(coordinates, Map)), 1, (255, 255, 0))
+            main_surface.fill((0, 0, 0), (ViewSoldierButton))
             main_surface.blit(soldierCounttext, (900, 700))
-            tankCounttext = font.render(str(countTanks(coordinates, Map)), 1, (255,0,0))
-            main_surface.fill((0, 0 , 0), (ViewTankButton))
+            tankCounttext = font.render(str(countTanks(coordinates, Map)), 1, (255, 0, 0))
+            main_surface.fill((0, 0, 0), (ViewTankButton))
             main_surface.blit(tankCounttext, (900, 720))
-            robotCounttext = font.render(str(countRobots(coordinates, Map)), 1, (255,50,0))
-            main_surface.fill((0, 0 , 0), (ViewRobotButton))
+            robotCounttext = font.render(str(countRobots(coordinates, Map)), 1, (255, 50, 0))
+            main_surface.fill((0, 0, 0), (ViewRobotButton))
             main_surface.blit(robotCounttext, (900, 740))
-            boatCounttext = font.render(str(countBoats(coordinates, Map)), 1, (255,100,0))
-            main_surface.fill((0, 0 , 0), (ViewBoatButton))
+            boatCounttext = font.render(str(countBoats(coordinates, Map)), 1, (255, 100, 0))
+            main_surface.fill((0, 0, 0), (ViewBoatButton))
             main_surface.blit(boatCounttext, (900, 760))
 
             # Unit Health TEXT
@@ -151,7 +152,7 @@ def draw_board():
             UnitR = pygame.Rect(900, 392, 140, 68)
             UnitB = pygame.Rect(1060, 392, 142, 68)
             UnitBr = pygame.Rect(900, 480, 142, 68)
-            Back  = pygame.Rect(1059, 480, 142, 68)
+            Back = pygame.Rect(1059, 480, 142, 68)
 
             main_surface.blit(shopmenuimage, (900, 300))
 
@@ -179,7 +180,6 @@ def draw_board():
                 shopmenu = 0
                 reload(Map)
 
-
         if not moneycheck:
             for i in Map:
                 if len(i.Soldier) > 0:
@@ -203,7 +203,6 @@ def draw_board():
             moneycheck = True
         drawMoney(currentplayer.Money)
 
-
         if barak == 1:
             if coordinates is not None:
                 for i in Map:
@@ -215,7 +214,7 @@ def draw_board():
                                         spawnbarak(currentplayer, coordinates, i)
                                         zetten += 1
                                         barak = 0
-                                        print("Het aantal zetten = " +str(zetten))
+                                        print("Het aantal zetten = " + str(zetten))
                                     else:
                                         barak = 0
                                 for x in i.Tank:
@@ -223,7 +222,7 @@ def draw_board():
                                         spawnbarak(currentplayer, coordinates, i)
                                         zetten += 1
                                         barak = 0
-                                        print("Het aantal zetten = " +str(zetten))
+                                        print("Het aantal zetten = " + str(zetten))
                                     else:
                                         barak = 0
                                 for x in i.Robot:
@@ -231,13 +230,11 @@ def draw_board():
                                         spawnbarak(currentplayer, coordinates, i)
                                         zetten += 1
                                         barak = 0
-                                        print("Het aantal zetten = " +str(zetten))
+                                        print("Het aantal zetten = " + str(zetten))
                                     else:
                                         barak = 0
                             else:
                                 barak = 0
-
-
 
         if soldier == 1:
             if coordinates is not None:
@@ -249,7 +246,7 @@ def draw_board():
                                     spawnSoldier(currentplayer, coordinates, i)
                                     zetten += 1
                                     soldier = 0
-                                    print("Het aantal zetten = " +str(zetten))
+                                    print("Het aantal zetten = " + str(zetten))
                                 else:
                                     soldier = 0
                             for x in i.Bases:
@@ -257,7 +254,7 @@ def draw_board():
                                     spawnSoldier(currentplayer, coordinates, i)
                                     zetten += 1
                                     soldier = 0
-                                    print("Het aantal zetten = " +str(zetten))
+                                    print("Het aantal zetten = " + str(zetten))
                                 else:
                                     soldier = 0
                         else:
@@ -273,7 +270,7 @@ def draw_board():
                                     spawnTank(currentplayer, coordinates, i)
                                     zetten += 1
                                     tank = 0
-                                    print("Het aantal zetten = " +str(zetten))
+                                    print("Het aantal zetten = " + str(zetten))
                                 else:
                                     tank = 0
                             for x in i.Bases:
@@ -281,7 +278,7 @@ def draw_board():
                                     spawnTank(currentplayer, coordinates, i)
                                     zetten += 1
                                     tank = 0
-                                    print("Het aantal zetten = " +str(zetten))
+                                    print("Het aantal zetten = " + str(zetten))
                                 else:
                                     tank = 0
                         else:
@@ -297,7 +294,7 @@ def draw_board():
                                     spawnRobot(currentplayer, coordinates, i)
                                     zetten += 1
                                     robot = 0
-                                    print("Het aantal zetten = " +str(zetten))
+                                    print("Het aantal zetten = " + str(zetten))
                                 else:
                                     robot = 0
                             for x in i.Bases:
@@ -305,7 +302,7 @@ def draw_board():
                                     spawnRobot(currentplayer, coordinates, i)
                                     zetten += 1
                                     robot = 0
-                                    print("Het aantal zetten = " +str(zetten))
+                                    print("Het aantal zetten = " + str(zetten))
                                 else:
                                     robot = 0
                         else:
@@ -316,11 +313,20 @@ def draw_board():
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is False:
                         for i in Map:
-                            if (coordinates.Position.x + 1 == i.Position.x and coordinates.Position.y == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
-                                    or (coordinates.Position.x - 1 == i.Position.x and coordinates.Position.y == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
-                                    or (coordinates.Position.x == i.Position.x and coordinates.Position.y + 1 == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
-                                    or (coordinates.Position.x == i.Position.x and coordinates.Position.y - 1 == i.Position.y and (i.Robot or i.Soldier or i.Tank))\
-                                    and (currentplayer.Money >= 1000 or (currentplayer.Player == 3 and currentplayer.Money >= 800)):
+                            if (
+                                            coordinates.Position.x + 1 == i.Position.x and coordinates.Position.y == i.Position.y and (
+                                    i.Robot or i.Soldier or i.Tank)) \
+                                    or (
+                                                    coordinates.Position.x - 1 == i.Position.x and coordinates.Position.y == i.Position.y and (
+                                            i.Robot or i.Soldier or i.Tank)) \
+                                    or (
+                                                coordinates.Position.x == i.Position.x and coordinates.Position.y + 1 == i.Position.y and (
+                                            i.Robot or i.Soldier or i.Tank)) \
+                                    or (
+                                                coordinates.Position.x == i.Position.x and coordinates.Position.y - 1 == i.Position.y and (
+                                            i.Robot or i.Soldier or i.Tank)) \
+                                            and (currentplayer.Money >= 1000 or (
+                                                    currentplayer.Player == 3 and currentplayer.Money >= 800)):
                                 unit = UnitClasses.Boat(currentplayer.Player)
                                 coordinates.Boat.append(unit)
                                 boot = 0
@@ -332,7 +338,8 @@ def draw_board():
                                 print(zetten)
 
         if coordinates is not None and coordinates1 is None:
-            if (coordinates.Soldier != [] or coordinates.Tank != [] or coordinates.Robot != [] or coordinates.Boat != []):
+            if (
+                            coordinates.Soldier != [] or coordinates.Tank != [] or coordinates.Robot != [] or coordinates.Boat != []):
                 if len(coordinates.Soldier) > 0:
                     soldiercheck = 0
                     for i in coordinates.Soldier:
@@ -363,16 +370,17 @@ def draw_board():
                                 coordinates1 = getTile(event, mouse_pos, Map)
 
         if coordinates1 != coordinates and coordinates is not None and coordinates1 is not None:
-            if (coordinates1.Soldier != [] or coordinates1.Tank != [] or coordinates1.Robot != [] or coordinates1.Boat != []):
-                    # print("Deze unit behoort tot player: " + str(coordinates1.Soldier[0].Player))
-                    coordinates2 = getTile(event, mouse_pos, Map)
-                    players = Tile.selectUnit(coordinates1, coordinates2, Map, currentplayer, players)
-                    zetten += 1
-                    print("Het aantal zetten = " +str(zetten))
-                    coordinates1 = None
-                    coordinates2 = None
-                    coordinates = None
-                    reload(Map)
+            if (
+                            coordinates1.Soldier != [] or coordinates1.Tank != [] or coordinates1.Robot != [] or coordinates1.Boat != []):
+                # print("Deze unit behoort tot player: " + str(coordinates1.Soldier[0].Player))
+                coordinates2 = getTile(event, mouse_pos, Map)
+                players = Tile.selectUnit(coordinates1, coordinates2, Map, currentplayer, players)
+                zetten += 1
+                print("Het aantal zetten = " + str(zetten))
+                coordinates1 = None
+                coordinates2 = None
+                coordinates = None
+                reload(Map)
         drawUnits(Map)
 
         if zetten >= 4:
@@ -391,23 +399,23 @@ def draw_board():
 
         if klik == 1:
             main_surface.blit(areyousurepng, (300, 200))
-            yesbutton = pygame.Rect(410, 415, 190, 100)    # position yes button
-            nobutton = pygame.Rect(630, 415, 190, 100)     # position no button
+            yesbutton = pygame.Rect(410, 415, 190, 100)  # position yes button
+            nobutton = pygame.Rect(630, 415, 190, 100)  # position no button
             if ev.type == pygame.MOUSEBUTTONDOWN and yesbutton.collidepoint(mouse_pos):
                 return
             elif ev.type == pygame.MOUSEBUTTONDOWN and nobutton.collidepoint(mouse_pos):
                 klik = 2
         elif klik == 2:
-            main_surface.blit(bordload, (0,0))
+            main_surface.blit(bordload, (0, 0))
             reload(Map)
             klik = 0
 
         if currentplayer.Money >= 50000:
             main_surface.fill(BLACK)
             main_surface.blit(pygame.image.load('Pics/winner.png'), (0, 0))
-            playertext = font.render(("Player " + str(currentplayer.Player) + " is the winner"), 1, (255,255,255))
+            playertext = font.render(("Player " + str(currentplayer.Player) + " is the winner"), 1, (255, 255, 255))
             main_surface.blit(playertext, (500, 670))
-            escapetext = font.render(("Press esc to go back to main menu"), 1, (255,255,255))
+            escapetext = font.render(("Press esc to go back to main menu"), 1, (255, 255, 255))
             main_surface.blit(escapetext, (450, 700))
             if ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:  # back to main menu
                 return
