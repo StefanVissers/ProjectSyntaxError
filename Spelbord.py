@@ -364,7 +364,7 @@ def draw_board():
             if (coordinates1.Soldier != [] or coordinates1.Tank != [] or coordinates1.Robot != [] or coordinates1.Boat != []):
                     # print("Deze unit behoort tot player: " + str(coordinates1.Soldier[0].Player))
                     coordinates2 = getTile(event, mouse_pos, Map)
-                    Tile.selectUnit(coordinates1, coordinates2, Map)
+                    players = Tile.selectUnit(coordinates1, coordinates2, Map, currentplayer, players)
                     zetten += 1
                     print("Het aantal zetten = " +str(zetten))
                     coordinates1 = None
@@ -376,7 +376,7 @@ def draw_board():
         if zetten >= 4:
             print("De beurt van player " + str(currentplayer.Player) + " is nu voorbij")
             player += 1
-            if player > 3:
+            if player > len(players) - 1:
                 player = 0
             currentplayer = players[player]
             print("De beurt van player " + str(currentplayer.Player) + " begint nu")

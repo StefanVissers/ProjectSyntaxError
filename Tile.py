@@ -155,7 +155,7 @@ def drawUnits(map):
         for u in x.Boat:
             main_surface.blit(u.Texture,(x.Position.x * 50 + 3, x.Position.y * 50 + 3, 45, 45))
 
-def selectUnit(coordinates1, coordinates2, Map):
+def selectUnit(coordinates1, coordinates2, Map, currentplayer, players):
     #Units op land verplaatsen
     if coordinates1 is not None:
         #Kijkt of de coordinaten naast de oorspronkelijke Tile zit en of deze geen rivier is
@@ -568,9 +568,45 @@ def selectUnit(coordinates1, coordinates2, Map):
             coordinates2.Tank = []
             coordinates2.Robot = []
 
-
-def turn(x):
-    x += 1
-    if x > 4:
-        x = 1
-    return x
+    if coordinates2.Bases:# and (coordinates1.Soldier or coordinates1.Tank or coordinates1.Robot):
+        totalattack = 0
+        for i in coordinates2.Robot:
+            totalattack += i.Attack
+        for i in coordinates2.Soldier:
+            totalattack += i.Attack
+        for i in coordinates2.Tank:
+            totalattack += i.Attack
+        if coordinates2.Bases[0].Player != currentplayer.Player:
+            playernr = coordinates2.Bases[0].Player
+            for u in players:
+                print(u.Player)
+                if u.Player == playernr:
+                    u.Health -= totalattack
+                    if u.Health <= 0:
+                        for d in players:
+                            if d.Health <= 0:
+                                deadplayer = d
+                                for i in Map:
+                                    for u in i.Soldier:
+                                        if u.Player == deadplayer.Player:
+                                            i.Soldier = []
+                                    for u in i.Tank:
+                                        if u.Player == deadplayer.Player:
+                                            i.Tank = []
+                                    for u in i.Robot:
+                                        if u.Player == deadplayer.Player:
+                                            i.Robot = []
+                                    for u in i.Boat:
+                                        if u.Player == deadplayer.Player:
+                                            i.Boat = []
+                                    for u in i.BarackObama:
+                                        if u.Player == deadplayer.Player:
+                                            i.BarackObama = []
+                                    for u in i.Bases:
+                                        if u.Player == deadplayer.Player:
+                                            i.Bases = []
+                                for i in players:
+                                    if i.Player == deadplayer.Player:
+                                        players.remove(i)
+                                        return players
+    return players
