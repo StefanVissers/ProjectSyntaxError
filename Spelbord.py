@@ -149,20 +149,22 @@ def draw_board():
         if not moneycheck:
             for i in Map:
                 if len(i.Soldier) > 0:
-                    for x in i.Soldier:
-                        if x.Player == currentplayer.Player:
+                    if i.Soldier[0].Player == currentplayer.Player:
+                        if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
+                            currentplayer.Money += 150
+                        else:
                             currentplayer.Money += 50
                 elif len(i.Tank) > 0:
-                    for x in i.Tank:
-                        if x.Player == currentplayer.Player:
+                    if i.Tank[0].Player == currentplayer.Player:
+                        if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
+                            currentplayer.Money += 150
+                        else:
                             currentplayer.Money += 50
                 elif len(i.Robot) > 0:
-                    for x in i.Robot:
-                        if x.Player == currentplayer.Player:
-                            currentplayer.Money += 50
-                elif len(i.Boat) > 0:
-                    for x in i.Boat:
-                        if x.Player == currentplayer.Player:
+                    if i.Robot[0].Player == currentplayer.Player:
+                        if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
+                            currentplayer.Money += 150
+                        else:
                             currentplayer.Money += 50
             moneycheck = True
         drawMoney(currentplayer.Money)
