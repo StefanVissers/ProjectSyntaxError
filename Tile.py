@@ -150,6 +150,7 @@ def HealthTank(coordinates, Map):
                     for i in range(len(i.Tank)):
                         HealthTank += 2
                 return HealthTank
+            
 def HealthRobot(coordinates, Map):
     HealthRobot = 0
     if coordinates is not None:
@@ -181,6 +182,7 @@ def HealthBase(coordinates, Map, players):
                             if d.Player == i.Player:
                                 return d.Health
         return 0
+
 def HealthBarack(coordinates, Map):
     HealthBarack = 0
     if coordinates is not None:
