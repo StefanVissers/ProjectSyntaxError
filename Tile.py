@@ -139,8 +139,8 @@ def HealthBarack(f):
     HealthBarack = 0
     i = f
     if i.BarackObama is not []:
-        for i in range(len(i.BarackObama)):
-            HealthBarack += 5
+        for i in i.BarackObama:
+            HealthBarack += i.Health
     return HealthBarack
 
 def DMGSoldier (f):
