@@ -26,25 +26,28 @@ class Base:
 
     def Moneycount(self, moneycheck, Map):
         if not moneycheck:
-                    for i in Map:
-                        if len(i.Soldier) > 0:
-                            if i.Soldier[0].Player == self.Player:
-                                if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
-                                    self.Money += 150
-                                elif i.Traversable == True:
-                                    self.Money += 50
-                        elif len(i.Tank) > 0:
-                            if i.Tank[0].Player == self.Player:
-                                if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
-                                    self.Money += 150
-                                else:
-                                    self.Money += 50
-                        elif len(i.Robot) > 0:
-                            if i.Robot[0].Player == self.Player:
-                                if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
-                                    self.Money += 150
-                                else:
-                                    self.Money += 50
+            for i in Map:
+                if len(i.Soldier) > 0:
+                    if i.Soldier[0].Player == self.Player:
+                        if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
+                            self.Money += 150
+                        elif i.Traversable == True:
+                            self.Money += 50
+                elif len(i.Tank) > 0:
+                    if i.Tank[0].Player == self.Player:
+                        if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
+                            self.Money += 150
+                        else:
+                            self.Money += 50
+                elif len(i.Robot) > 0:
+                    if i.Robot[0].Player == self.Player:
+                        if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
+                            self.Money += 150
+                        else:
+                            self.Money += 50
+                elif len(i.Bases) > 0:
+                    if i.Bases[0].Player == self.Player:
+                        self.Money += 150
 
 
 class BarackObama:
@@ -125,9 +128,9 @@ class Boat:
         self.Tank = []
         self.Name = "Boat"
         if player == 1:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/boat1.png'), (45, 45))
-        elif player == 2:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/boat2.png'), (45, 45))
+        elif player == 2:
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/boat1.png'), (45, 45))
         elif player == 3:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/boat3.png'), (45, 45))
         else:
