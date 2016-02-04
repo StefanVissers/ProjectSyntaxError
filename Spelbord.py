@@ -42,7 +42,7 @@ def spawnbarak(currentplayer, coordinates, i):
         pygame.mixer.Sound.play(construction1)
 
 
-def spawnSoldier(currentplayer, coordinates, i):
+def spawnSoldier(currentplayer, i):
     if currentplayer.Money >= 150 or (currentplayer.Player == 4 and currentplayer.Money >= 120):
         unit = UnitClasses.Soldier(currentplayer.Player)
         print("De huidige player = " + str(currentplayer.Player))
@@ -65,7 +65,7 @@ def spawnSoldier(currentplayer, coordinates, i):
             rifleman4 = pygame.mixer.Sound('Pics/sound/RiflemanYes4.wav')
             pygame.mixer.Sound.play(rifleman4)
 
-def spawnTank(currentplayer, coordinates, i):
+def spawnTank(currentplayer, i):
     if currentplayer.Money >= 750 or (currentplayer.Player == 1 and currentplayer.Money >= 600):
         unit = UnitClasses.Tank(currentplayer.Player)
         i.Tank.append(unit)
@@ -89,7 +89,7 @@ def spawnTank(currentplayer, coordinates, i):
 
 
 
-def spawnRobot(currentplayer, coordinates, i):
+def spawnRobot(currentplayer,i):
     if currentplayer.Money >= 300 or (currentplayer.Player == 2 and currentplayer.Money >= 240):
         unit = UnitClasses.Robot(currentplayer.Player)
         i.Robot.append(unit)
@@ -112,7 +112,7 @@ def spawnRobot(currentplayer, coordinates, i):
             pygame.mixer.Sound.play(robot4)
 
 
-def reload(Map):  # herinstantieert het bord
+def reload():  # herinstantieert het bord
     main_surface.blit(background, (0, 0))
     main_surface.blit(quit_in_gamebuttonpng, (950, 0))
     main_surface.blit(optionsbuttongame, (950, 50 + (50 / 3)))
@@ -144,11 +144,11 @@ def draw_board():
 
     Map = Tile.create_Tilelist()
     drawBase(Map)
-    zetten = 0
     players = [(Base(1)), (Base(2)), (Base(3)), (Base(4))]
     currentplayer = players[0]
     moneycheck = False
     player = 0
+    zetten = 0
 
     battletheme = pygame.mixer.Sound('Pics/sound/battle.wav')
     pygame.mixer.Sound.play(battletheme, -1)
@@ -170,35 +170,38 @@ def draw_board():
                 shopmenu = 1
             elif ev.type == pygame.MOUSEBUTTONDOWN and manualbuttonrect.collidepoint(mouse_pos):
                 Manual.manual()
-                reload(Map)
+                reload()
 
         if coordinates is not None:
             # Unit Count TEXT
-            soldierCounttext = font.render(str(countSoldiers(coordinates, Map)), 1, (255, 255, 0))
+            soldierCounttext = font.render(str(countUnits(positionchecker(coordinates, Map), 1, "Soldiers")), 1, (255, 255, 0))
             main_surface.fill((0, 0, 0), (ViewSoldierButton))
             main_surface.blit(soldierCounttext, (900, 700))
-            tankCounttext = font.render(str(countTanks(coordinates, Map)), 1, (255, 0, 0))
+            tankCounttext = font.render(str(countUnits(positionchecker(coordinates, Map), 3, "Tanks")), 1, (255, 0, 0))
             main_surface.fill((0, 0, 0), (ViewTankButton))
             main_surface.blit(tankCounttext, (900, 720))
-            robotCounttext = font.render(str(countRobots(coordinates, Map)), 1, (255, 50, 0))
+            robotCounttext = font.render(str(countUnits(positionchecker(coordinates, Map), 2, "Robots")), 1, (255, 50, 0))
             main_surface.fill((0, 0, 0), (ViewRobotButton))
             main_surface.blit(robotCounttext, (900, 740))
-            boatCounttext = font.render(str(countBoats(coordinates, Map)), 1, (255, 100, 0))
+            boatCounttext = font.render(str(countUnits(positionchecker(coordinates, Map), 4, "Boats")), 1, (255, 100, 0))
             main_surface.fill((0, 0, 0), (ViewBoatButton))
             main_surface.blit(boatCounttext, (900, 760))
 
             # Unit Health TEXT
-            TotalHealth = str(HealthSoldier(coordinates, Map) + HealthTank(coordinates, Map) + HealthRobot(coordinates, Map) + HealthBoat(coordinates, Map))
+            TotalHealth = str((HealthCount(positionchecker(coordinates, Map),1))\
+                          + (HealthCount(positionchecker(coordinates, Map),2))\
+                          + (HealthCount(positionchecker(coordinates, Map),3))\
+                          + (HealthCount(positionchecker(coordinates, Map),4)))
             Healthtext = font.render(("Total Health Units: " + TotalHealth), 1, (255,255,255))
             main_surface.blit(Healthtext, (900, 780))
 
             # Base/Barack Health TEXT
-            Healthbuildings = str(HealthBarack(coordinates, Map) + HealthBase(coordinates, Map, players))
+            Healthbuildings = str(HealthBarack(positionchecker(coordinates, Map))+ HealthBase((positionchecker(coordinates, Map)), players))
             Healthtext2 = font.render(("Health Base/Barack: " + Healthbuildings), 1, (255,255,255))
             main_surface.blit(Healthtext2, (900, 820))
 
             # Unit DMG TEXT
-            TotalDMG = str(DMGSoldier(coordinates, Map) + DMGTank(coordinates, Map) + DMGRobot(coordinates, Map))
+            TotalDMG = str(DMGSoldier(positionchecker(coordinates, Map)) + DMGTank(positionchecker(coordinates, Map)) + DMGRobot(positionchecker(coordinates, Map)))
             DMGtext = font.render(("Total DMG Units: " + TotalDMG), 1, (255,255,255))
             main_surface.blit(DMGtext, (900, 800))
 
@@ -215,49 +218,26 @@ def draw_board():
             if ev.type == pygame.MOUSEBUTTONDOWN and UnitS.collidepoint(mouse_pos):
                 soldier = 1
                 shopmenu = 0
-                reload(Map)
+                reload()
             elif ev.type == pygame.MOUSEBUTTONDOWN and UnitT.collidepoint(mouse_pos):
                 tank = 1
                 shopmenu = 0
-                reload(Map)
+                reload()
             elif ev.type == pygame.MOUSEBUTTONDOWN and UnitR.collidepoint(mouse_pos):
                 robot = 1
                 shopmenu = 0
-                reload(Map)
+                reload()
             elif ev.type == pygame.MOUSEBUTTONDOWN and UnitB.collidepoint(mouse_pos):
                 boot = 1
                 shopmenu = 0
-                reload(Map)
+                reload()
             elif ev.type == pygame.MOUSEBUTTONDOWN and UnitBr.collidepoint(mouse_pos):
                 barak = 1
                 shopmenu = 0
-                reload(Map)
+                reload()
             elif ev.type == pygame.MOUSEBUTTONDOWN and Back.collidepoint(mouse_pos):
                 shopmenu = 0
-                reload(Map)
-
-        if not moneycheck:
-            for i in Map:
-                if len(i.Soldier) > 0:
-                    if i.Soldier[0].Player == currentplayer.Player:
-                        if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
-                            currentplayer.Money += 150
-                        elif i.Traversable == True:
-                            currentplayer.Money += 50
-                elif len(i.Tank) > 0:
-                    if i.Tank[0].Player == currentplayer.Player:
-                        if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
-                            currentplayer.Money += 150
-                        else:
-                            currentplayer.Money += 50
-                elif len(i.Robot) > 0:
-                    if i.Robot[0].Player == currentplayer.Player:
-                        if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
-                            currentplayer.Money += 150
-                        else:
-                            currentplayer.Money += 50
-            moneycheck = True
-        drawMoney(currentplayer.Money)
+                reload()
 
         if barak == 1:
             if coordinates is not None:
@@ -299,7 +279,7 @@ def draw_board():
                         if i.Barack == True or i.Base == True:
                             for x in i.BarackObama:
                                 if x.Player == currentplayer.Player:
-                                    spawnSoldier(currentplayer, coordinates, i)
+                                    spawnSoldier(currentplayer, i)
                                     zetten += 1
                                     soldier = 0
                                     print("Het aantal zetten = " + str(zetten))
@@ -307,7 +287,7 @@ def draw_board():
                                     soldier = 0
                             for x in i.Bases:
                                 if x.Player == currentplayer.Player:
-                                    spawnSoldier(currentplayer, coordinates, i)
+                                    spawnSoldier(currentplayer, i)
                                     zetten += 1
                                     soldier = 0
                                     print("Het aantal zetten = " + str(zetten))
@@ -323,7 +303,7 @@ def draw_board():
                         if i.Barack == True or i.Base == True:
                             for x in i.BarackObama:
                                 if x.Player == currentplayer.Player:
-                                    spawnTank(currentplayer, coordinates, i)
+                                    spawnTank(currentplayer, i)
                                     zetten += 1
                                     tank = 0
                                     print("Het aantal zetten = " + str(zetten))
@@ -331,7 +311,7 @@ def draw_board():
                                     tank = 0
                             for x in i.Bases:
                                 if x.Player == currentplayer.Player:
-                                    spawnTank(currentplayer, coordinates, i)
+                                    spawnTank(currentplayer, i)
                                     zetten += 1
                                     tank = 0
                                     print("Het aantal zetten = " + str(zetten))
@@ -347,7 +327,7 @@ def draw_board():
                         if i.Barack == True or i.Base == True:
                             for x in i.BarackObama:
                                 if x.Player == currentplayer.Player:
-                                    spawnRobot(currentplayer, coordinates, i)
+                                    spawnRobot(currentplayer, i)
                                     zetten += 1
                                     robot = 0
                                     print("Het aantal zetten = " + str(zetten))
@@ -355,7 +335,7 @@ def draw_board():
                                     robot = 0
                             for x in i.Bases:
                                 if x.Player == currentplayer.Player:
-                                    spawnRobot(currentplayer, coordinates, i)
+                                    spawnRobot(currentplayer, i)
                                     zetten += 1
                                     robot = 0
                                     print("Het aantal zetten = " + str(zetten))
@@ -409,6 +389,10 @@ def draw_board():
                                     boat5 = pygame.mixer.Sound('Pics/sound/boat5.wav')
                                     pygame.mixer.Sound.play(boat5)
 
+        Base.Moneycount(currentplayer, moneycheck, Map)
+        moneycheck = True
+        drawMoney(currentplayer.Money)
+
         if coordinates is not None and coordinates1 is None:
             if (
                             coordinates.Soldier != [] or coordinates.Tank != [] or coordinates.Robot != [] or coordinates.Boat != []):
@@ -452,16 +436,14 @@ def draw_board():
                 coordinates1 = None
                 coordinates2 = None
                 coordinates = None
-                reload(Map)
+                reload()
         drawUnits(Map)
 
         if zetten >= 4:
-            print("De beurt van player " + str(currentplayer.Player) + " is nu voorbij")
             player += 1
             if player > len(players) - 1:
                 player = 0
             currentplayer = players[player]
-            print("De beurt van player " + str(currentplayer.Player) + " begint nu")
             zetten = 0
             moneycheck = False
             TurnText = turnfont.render("Player " + str(currentplayer.Player) + "'s turn!", 1, (0, 0, 0))
@@ -480,7 +462,7 @@ def draw_board():
                 klik = 2
         elif klik == 2:
             main_surface.blit(bordload, (0, 0))
-            reload(Map)
+            reload()
             klik = 0
 
         if currentplayer.Money >= 50000:

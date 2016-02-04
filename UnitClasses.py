@@ -16,13 +16,35 @@ class Base:
         self.Money = 500
         self.Barack = BarackObama(player)
         if player == 1:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_brown.png'), (50, 50))
-        elif player == 2:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_red.png'), (50, 50))
+        elif player == 2:
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_brown.png'), (50, 50))
         elif player == 3:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_blue.png'), (50, 50))
         else:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/castle_green.png'), (50, 50))
+
+    def Moneycount(self, moneycheck, Map):
+        if not moneycheck:
+                    for i in Map:
+                        if len(i.Soldier) > 0:
+                            if i.Soldier[0].Player == self.Player:
+                                if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
+                                    self.Money += 150
+                                elif i.Traversable == True:
+                                    self.Money += 50
+                        elif len(i.Tank) > 0:
+                            if i.Tank[0].Player == self.Player:
+                                if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
+                                    self.Money += 150
+                                else:
+                                    self.Money += 50
+                        elif len(i.Robot) > 0:
+                            if i.Robot[0].Player == self.Player:
+                                if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
+                                    self.Money += 150
+                                else:
+                                    self.Money += 50
 
 
 class BarackObama:
@@ -31,9 +53,9 @@ class BarackObama:
         self.Health = 5
         self.Name = "Barack"
         if player == 1:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/brown_tent.png'), (45, 45))
-        elif player == 2:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/red_tent.png'), (45, 45))
+        elif player == 2:
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/brown_tent.png'), (45, 45))
         elif player == 3:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/blue_tent.png'), (45, 45))
         else:
@@ -49,9 +71,9 @@ class Soldier:
         self.Attack = 1
         self.Name = "Soldier"
         if player == 1:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/soldier1.png'), (45, 45))
-        elif player == 2:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/soldier2.png'), (45, 45))
+        elif player == 2:
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/soldier1.png'), (45, 45))
         elif player == 3:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/soldier3.png'), (45, 45))
         else:
@@ -66,9 +88,9 @@ class Robot:
         self.Attack = 2
         self.Name = "Robot"
         if player == 1:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/robot1.png'), (45, 45))
-        elif player == 2:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/robot2.png'), (45, 45))
+        elif player == 2:
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/robot1.png'), (45, 45))
         elif player == 3:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/robot3.png'), (45, 45))
         else:
@@ -83,9 +105,9 @@ class Tank:
         self.Attack = 3
         self.Name = "Tank"
         if player == 1:
-            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/tank1.png'), (45, 45))
-        elif player == 2:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/tank2.png'), (45, 45))
+        elif player == 2:
+            self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/tank1.png'), (45, 45))
         elif player == 3:
             self.Texture = pygame.transform.scale(pygame.image.load('Pics/units/tank3.png'), (45, 45))
         else:
