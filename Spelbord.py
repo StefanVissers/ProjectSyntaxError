@@ -28,7 +28,6 @@ ViewRobotButton = pygame.Rect(900, 800, 500, 50)
 ViewBoatButton = pygame.Rect(900, 850, 500, 50)
 shopmenubutton = pygame.image.load('Pics/units/shop_menu_button.png')
 moneydisplay = pygame.Rect(1100, 450, 200, 50)
-optionsbuttongame = pygame.image.load('Pics/units/options_button_game.png')
 manualbuttongame = pygame.image.load('Pics/units/manual_button_game.png')
 
 
@@ -115,7 +114,6 @@ def spawnRobot(currentplayer,i):
 def reload():  # herinstantieert het bord
     main_surface.blit(background, (0, 0))
     main_surface.blit(quit_in_gamebuttonpng, (950, 0))
-    main_surface.blit(optionsbuttongame, (950, 50 + (50 / 3)))
     main_surface.blit(manualbuttongame, (950, 100 + (50 / 3) + (50 / 3)))
     main_surface.blit(bordload, (0, 0))
     main_surface.blit(shopmenubutton, (950, 200))
@@ -124,7 +122,6 @@ def reload():  # herinstantieert het bord
 def draw_board():
     main_surface.blit(background, (0, 0))
     main_surface.blit(quit_in_gamebuttonpng, (950, 0))
-    main_surface.blit(optionsbuttongame, (950, 50 + (50 / 3)))
     main_surface.blit(manualbuttongame, (950, 100 + (50 / 3) + (50 / 3)))
     main_surface.blit(bordload, (0, 0))
     main_surface.blit(shopmenubutton, (950, 200))

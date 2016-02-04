@@ -12,14 +12,12 @@ def menu(main_surface):
             muziek = 1
         startgamebuttonpng = pygame.image.load('Pics/startgame_button.png').convert_alpha()         #laad de plaatjes voor het menu
         manualgamebuttonpng = pygame.image.load('Pics/manual_button.png').convert_alpha()
-        optionbuttonpng = pygame.image.load('Pics/options_button.png').convert_alpha()
         quitgamebuttonpng = pygame.image.load('Pics/exitgame_button.png').convert_alpha()
         background = pygame.image.load('Pics/Background.jpg').convert_alpha()
 
 
         startgamebutton = pygame.Rect(150, 100, 265, 125)
         instructionbutton = pygame.Rect(150, 250, 265, 125)
-        optionbutton = pygame.Rect(150, 400, 265, 125)
         quitgamebutton = pygame.Rect(150, 550, 265, 125)
 
         event = pygame.event.get()            #kan alle events zijn zoals mouse_click
@@ -32,8 +30,6 @@ def menu(main_surface):
             elif ev.type == pygame.MOUSEBUTTONDOWN and quitgamebutton.collidepoint(mouse_pos) or ev.type == pygame.QUIT:    #als je op de quit game knop drukt
                 pygame.quit()
                 quit()
-            elif ev.type == pygame.MOUSEBUTTONDOWN and optionbutton.collidepoint(mouse_pos):    #als je op de opties knop drukt
-                print ("OPTIES HIER")
             elif ev.type == pygame.MOUSEBUTTONDOWN and instructionbutton.collidepoint(mouse_pos):   #als je op de instructies knop drukt
                 Manual.manual()
 
@@ -42,7 +38,6 @@ def menu(main_surface):
 
         main_surface.blit(startgamebuttonpng, (100, 100))   #laat de plaatjes zien
         main_surface.blit(manualgamebuttonpng, (100, 250))
-        main_surface.blit(optionbuttonpng, (100, 400))
         main_surface.blit(quitgamebuttonpng, (100, 550))
 
         pygame.display.flip()
