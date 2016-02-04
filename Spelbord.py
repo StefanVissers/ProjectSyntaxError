@@ -150,12 +150,12 @@ def draw_board():
             # Base/Barack Health TEXT
             Healthbuildings = str(HealthBarack(coordinates, Map) + HealthBase(coordinates, Map, players))
             Healthtext2 = font.render(("Health Base/Barack: " + Healthbuildings), 1, (255,255,255))
-            main_surface.blit(Healthtext2, (900, 800))
+            main_surface.blit(Healthtext2, (900, 820))
 
             # Unit DMG TEXT
             TotalDMG = str(DMGSoldier(coordinates, Map) + DMGTank(coordinates, Map) + DMGRobot(coordinates, Map))
             DMGtext = font.render(("Total DMG Units: " + TotalDMG), 1, (255,255,255))
-            main_surface.blit(DMGtext, (900, 820))
+            main_surface.blit(DMGtext, (900, 800))
 
         if shopmenu == 1:
             UnitS = pygame.Rect(900, 300, 142, 68)
@@ -197,7 +197,7 @@ def draw_board():
                     if i.Soldier[0].Player == currentplayer.Player:
                         if i.Position.x >= 7 and i.Position.x <= 10 and i.Position.y >= 7 and i.Position.y <= 10:
                             currentplayer.Money += 150
-                        else:
+                        elif i.Traversable == True:
                             currentplayer.Money += 50
                 elif len(i.Tank) > 0:
                     if i.Tank[0].Player == currentplayer.Player:
