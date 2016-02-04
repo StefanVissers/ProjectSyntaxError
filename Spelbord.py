@@ -3,6 +3,7 @@ from UnitClasses import *
 import Menu
 import time
 import Manual
+import random
 
 # Wat kleur variabelen
 BLACK = (0, 0, 0)
@@ -37,6 +38,8 @@ def spawnbarak(currentplayer, coordinates, i):
         coordinates.BarackObama.append(unit)
         i.Barack = True
         currentplayer.Money -= 500
+        construction1 = pygame.mixer.Sound('Pics/sound/construction1.wav')
+        pygame.mixer.Sound.play(construction1)
 
 
 def spawnSoldier(currentplayer, coordinates, i):
@@ -48,7 +51,19 @@ def spawnSoldier(currentplayer, coordinates, i):
             currentplayer.Money -= 120
         else:
             currentplayer.Money -= 150
-
+        randint = random.randint(0, 3)
+        if randint == 0:
+            rifleman1 = pygame.mixer.Sound('Pics/sound/RiflemanYes1.wav')
+            pygame.mixer.Sound.play(rifleman1)
+        if randint == 1:
+            rifleman2 = pygame.mixer.Sound('Pics/sound/RiflemanYes2.wav')
+            pygame.mixer.Sound.play(rifleman2)
+        if randint == 2:
+            rifleman3 = pygame.mixer.Sound('Pics/sound/RiflemanYes3.wav')
+            pygame.mixer.Sound.play(rifleman3)
+        if randint == 3:
+            rifleman4 = pygame.mixer.Sound('Pics/sound/RiflemanYes4.wav')
+            pygame.mixer.Sound.play(rifleman4)
 
 def spawnTank(currentplayer, coordinates, i):
     if currentplayer.Money >= 750 or (currentplayer.Player == 1 and currentplayer.Money >= 600):
@@ -58,6 +73,20 @@ def spawnTank(currentplayer, coordinates, i):
             currentplayer.Money -= 600
         else:
             currentplayer.Money -= 750
+        randint = random.randint(0, 3)
+        if randint == 0:
+            tank1 = pygame.mixer.Sound('Pics/sound/tank1.wav')
+            pygame.mixer.Sound.play(tank1)
+        if randint == 1:
+            tank2 = pygame.mixer.Sound('Pics/sound/tank2.wav')
+            pygame.mixer.Sound.play(tank2)
+        if randint == 2:
+            tank3 = pygame.mixer.Sound('Pics/sound/tank3.wav')
+            pygame.mixer.Sound.play(tank3)
+        if randint == 3:
+            tank4 = pygame.mixer.Sound('Pics/sound/tank4.wav')
+            pygame.mixer.Sound.play(tank4)
+
 
 
 def spawnRobot(currentplayer, coordinates, i):
@@ -68,6 +97,19 @@ def spawnRobot(currentplayer, coordinates, i):
             currentplayer.Money -= 240
         else:
             currentplayer.Money -= 300
+        randint = random.randint(0, 3)
+        if randint == 0:
+            robot1 = pygame.mixer.Sound('Pics/sound/robot1.wav')
+            pygame.mixer.Sound.play(robot1)
+        if randint == 1:
+            robot2 = pygame.mixer.Sound('Pics/sound/robot2.wav')
+            pygame.mixer.Sound.play(robot2)
+        if randint == 2:
+            robot3 = pygame.mixer.Sound('Pics/sound/robot3.wav')
+            pygame.mixer.Sound.play(robot3)
+        if randint == 3:
+            robot4 = pygame.mixer.Sound('Pics/sound/robot4.wav')
+            pygame.mixer.Sound.play(robot4)
 
 
 def reload(Map):  # herinstantieert het bord
@@ -107,6 +149,9 @@ def draw_board():
     currentplayer = players[0]
     moneycheck = False
     player = 0
+
+    battletheme = pygame.mixer.Sound('Pics/sound/battle.wav')
+    pygame.mixer.Sound.play(battletheme, -1)
 
     while True:
         mouse_pos = pygame.mouse.get_pos()  # krijgt de positie van de cursor
@@ -347,6 +392,22 @@ def draw_board():
                                 else:
                                     currentplayer.Money -= 1000
                                 print(zetten)
+                                randint = random.randint(0, 4)
+                                if randint == 0:
+                                    boat1 = pygame.mixer.Sound('Pics/sound/boat1.wav')
+                                    pygame.mixer.Sound.play(boat1)
+                                if randint == 1:
+                                    boat2 = pygame.mixer.Sound('Pics/sound/boat2.wav')
+                                    pygame.mixer.Sound.play(boat2)
+                                if randint == 2:
+                                    boat3 = pygame.mixer.Sound('Pics/sound/boat3.wav')
+                                    pygame.mixer.Sound.play(boat3)
+                                if randint == 3:
+                                    boat4 = pygame.mixer.Sound('Pics/sound/boat4.wav')
+                                    pygame.mixer.Sound.play(boat4)
+                                if randint == 4:
+                                    boat5 = pygame.mixer.Sound('Pics/sound/boat5.wav')
+                                    pygame.mixer.Sound.play(boat5)
 
         if coordinates is not None and coordinates1 is None:
             if (
@@ -413,6 +474,7 @@ def draw_board():
             yesbutton = pygame.Rect(410, 415, 190, 100)  # position yes button
             nobutton = pygame.Rect(630, 415, 190, 100)  # position no button
             if ev.type == pygame.MOUSEBUTTONDOWN and yesbutton.collidepoint(mouse_pos):
+                pygame.mixer.Sound.stop(battletheme)
                 return
             elif ev.type == pygame.MOUSEBUTTONDOWN and nobutton.collidepoint(mouse_pos):
                 klik = 2
