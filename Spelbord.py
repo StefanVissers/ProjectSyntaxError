@@ -346,7 +346,7 @@ def draw_board():
                 for i in Map:
                     if coordinates.Position.x == i.Position.x and coordinates.Position.y == i.Position.y and i.Traversable is False:
                         for i in Map:
-                            if (
+                            if ((
                                             coordinates.Position.x + 1 == i.Position.x and coordinates.Position.y == i.Position.y and (
                                     i.Robot or i.Soldier or i.Tank)) \
                                     or (
@@ -357,7 +357,7 @@ def draw_board():
                                             i.Robot or i.Soldier or i.Tank)) \
                                     or (
                                                 coordinates.Position.x == i.Position.x and coordinates.Position.y - 1 == i.Position.y and (
-                                            i.Robot or i.Soldier or i.Tank)) \
+                                            i.Robot or i.Soldier or i.Tank))) \
                                             and (currentplayer.Money >= 1000 or (
                                                     currentplayer.Player == 3 and currentplayer.Money >= 800)):
                                 unit = UnitClasses.Boat(currentplayer.Player)
