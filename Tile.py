@@ -603,6 +603,20 @@ def selectUnit(coordinates1, coordinates2, Map, currentplayer, players):
             coordinates2.Tank = []
             coordinates2.Robot = []
 
+    if coordinates2.BarackObama:# and (coordinates1.Soldier or coordinates1.Tank or coordinates1.Robot):
+        totalattack = 0
+        for i in coordinates2.Robot:
+            totalattack += i.Attack
+        for i in coordinates2.Soldier:
+            totalattack += i.Attack
+        for i in coordinates2.Tank:
+            totalattack += i.Attack
+        if coordinates2.BarackObama[0].Player != currentplayer.Player:
+            for u in coordinates2.BarackObama:
+                u.Health -= totalattack
+                if u.Health <= 0:
+                    coordinates2.BarackObama = []
+
     if coordinates2.Bases:# and (coordinates1.Soldier or coordinates1.Tank or coordinates1.Robot):
         totalattack = 0
         for i in coordinates2.Robot:
